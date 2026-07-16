@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class Item
+    internal class DroppedItems
     {
-        private string itemName;
+        private Item item;
+
+        public void GetPickedUp()
+        {
+
+        }
     }
 }

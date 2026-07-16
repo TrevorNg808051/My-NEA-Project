@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class Item
+    internal class World
     {
-        private string itemName;
     }
 }
