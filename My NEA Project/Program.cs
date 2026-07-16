@@ -6,6 +6,12 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
+    public struct Movement
+    {
+        int horrizontalMovement;
+        int verticalMovement;
+    }
+
     internal static class Program
     {
         /// <summary>
