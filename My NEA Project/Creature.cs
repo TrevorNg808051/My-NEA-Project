@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class Creature : Entity
+    internal abstract class Creature : Entity
     {
         protected int currentVerticalVelocity;
         protected int maxVerticalSpeed;
@@ -24,10 +24,8 @@ namespace My_NEA_Project
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity) : base(xCoord, yCoord, width, height)
         {
         }
-        public Movement Move()
-        {
+        public abstract Movement Move();
 
-        }
         public int ReturnCreatureCurrentVerticalVelocity()
         {
             return currentVerticalVelocity;
