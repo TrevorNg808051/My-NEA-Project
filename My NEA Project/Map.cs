@@ -8,7 +8,7 @@ namespace My_NEA_Project
 {
     internal class Map
     {
-        private Chunks[,] visableChunks;
+        private Chunk[,] visableChunks;
 
         public void DisplayMap(Camara playerPov)
         {
