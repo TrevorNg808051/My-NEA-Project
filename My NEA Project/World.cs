@@ -13,9 +13,9 @@ namespace My_NEA_Project
         private Map WorldMap;
         private int seed;
 
-        public Square SquareFinder()
+        public Material SquareFinder(int x, int y)
         {
-
+            throw new NotImplementedException();
         }
 
         public void AddEntity()
