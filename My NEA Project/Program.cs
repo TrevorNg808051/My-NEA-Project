@@ -12,6 +12,17 @@ namespace My_NEA_Project
         int verticalMovement;
     }
 
+    public struct Material 
+    {
+        string name;
+        bool solid;
+        bool liquid;
+        bool gas;
+        bool slipery;
+        bool decreaseSpeed;
+
+    }
+
     internal static class Program
     {
         /// <summary>
