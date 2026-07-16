@@ -12,9 +12,16 @@ namespace My_NEA_Project
 {
     public partial class Form1 : Form
     {
+        World theWorld;
         public Form1()
         {
             InitializeComponent();
+            FrameIntervalTracker.Start();
+        }
+
+        private void FrameIntervalTracker_Tick(object sender, EventArgs e)
+        {
+            theWorld.WorldUpdate();
         }
     }
 }

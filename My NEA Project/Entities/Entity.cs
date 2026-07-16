@@ -31,15 +31,19 @@ namespace My_NEA_Project
         {
             return height;
         }
-        public int returnWidth()
+        public int ReturnWidth()
         {
             return width;
         } 
 
-        public void getHit()
+        public void GetHit()
         {
 
         }
-
+        public void MoveSprite(Camara cam)
+        {
+            this.entitySprite.Left = (xCoord - cam.ReturnCamX()) * cam.ReturnCamScale();
+            this.entitySprite.Top = (yCoord - cam.ReturnCamY()) * cam.ReturnCamScale();
+        }
     }
 }

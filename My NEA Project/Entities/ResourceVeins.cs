@@ -8,7 +8,7 @@ namespace My_NEA_Project
 {
     internal class ResourceVeins: Entity
     {
-        protected List<Items> listOfDrops;
+        protected List<Item> listOfDrops;
         protected int hitPoint;
         protected int numOfDrops;
 

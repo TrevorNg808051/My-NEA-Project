@@ -12,6 +12,7 @@ namespace My_NEA_Project
         private int camY;
         private int camWidth;
         private int camHeight;
+        private int camScale;
 
         public void ZoomOut()
         {
@@ -21,6 +22,20 @@ namespace My_NEA_Project
         public void MoveCamPos()
         {
 
+        }
+
+        public int ReturnCamX()
+        {
+            return camX;
+        }
+
+        public int ReturnCamY()
+        {
+            return camY;
+        }
+        public int ReturnCamScale()
+        {
+            return camScale;
         }
     }
 }
