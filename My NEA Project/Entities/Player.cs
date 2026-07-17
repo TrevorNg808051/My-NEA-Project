@@ -10,18 +10,33 @@ namespace My_NEA_Project
     {
         private bool gunEquipped;
 
+        private bool moveRight = false;
+        private bool moveLeft = false;
+        private bool jump = false;
 
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
         {
+            this.horrizontalSpeed = 10;
+            this.maxVerticalSpeed = 10;
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
         {
-
+            if (moveRight && moveLeft) return;
+            if (moveRight) this.moveRight = true;
+            if (moveLeft) this.moveLeft = true;
+            if (jump) this.jump = true;
         }
         public override Movement Move()
         {
-            throw new NotImplementedException();
+            Movement movementThisFrame = new Movement();
+
+            
+            if (moveRight) movementThisFrame.horrizontalMovement = horrizontalSpeed;
+            if (moveLeft) movementThisFrame.horrizontalMovement = horrizontalSpeed * -1;
+            if (jump) movementThisFrame.verticalMovement = maxVerticalSpeed;
+
+            return movementThisFrame;
         }
     }
 }

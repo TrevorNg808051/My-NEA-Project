@@ -28,18 +28,28 @@ namespace My_NEA_Project
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             FrameIntervalTracker.Start();
         }
+        bool left, right, jump;
+
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.D) right = false;
+            if (e.KeyCode == Keys.A) left = false ;
+            if (e.KeyCode == Keys.Space) jump = false;
+        }
 
         private void FrameIntervalTracker_Tick(object sender, EventArgs e)
         {
+            label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
+            thePlayer.SetMovement(right, left, jump);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D) 
-            if (e.KeyCode == Keys.A) 
-            if (e.KeyCode == Keys.Space)
-           
+            
+            if (e.KeyCode == Keys.D) right = true;
+            if (e.KeyCode == Keys.A) left = true;
+            if (e.KeyCode == Keys.Space) jump = true;
         }
     }
 }

@@ -36,17 +36,45 @@ namespace My_NEA_Project
 
         public void WorldUpdate()
         {
-           foreach(Entity c in listOfLoadedEntities)
+           foreach(Entity e in listOfLoadedEntities)
            {
-                if(c is Player)
+                if(e is Player)
                 {
-                    Player player = (Player)c;
+                    Player player = (Player)e;
                     int camHorizontalStartingCoord = player.ReturnXCoord() - ((Screen.PrimaryScreen.Bounds.Width / cam.ReturnCamScale()) / 2);
                     int camVerticalStartingCoord = player.ReturnYCoord() - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
                     cam.SetCamStartingCoords(camHorizontalStartingCoord,camVerticalStartingCoord);
                 }
-                worldMap.DisplayEntity(c,cam);
-           }
+                worldMap.DisplayEntity(e,cam);
+                if(e is Creature)
+                {
+                    Creature c = (Creature)e;
+
+                    Movement currentCreaturMovement = c.Move();
+
+                    int FinalXValue = 0;
+                    int FinalYValue = 0;
+
+                    if (currentCreaturMovement.horrizontalMovement < 0)
+                    {
+                        for (int i = 0; i > currentCreaturMovement.horrizontalMovement; i--)
+                        {
+                            
+                            FinalXValue--;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < currentCreaturMovement.horrizontalMovement; i++)
+                        {
+                            FinalXValue++;
+                        }
+                    }
+
+                    c.SetCreatureCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
+
+                }
+            }
         }
     }
 }

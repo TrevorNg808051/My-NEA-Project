@@ -8,18 +8,18 @@ namespace My_NEA_Project
 {
     public struct Movement
     {
-        int horrizontalMovement;
-        int verticalMovement;
+        public int horrizontalMovement;
+        public int verticalMovement;
     }
 
     public struct Material 
     {
-        string name;
-        bool solid;
-        bool liquid;
-        bool gas;
-        bool slipery;
-        bool decreaseSpeed;
+        public string name;
+        public bool solid;
+        public bool liquid;
+        public bool gas;
+        public bool slipery;
+        public bool decreaseSpeed;
 
     }
 
