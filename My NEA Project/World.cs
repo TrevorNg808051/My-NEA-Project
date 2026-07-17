@@ -15,6 +15,9 @@ namespace My_NEA_Project
         private int seed;
         private Camara cam;
         Form theFormThisWorldExistsIn;
+
+        int playerX;
+        int playerY;
         public World(Map worldMap, Camara playerPov, Form theFormThisWorldExistsIn)
         {
             this.worldMap = worldMap;
@@ -62,6 +65,7 @@ namespace My_NEA_Project
 
         public void WorldUpdate()
         {
+            
             foreach (Entity e in listOfLoadedEntities)
             {
                 if (e is Player)
@@ -70,6 +74,9 @@ namespace My_NEA_Project
                     int camHorizontalStartingCoord = player.ReturnXCoord() - ((Screen.PrimaryScreen.Bounds.Width / cam.ReturnCamScale()) / 2);
                     int camVerticalStartingCoord = player.ReturnYCoord() - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
                     cam.SetCamStartingCoords(camHorizontalStartingCoord, camVerticalStartingCoord);
+
+                    playerX = player.ReturnXCoord();
+                    playerY = player.ReturnYCoord();
                 }
                 worldMap.DisplayEntity(e, cam);
                 if (e is Creature)
@@ -101,6 +108,7 @@ namespace My_NEA_Project
 
                 }
             }
+            worldMap.loadingMap(playerX,playerY);
         }
     }
 }

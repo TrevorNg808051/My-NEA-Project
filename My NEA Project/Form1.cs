@@ -19,7 +19,7 @@ namespace My_NEA_Project
         public Form1()
         {
             InitializeComponent();
-            theWorldMap = new Map();
+            theWorldMap = new Map(theWorld);
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,0,60,100,10);
             theWorld = new World(theWorldMap, thePlayerPov,this);
@@ -46,12 +46,41 @@ namespace My_NEA_Project
             thePlayer.SetMovement(right, left, jump);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            theWorld.WorldUpdate();
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             
             if (e.KeyCode == Keys.D) right = true;
             if (e.KeyCode == Keys.A) left = true;
             if (e.KeyCode == Keys.Space) jump = true;
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            for(int vertical = 0; vertical < theWorldMap.ReturnRenderY(); vertical++)
+            {
+                for (int horizontal = 0; horizontal < theWorldMap.ReturnRenderX(); horizontal++)
+                {
+                    Chunk[,] loadedChunks = theWorldMap.ReturnVisableMap();
+
+                    Bitmap currentChunkToLoad = loadedChunks[horizontal, vertical].ReturnChunk();
+
+                    Graphics g = e.Graphics;
+
+                    int worldX = loadedChunks[horizontal,vertical].ReturnChunkX();
+                    int worldY = loadedChunks[horizontal,vertical].ReturnChunkY();
+
+                    int screenCentreX = (Screen.PrimaryScreen.Bounds.Width / 2);
+                    int screenCentreY = (Screen.PrimaryScreen.Bounds.Height / 2);
+
+                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
+
+                }
+            }
         }
     }
 }
