@@ -18,7 +18,7 @@ namespace My_NEA_Project
 
         int playerX;
         int playerY;
-        public World(Map worldMap, Camara playerPov, Form theFormThisWorldExistsIn)
+        public World(Camara playerPov, Form theFormThisWorldExistsIn)
         {
             this.worldMap = worldMap;
             listOfLoadedEntities = new List<Entity>();
@@ -63,6 +63,10 @@ namespace My_NEA_Project
             theFormThisWorldExistsIn.Controls.Add(thingToAdd.ReturnPictureBox());
         }
 
+        public void getWorldMap(Map worldMap)
+        {
+            this.worldMap = worldMap;
+        }
         public void WorldUpdate()
         {
             
@@ -78,6 +82,7 @@ namespace My_NEA_Project
                     playerX = player.ReturnXCoord();
                     playerY = player.ReturnYCoord();
                 }
+
                 worldMap.DisplayEntity(e, cam);
                 if (e is Creature)
                 {

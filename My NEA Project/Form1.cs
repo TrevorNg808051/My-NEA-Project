@@ -10,19 +10,25 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
+
     public partial class Form1 : Form
     {
         World theWorld;
         Player thePlayer;
         Camara thePlayerPov;
         Map theWorldMap;
+
+        
         public Form1()
         {
             InitializeComponent();
-            theWorldMap = new Map(theWorld);
+            
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,0,60,100,10);
-            theWorld = new World(theWorldMap, thePlayerPov,this);
+            theWorld = new World(thePlayerPov,this);
+            theWorldMap = new Map(theWorld,10);
+            theWorld.getWorldMap(theWorldMap);
+
             theWorld.AddEntity(thePlayer);
             theWorld.AddEntity(new DebugDummy(0,0,60,100,10));
 

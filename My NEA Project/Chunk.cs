@@ -14,12 +14,14 @@ namespace My_NEA_Project
         private int chunkX;
         private int chunkY;
         private int chunkSize;
-        private int pixelScale = 10;
-        public Chunk(int chunkX, int chunkY)
+        private int pixelScale;
+        public Chunk(int chunkX, int chunkY,int chunkSize)
         {
             this.chunkX = chunkX;
             this.chunkY = chunkY;
             this.chunkSize = chunkSize;
+            this.pixelScale = 10;
+            this.mapInfo = new Material[chunkSize, chunkSize];
         }
         public void LoadDirty()
         {
@@ -37,7 +39,7 @@ namespace My_NEA_Project
                     mapInfo[vertical, horizontal] = worldChunkIsIn.SquareFinder(worldX, worldY);
                 }
             }
-
+            visualMap = new Bitmap(chunkSize * pixelScale,chunkSize * pixelScale);
             using (Graphics g = Graphics.FromImage(visualMap))
             {
                 int horrizontalPaintingPos = 0;
@@ -58,7 +60,10 @@ namespace My_NEA_Project
 
 
                         }
+                        horrizontalPaintingPos += pixelScale;
                     }
+                    verticalPaintingPos += pixelScale;
+                    horrizontalPaintingPos = 0;
                 }
 
 

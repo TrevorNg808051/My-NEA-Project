@@ -14,8 +14,10 @@ namespace My_NEA_Project
         private int renderDistanceX;
         private int renderDistanceY;
         private World worldTheMapIsIn;
-        public Map(World worldTheMapIsIn)
+        private int chunkSize;
+        public Map(World worldTheMapIsIn, int chunkSize)
         {
+            this.chunkSize = chunkSize;
             renderDistanceX = 3;
             renderDistanceY = 3;
             visableChunks = new Chunk[renderDistanceX, renderDistanceY];
@@ -32,21 +34,28 @@ namespace My_NEA_Project
 
         public void loadingMap(int playerX, int playerY)
         {
-            int firstChunkX = ((renderDistanceX / 2) * -1) + playerX;
-            int firstChunkY = ((renderDistanceY / 2) * -1) + playerY;
+            int firstChunkX = ((renderDistanceX / 2) * -1) + (int)Math.Floor((double)playerX/chunkSize);
+            int firstChunkY = ((renderDistanceY / 2) * -1) + (int)Math.Floor((double)playerY / chunkSize);
 
-            int lastChunkX = (renderDistanceX / 2);
-            int lastChunkY = (renderDistanceY / 2);
+            int lastChunkX = (renderDistanceX / 2) + (int)Math.Floor((double)playerX / chunkSize);
+            int lastChunkY = (renderDistanceY / 2) + (int)Math.Floor((double)playerY / chunkSize);
+
+            int xIndex = 0;
+            int yIndex = 0;
             for (int vertical = firstChunkX; vertical <= lastChunkX; vertical++)
             {
+                
                 for (int horizontal = firstChunkY; horizontal <= lastChunkY; horizontal++)
                 {
-                    if (visableChunks[vertical + lastChunkX, horizontal + lastChunkY] == null)
+                    if (visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex] == null)
                     {
-                        visableChunks[vertical + lastChunkX, horizontal + lastChunkY] = new Chunk(horizontal,vertical);
+                        visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex] = new Chunk(horizontal,vertical,chunkSize);
                     }
-                    visableChunks[vertical + lastChunkX, horizontal + lastChunkY].LoadChunk(horizontal,vertical,worldTheMapIsIn);
+                    visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex].LoadChunk(horizontal,vertical,worldTheMapIsIn);
+                    xIndex++;
                 }
+                xIndex = 0;
+                yIndex++;
             }
         }
 
