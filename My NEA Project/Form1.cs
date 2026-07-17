@@ -24,6 +24,7 @@ namespace My_NEA_Project
             thePlayer = new Player(0,0,60,100,10);
             theWorld = new World(theWorldMap, thePlayerPov,this);
             theWorld.AddEntity(thePlayer);
+            theWorld.AddEntity(new DebugDummy(0,0,60,100,10));
 
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;

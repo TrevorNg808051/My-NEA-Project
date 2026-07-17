@@ -23,6 +23,7 @@ namespace My_NEA_Project
         // also the creature when jumping would start at the max vertical velocity and decelorate to a stop by gravity so acceloration of the crature will be removed and gravity will be handled by the World class
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity) : base(xCoord, yCoord, width, height)
         {
+            this.maxVerticalSpeed = maximumVerticalVelocity;
         }
         public abstract Movement Move();
 
