@@ -15,7 +15,7 @@ namespace My_NEA_Project
         private int seed;
         private Camara cam;
         Form theFormThisWorldExistsIn;
-        public World(Map worldMap, Camara playerPov,Form theFormThisWorldExistsIn)
+        public World(Map worldMap, Camara playerPov, Form theFormThisWorldExistsIn)
         {
             this.worldMap = worldMap;
             listOfLoadedEntities = new List<Entity>();
@@ -25,7 +25,33 @@ namespace My_NEA_Project
         }
         public Material SquareFinder(int x, int y)
         {
-            throw new NotImplementedException();
+            Material air = new Material()
+            {
+                name = "Air",
+                solid = false,
+                liquid = false,
+                gas = true,
+                slipery = false,
+                decreaseSpeed = false
+
+            };
+
+            Material dirt = new Material()
+            {
+                name = "Dirt",
+                solid = true,
+                liquid = false,
+                gas = false,
+                slipery = false,
+                decreaseSpeed = false
+
+            };
+
+
+            if (y < 0) return air;
+            if (y >= 0) return dirt;
+            else return dirt;
+
         }
 
         public void AddEntity(Entity thingToAdd)
@@ -36,17 +62,17 @@ namespace My_NEA_Project
 
         public void WorldUpdate()
         {
-           foreach(Entity e in listOfLoadedEntities)
-           {
-                if(e is Player)
+            foreach (Entity e in listOfLoadedEntities)
+            {
+                if (e is Player)
                 {
                     Player player = (Player)e;
                     int camHorizontalStartingCoord = player.ReturnXCoord() - ((Screen.PrimaryScreen.Bounds.Width / cam.ReturnCamScale()) / 2);
                     int camVerticalStartingCoord = player.ReturnYCoord() - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
-                    cam.SetCamStartingCoords(camHorizontalStartingCoord,camVerticalStartingCoord);
+                    cam.SetCamStartingCoords(camHorizontalStartingCoord, camVerticalStartingCoord);
                 }
-                worldMap.DisplayEntity(e,cam);
-                if(e is Creature)
+                worldMap.DisplayEntity(e, cam);
+                if (e is Creature)
                 {
                     Creature c = (Creature)e;
 
@@ -59,7 +85,7 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i > currentCreaturMovement.horrizontalMovement; i--)
                         {
-                            
+
                             FinalXValue--;
                         }
                     }
