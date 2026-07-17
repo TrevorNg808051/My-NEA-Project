@@ -22,10 +22,10 @@ namespace My_NEA_Project
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
         {
-            if (moveRight && moveLeft) return;
-            if (moveRight) this.moveRight = true;
-            if (moveLeft) this.moveLeft = true;
-            if (jump) this.jump = true;
+            if (moveRight && moveLeft) { moveRight = false; moveLeft = false; }
+            this.moveRight = moveRight;
+            this.moveLeft = moveLeft;
+            this.jump = jump;
         }
         public override Movement Move()
         {
