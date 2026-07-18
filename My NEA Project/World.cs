@@ -109,6 +109,22 @@ namespace My_NEA_Project
                         }
                     }
 
+                    if (currentCreaturMovement.verticalMovement < 0)
+                    {
+                        for (int i = 0; i > currentCreaturMovement.verticalMovement; i--)
+                        {
+
+                            FinalYValue--;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < currentCreaturMovement.verticalMovement; i++)
+                        {
+                            FinalYValue++;
+                        }
+                    }
+
                     c.SetCreatureCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
 
                 }

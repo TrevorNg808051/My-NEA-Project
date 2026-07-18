@@ -11,6 +11,8 @@ namespace My_NEA_Project
     {
         protected int currentVerticalVelocity;
         protected int maxVerticalSpeed;
+        protected int currentVerticalSpeed;
+        protected int verticalAcceloration;
         protected int currentHorrizontalSpeed;
         protected int horrizontalSpeed;// movement on the horrizontal plain is designed to have no accelortation
         protected Label equationBar;

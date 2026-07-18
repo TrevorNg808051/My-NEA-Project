@@ -18,8 +18,8 @@ namespace My_NEA_Project
         public Map(World worldTheMapIsIn, int chunkSize)
         {
             this.chunkSize = chunkSize;
-            renderDistanceX = 3;
-            renderDistanceY = 3;
+            renderDistanceX = 5;
+            renderDistanceY = 5;
             visableChunks = new Chunk[renderDistanceX, renderDistanceY];
 
             this.worldTheMapIsIn = worldTheMapIsIn;
