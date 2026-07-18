@@ -67,6 +67,8 @@ namespace My_NEA_Project
         {
             this.worldMap = worldMap;
         }
+        double bulletProgressionX = 0;
+        double bulletProgressionY = 0;
         public void WorldUpdate()
         {
             
@@ -139,11 +141,42 @@ namespace My_NEA_Project
                         }
                     }
 
-                    c.SetCreatureCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
+                    c.SetEntityCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
                     
                 }
+                if(e is Bullet)
+                {
+                    Bullet bullet = (Bullet)e;
+                  
+                    if (bulletProgressionX >= 1 || bulletProgressionX <= -1 || bulletProgressionY >= 1 || bulletProgressionY <= -1)
+                    {
+                        int xIncrease = 0;
+                        int yIncrease = 0;
 
-                GravatationalPull(e);
+                        if (bulletProgressionX >= 1 || bulletProgressionX <= -1)
+                        {
+                            xIncrease = (int)Math.Truncate(bulletProgressionX);
+
+                            bulletProgressionX -= Math.Truncate(bulletProgressionX);
+                        }
+                        if (bulletProgressionY >= 1 || bulletProgressionY <= -1)
+                        {
+                            yIncrease = (int)Math.Truncate(bulletProgressionY);
+                            bulletProgressionY -= Math.Truncate(bulletProgressionY);
+                        }
+
+                        bullet.SetEntityCoords(bullet.ReturnXCoord() + xIncrease, bullet.ReturnYCoord() + yIncrease);
+                    }
+
+                    bulletProgressionX += bullet.Travel().horrizontalMovement;
+                    bulletProgressionY += bullet.Travel().verticalMovement;
+                }
+                else
+                {
+                    GravatationalPull(e);
+                }
+
+                
             }
             worldMap.loadingMap(playerX,playerY);
         }

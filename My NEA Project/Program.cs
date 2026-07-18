@@ -8,8 +8,8 @@ namespace My_NEA_Project
 {
     public struct Movement
     {
-        public int horrizontalMovement;
-        public int verticalMovement;
+        public double horrizontalMovement;
+        public double verticalMovement;
     }
 
     public struct Material 

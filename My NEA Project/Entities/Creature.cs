@@ -46,11 +46,7 @@ namespace My_NEA_Project
                 currentHorrizontalVelocity = 0;
             }
         }
-        public void SetCreatureCoords(int xCoord, int yCoord)
-        {
-            this.xCoord = xCoord;
-            this.yCoord = yCoord;
-        }
+
         public string EquationGenerator()
         {
             throw new NotImplementedException();

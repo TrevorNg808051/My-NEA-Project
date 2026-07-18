@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
     internal class Player : Creature
     {
+       
         private bool gunEquipped;
 
         private bool moveRight = false;
@@ -20,6 +22,9 @@ namespace My_NEA_Project
             this.maxVerticalVelocity = 5;
 
             this.verticalAcceloration = 1;
+
+            this.gunEquipped = true;
+
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
@@ -59,5 +64,10 @@ namespace My_NEA_Project
 
             return movementThisFrame;
         }
+        public bool GunEqquiped()
+        {
+            return gunEquipped;
+        }
+
     }
 }

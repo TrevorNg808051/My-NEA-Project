@@ -59,5 +59,10 @@ namespace My_NEA_Project
             this.entitySprite.Top = (yCoord - cam.ReturnStartingY()) * cam.ReturnCamScale();
 
         }
+        public void SetEntityCoords(int xCoord, int yCoord)
+        {
+            this.xCoord = xCoord;
+            this.yCoord = yCoord;
+        }
     }
 }

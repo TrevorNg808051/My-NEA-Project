@@ -10,13 +10,27 @@ namespace My_NEA_Project
     {
         private Movement distanceMovedPerFrame;
         private double answerOfTheBullet;
-        private int timeToLive;
-
-        public Bullet(int xCoord, int yCoord, int width, int height) : base(xCoord, yCoord, width, height)
+        private int bulletSpeed;
+        public Bullet(int xCoord, int yCoord, int width, int height,double destinationX, double destinationY, int speed) : base(xCoord, yCoord, width, height)
         {
+            this.bulletSpeed = speed;
+
+            double distanceBetweenStartXAndEndX = destinationX - xCoord;
+            double distanceBetweenStartYAndEndY = destinationY - yCoord;
+
+            double StrightLineDistanceBetweenStartAndEnd = Math.Sqrt(((distanceBetweenStartXAndEndX * distanceBetweenStartXAndEndX) + (distanceBetweenStartYAndEndY * distanceBetweenStartYAndEndY)));
+
+            double framesTakenToReachDestination = StrightLineDistanceBetweenStartAndEnd / bulletSpeed;
+
+            distanceMovedPerFrame.horrizontalMovement = distanceBetweenStartXAndEndX / framesTakenToReachDestination;
+            distanceMovedPerFrame.verticalMovement = distanceBetweenStartYAndEndY / framesTakenToReachDestination;
 
         }
 
+        public Movement Travel()
+        {
+            return distanceMovedPerFrame;
+        }
         public void FormAnswer(string equation)
         {
 

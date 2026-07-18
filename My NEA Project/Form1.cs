@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -59,6 +60,23 @@ namespace My_NEA_Project
             theWorld.WorldUpdate();
             this.DoubleBuffered = true;
 
+        }
+
+        private void Shoot(object sender, MouseEventArgs e)
+        {
+
+            Point p = PointToClient(MousePosition);
+            label2.Text = $"{p.X},{p.Y}";
+            if (thePlayer.GunEqquiped())
+            {
+
+                int bulletSpeed = 2;
+                double destinationX = thePlayer.ReturnXCoord() + Math.Floor((double)((p.X - (this.Width / 2)) / thePlayerPov.ReturnCamScale()));
+                double destinationY = thePlayer.ReturnYCoord() + Math.Floor((double)((p.Y - (this.Height / 2)) / thePlayerPov.ReturnCamScale()));
+
+                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),5,5,destinationX,destinationY,bulletSpeed));
+
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
