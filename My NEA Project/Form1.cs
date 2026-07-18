@@ -50,11 +50,14 @@ namespace My_NEA_Project
             label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
             thePlayer.SetMovement(right, left, jump);
+
+            this.Invalidate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             theWorld.WorldUpdate();
+            this.DoubleBuffered = true;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -77,13 +80,13 @@ namespace My_NEA_Project
 
                     Graphics g = e.Graphics;
 
-                    int worldX = loadedChunks[horizontal,vertical].ReturnChunkX();
-                    int worldY = loadedChunks[horizontal,vertical].ReturnChunkY();
+                    int worldX = loadedChunks[horizontal,vertical].ReturnChunkX() * loadedChunks[horizontal, vertical].ReturnChunkSize();
+                    int worldY = loadedChunks[horizontal,vertical].ReturnChunkY() * loadedChunks[horizontal, vertical].ReturnChunkSize();
 
                     int screenCentreX = (Screen.PrimaryScreen.Bounds.Width / 2);
                     int screenCentreY = (Screen.PrimaryScreen.Bounds.Height / 2);
 
-                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
+                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord() * thePlayerPov.ReturnCamScale())) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
 
                 }
             }

@@ -20,7 +20,7 @@ namespace My_NEA_Project
             this.chunkX = chunkX;
             this.chunkY = chunkY;
             this.chunkSize = chunkSize;
-            this.pixelScale = 10;
+            this.pixelScale = 50;
             this.mapInfo = new Material[chunkSize, chunkSize];
         }
         public void LoadDirty()
@@ -36,7 +36,7 @@ namespace My_NEA_Project
                 {
                     int worldX = (chunkX * chunkSize) + horizontal;
                     int worldY = (chunkY * chunkSize) + vertical;
-                    mapInfo[vertical, horizontal] = worldChunkIsIn.SquareFinder(worldX, worldY);
+                    mapInfo[horizontal,vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
                 }
             }
             visualMap = new Bitmap(chunkSize * pixelScale,chunkSize * pixelScale);

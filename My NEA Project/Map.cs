@@ -42,16 +42,15 @@ namespace My_NEA_Project
 
             int xIndex = 0;
             int yIndex = 0;
-            for (int vertical = firstChunkX; vertical <= lastChunkX; vertical++)
+            for (int vertical = firstChunkY; vertical <= lastChunkY; vertical++)
             {
-                
-                for (int horizontal = firstChunkY; horizontal <= lastChunkY; horizontal++)
+                for (int horizontal = firstChunkX; horizontal <= lastChunkX; horizontal++)
                 {
-                    if (visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex] == null)
+                    if (visableChunks[horizontal + (horizontal * -1) + xIndex, vertical + (vertical * -1) + yIndex] == null)
                     {
-                        visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex] = new Chunk(horizontal,vertical,chunkSize);
+                        visableChunks[horizontal + (horizontal * -1) + xIndex, vertical + (vertical * -1) + yIndex] = new Chunk(horizontal,vertical,chunkSize);
                     }
-                    visableChunks[vertical + (vertical * -1) + yIndex, horizontal + (horizontal * -1) + xIndex].LoadChunk(horizontal,vertical,worldTheMapIsIn);
+                    visableChunks[horizontal + (horizontal * -1) + xIndex, vertical + (vertical * -1) + yIndex].LoadChunk(horizontal,vertical,worldTheMapIsIn);
                     xIndex++;
                 }
                 xIndex = 0;
