@@ -26,7 +26,7 @@ namespace My_NEA_Project
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,0,60,100,10);
             theWorld = new World(thePlayerPov,this);
-            theWorldMap = new Map(theWorld,10);
+            theWorldMap = new Map(theWorld,20);
             theWorld.getWorldMap(theWorldMap);
 
             theWorld.AddEntity(thePlayer);
@@ -58,6 +58,7 @@ namespace My_NEA_Project
         {
             theWorld.WorldUpdate();
             this.DoubleBuffered = true;
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -86,7 +87,7 @@ namespace My_NEA_Project
                     int screenCentreX = (Screen.PrimaryScreen.Bounds.Width / 2);
                     int screenCentreY = (Screen.PrimaryScreen.Bounds.Height / 2);
 
-                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord() * thePlayerPov.ReturnCamScale())) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
+                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
 
                 }
             }

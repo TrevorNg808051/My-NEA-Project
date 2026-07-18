@@ -25,7 +25,7 @@ namespace My_NEA_Project
             this.camWidth = Screen.PrimaryScreen.Bounds.Width;
             this.camHeight = Screen.PrimaryScreen.Bounds.Height;
 
-            camScale = 50;
+            camScale = 10;
         }
         public void ZoomOut()
         {

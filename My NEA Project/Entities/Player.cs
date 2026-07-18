@@ -16,8 +16,8 @@ namespace My_NEA_Project
 
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
         {
-            this.horrizontalSpeed = 10;
-            this.maxVerticalSpeed = 10;
+            this.horrizontalSpeed = 5;
+            this.maxVerticalSpeed = 5;
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
