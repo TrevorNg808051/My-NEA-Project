@@ -30,11 +30,6 @@ namespace My_NEA_Project
 
         }
 
-        public void MoveCamPos()
-        {
-
-        }
-
         public int ReturnCamScale()
         {
             return camScale;
