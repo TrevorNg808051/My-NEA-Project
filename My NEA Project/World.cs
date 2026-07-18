@@ -52,8 +52,8 @@ namespace My_NEA_Project
 
 
             if (y < 0) return air;
-            if (y >= 0) return dirt;
-            else return dirt;
+            if (y > -1) return dirt;
+            else return air;
 
         }
 
@@ -76,7 +76,7 @@ namespace My_NEA_Project
                 {
                     Player player = (Player)e;
                     int camHorizontalStartingCoord = player.ReturnXCoord() - ((Screen.PrimaryScreen.Bounds.Width / cam.ReturnCamScale()) / 2);
-                    int camVerticalStartingCoord = player.ReturnYCoord() - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
+                    int camVerticalStartingCoord = (player.ReturnYCoord()) - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
                     cam.SetCamStartingCoords(camHorizontalStartingCoord, camVerticalStartingCoord);
 
                     playerX = player.ReturnXCoord();
@@ -97,7 +97,10 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i > currentCreaturMovement.horrizontalMovement; i--)
                         {
-
+                            if (SquareFinder(e.ReturnXCoord() + i - 1,e.ReturnYCoord()).solid)
+                            {
+                                break;
+                            }
                             FinalXValue--;
                         }
                     }
@@ -105,6 +108,10 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i < currentCreaturMovement.horrizontalMovement; i++)
                         {
+                            if (SquareFinder(e.ReturnXCoord() + i + 1, e.ReturnYCoord()).solid)
+                            {
+                                break;
+                            }
                             FinalXValue++;
                         }
                     }
@@ -113,7 +120,10 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i > currentCreaturMovement.verticalMovement; i--)
                         {
-
+                            if (SquareFinder(e.ReturnXCoord() , e.ReturnYCoord() + i - 1).solid)
+                            {
+                                break;
+                            }
                             FinalYValue--;
                         }
                     }
@@ -121,15 +131,32 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i < currentCreaturMovement.verticalMovement; i++)
                         {
+                            if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + i + 1).solid)
+                            {
+                                break;
+                            }
                             FinalYValue++;
                         }
                     }
 
                     c.SetCreatureCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
-
+                    
                 }
+
+                GravatationalPull(e);
             }
             worldMap.loadingMap(playerX,playerY);
+        }
+        public void GravatationalPull(Entity e)
+        {
+            if (e is Creature)
+            {
+                Creature c = (Creature)e;
+                c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), c.ReturnCreatureCurrentVerticalVelocity() + 1);
+                if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
+            }
+            if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + 1).solid) return;
+            
         }
     }
 }

@@ -16,8 +16,8 @@ namespace My_NEA_Project
 
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
         {
-            this.horrizontalSpeed = 1;
-            this.maxVerticalSpeed = 5;
+            this.horrizontalVelocity = 1;
+            this.maxVerticalVelocity = 5;
 
             this.verticalAcceloration = 1;
         }
@@ -31,7 +31,7 @@ namespace My_NEA_Project
             if (jump)
             {
                 this.jump = jump;
-                this.jumpingCounter = 5;
+                this.jumpingCounter = 3;
                 
             }
         }
@@ -40,14 +40,14 @@ namespace My_NEA_Project
             Movement movementThisFrame = new Movement();
 
             
-            if (moveRight) movementThisFrame.horrizontalMovement = horrizontalSpeed;
-            if (moveLeft) movementThisFrame.horrizontalMovement = horrizontalSpeed * -1;
+            if (moveRight) movementThisFrame.horrizontalMovement = horrizontalVelocity;
+            if (moveLeft) movementThisFrame.horrizontalMovement = horrizontalVelocity * -1;
             if (jump)
             {
                 if (jumpingCounter > 0)
                 {
-                    this.currentVerticalSpeed += verticalAcceloration;
-                    movementThisFrame.verticalMovement = currentVerticalSpeed;
+                    this.currentVerticalVelocity -= verticalAcceloration;
+                    
                     jumpingCounter--;
                 }
                 else
@@ -55,6 +55,7 @@ namespace My_NEA_Project
                     jump = false;
                 }
             }
+            movementThisFrame.verticalMovement = currentVerticalVelocity;
 
             return movementThisFrame;
         }

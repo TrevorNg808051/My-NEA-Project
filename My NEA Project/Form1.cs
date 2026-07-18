@@ -24,7 +24,7 @@ namespace My_NEA_Project
             InitializeComponent();
             
             thePlayerPov = new Camara(theWorldMap);
-            thePlayer = new Player(0,0,60,100,10);
+            thePlayer = new Player(0,-10,60,100,10);
             theWorld = new World(thePlayerPov,this);
             theWorldMap = new Map(theWorld,20);
             theWorld.getWorldMap(theWorldMap);

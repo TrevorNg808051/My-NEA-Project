@@ -10,11 +10,10 @@ namespace My_NEA_Project
     internal abstract class Creature : Entity
     {
         protected int currentVerticalVelocity;
-        protected int maxVerticalSpeed;
-        protected int currentVerticalSpeed;
+        protected int maxVerticalVelocity;
         protected int verticalAcceloration;
-        protected int currentHorrizontalSpeed;
-        protected int horrizontalSpeed;// movement on the horrizontal plain is designed to have no accelortation
+        protected int currentHorrizontalVelocity;
+        protected int horrizontalVelocity;// movement on the horrizontal plain is designed to have no accelortation
         protected Label equationBar;
         static protected Random equationGen;
         protected int answer;
@@ -25,10 +24,13 @@ namespace My_NEA_Project
         // also the creature when jumping would start at the max vertical velocity and decelorate to a stop by gravity so acceloration of the crature will be removed and gravity will be handled by the World class
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity) : base(xCoord, yCoord, width, height)
         {
-            this.maxVerticalSpeed = maximumVerticalVelocity;
+            this.maxVerticalVelocity = maximumVerticalVelocity;
         }
         public abstract Movement Move();
-
+        public int ReturnCreatureCurrentHorrizontalVelocity()
+        {
+            return currentHorrizontalVelocity;
+        }
         public int ReturnCreatureCurrentVerticalVelocity()
         {
             return currentVerticalVelocity;
@@ -41,7 +43,7 @@ namespace My_NEA_Project
             }
             else
             {
-                currentHorrizontalSpeed = 0;
+                currentHorrizontalVelocity = 0;
             }
         }
         public void SetCreatureCoords(int xCoord, int yCoord)
@@ -52,6 +54,12 @@ namespace My_NEA_Project
         public string EquationGenerator()
         {
             throw new NotImplementedException();
+        }
+
+        public void CreatureSetVelocity(int horrizontalVelocity,int verticalVelocity)
+        {
+            this.currentHorrizontalVelocity = horrizontalVelocity;
+            this.currentVerticalVelocity = verticalVelocity;
         }
     }
  

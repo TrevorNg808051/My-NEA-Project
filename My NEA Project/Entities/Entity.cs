@@ -57,6 +57,7 @@ namespace My_NEA_Project
         {
             this.entitySprite.Left = (xCoord - cam.ReturnStaringX()) * cam.ReturnCamScale();
             this.entitySprite.Top = (yCoord - cam.ReturnStartingY()) * cam.ReturnCamScale();
+
         }
     }
 }
