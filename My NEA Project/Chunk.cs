@@ -9,12 +9,18 @@ namespace My_NEA_Project
 {
     internal class Chunk
     {
+        private struct PerlinChart
+        {
+            public int xCoord;
+            public int worldHeight;
+        }
         private Bitmap visualMap;
         private Material[,] mapInfo;
         private int chunkX;
         private int chunkY;
         private int chunkSize;
         private int pixelScale;
+        private PerlinChart[] perlinChart;
         public Chunk(int chunkX, int chunkY,int chunkSize)
         {
             this.chunkX = chunkX;
@@ -31,13 +37,14 @@ namespace My_NEA_Project
         public void LoadChunk(int chunkX, int chunkY,World worldChunkIsIn)
         {
 
-            LoadingPerlin();
+            perlinChart = new PerlinChart[chunkSize];
             for(int vertical = 0; vertical < chunkSize; vertical++)
             {
                 for(int horizontal = 0; horizontal < chunkSize; horizontal++)
                 {
                     int worldX = (chunkX * chunkSize) + horizontal;
                     int worldY = (chunkY * chunkSize) + vertical;
+                    LoadingPerlin(worldX);
                     mapInfo[horizontal,vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
                 }
             }
@@ -73,9 +80,12 @@ namespace My_NEA_Project
             }
         }
 
-        private void LoadingPerlin()
+        private void LoadingPerlin(int worldX)
         {
-            throw new NotImplementedException();
+            bool directionOfLeftChunk;
+            bool directionOfRightChunk;
+
+
         }
 
         public Bitmap ReturnChunk()
