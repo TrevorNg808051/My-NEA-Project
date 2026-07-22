@@ -12,7 +12,7 @@ namespace My_NEA_Project
         private struct PerlinChart
         {
             public int xCoord;
-            public int worldHeight;
+            public double worldHeight;
         }
         private Bitmap visualMap;
         private Material[,] mapInfo;
@@ -125,6 +125,10 @@ namespace My_NEA_Project
 
             double fadedTime = Fade(distanceFromLeft);
             double interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));
+
+            int indexOfArray = worldX - (chunkX * chunkSize);
+            perlinChart[indexOfArray].xCoord = worldX;
+            perlinChart[indexOfArray].worldHeight = interpolatedValue;
         }
 
         private double Fade(double time)
