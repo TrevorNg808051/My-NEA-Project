@@ -21,7 +21,7 @@ namespace My_NEA_Project
         private int chunkSize;
         private int pixelScale;
         private PerlinChart[] perlinChart;
-        public Chunk(int chunkX, int chunkY,int chunkSize)
+        public Chunk(int chunkX, int chunkY, int chunkSize)
         {
             this.chunkX = chunkX;
             this.chunkY = chunkY;
@@ -34,31 +34,31 @@ namespace My_NEA_Project
 
         }
 
-        public void LoadChunk(int chunkX, int chunkY,World worldChunkIsIn)
+        public void LoadChunk(int chunkX, int chunkY, World worldChunkIsIn)
         {
 
             perlinChart = new PerlinChart[chunkSize];
-            for(int vertical = 0; vertical < chunkSize; vertical++)
+            for (int vertical = 0; vertical < chunkSize; vertical++)
             {
-                for(int horizontal = 0; horizontal < chunkSize; horizontal++)
+                for (int horizontal = 0; horizontal < chunkSize; horizontal++)
                 {
                     int worldX = (chunkX * chunkSize) + horizontal;
                     int worldY = (chunkY * chunkSize) + vertical;
                     LoadingPerlin(worldX);
-                    mapInfo[horizontal,vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
+                    mapInfo[horizontal, vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
                 }
             }
-            visualMap = new Bitmap(chunkSize * pixelScale,chunkSize * pixelScale);
+            visualMap = new Bitmap(chunkSize * pixelScale, chunkSize * pixelScale);
             using (Graphics g = Graphics.FromImage(visualMap))
             {
                 int horrizontalPaintingPos = 0;
                 int verticalPaintingPos = 0;
 
-                for(int vertical = chunkSize - 1; vertical >= 0; vertical--)
+                for (int vertical = chunkSize - 1; vertical >= 0; vertical--)
                 {
-                    for(int horrizontal = chunkSize - 1; horrizontal >= 0; horrizontal--)
+                    for (int horrizontal = chunkSize - 1; horrizontal >= 0; horrizontal--)
                     {
-                        switch (mapInfo[horrizontal,vertical].name)
+                        switch (mapInfo[horrizontal, vertical].name)
                         {
                             case "Air":
                                 g.FillRectangle(new SolidBrush(Color.Cyan), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
@@ -76,7 +76,7 @@ namespace My_NEA_Project
                 }
 
 
-                
+
             }
         }
 
@@ -85,7 +85,51 @@ namespace My_NEA_Project
             bool directionOfLeftChunk;
             bool directionOfRightChunk;
 
+            double distanceFromLeft;
+            double distanceFromRight;
 
+            double leftDot = 0;
+            double rightDot = 0;
+
+            //distanceFromLeft
+            double physicalDistanceFromLeft = worldX - chunkX;
+            distanceFromLeft = physicalDistanceFromLeft / chunkSize;
+
+            //distanceFromRight
+            double physicaleDistanceFromRight = worldX - (chunkX + 1);
+            distanceFromRight = physicaleDistanceFromRight / chunkSize;
+
+            Random dircetionOfLeftPointGen = new Random(chunkX);
+            Random directionOfRightPointGen = new Random(chunkY);
+
+            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 3) == 1;
+            directionOfRightChunk = directionOfRightPointGen.Next(1, 3) == 1;
+
+            if (directionOfLeftChunk)
+            {
+                leftDot = distanceFromLeft;
+            }
+            else if (!directionOfLeftChunk)
+            {
+                leftDot = distanceFromLeft * -1;
+            }
+
+            if (directionOfRightChunk)
+            {
+                rightDot = distanceFromRight;
+            }
+            else if (!directionOfRightChunk)
+            {
+                rightDot = distanceFromRight * -1;
+            }
+
+            double fadedTime = Fade(distanceFromLeft);
+            double interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));
+        }
+
+        private double Fade(double time)
+        {
+            return time * time * time * ((time * ((6 * time) + 15)) + 10);
         }
 
         public Bitmap ReturnChunk()
