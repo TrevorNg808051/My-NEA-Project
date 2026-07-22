@@ -20,7 +20,6 @@ namespace My_NEA_Project
         int playerY;
         public World(Camara playerPov, Form theFormThisWorldExistsIn)
         {
-            this.worldMap = worldMap;
             listOfLoadedEntities = new List<Entity>();
             cam = playerPov;
 

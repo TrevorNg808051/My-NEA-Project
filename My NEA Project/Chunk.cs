@@ -30,6 +30,8 @@ namespace My_NEA_Project
 
         public void LoadChunk(int chunkX, int chunkY,World worldChunkIsIn)
         {
+
+            LoadingPerlin();
             for(int vertical = 0; vertical < chunkSize; vertical++)
             {
                 for(int horizontal = 0; horizontal < chunkSize; horizontal++)
@@ -70,6 +72,12 @@ namespace My_NEA_Project
                 
             }
         }
+
+        private void LoadingPerlin()
+        {
+            throw new NotImplementedException();
+        }
+
         public Bitmap ReturnChunk()
         {
             return visualMap;
