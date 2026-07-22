@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace My_NEA_Project
 {
@@ -189,6 +190,60 @@ namespace My_NEA_Project
             }
             if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + 1).solid) return;
             
+        }
+        private double LoadingPerlin(int worldX)
+        {
+            int chunkSize = worldMap.ReturnVisableMap()[0, 0].ReturnChunkSize();
+            bool directionOfLeftChunk;
+            bool directionOfRightChunk;
+
+            double distanceFromLeft;
+            double distanceFromRight;
+
+            double leftDot = 0;
+            double rightDot = 0;
+
+            //distanceFromLeft
+            double physicalDistanceFromLeft = worldX - (worldX - (worldX % chunkSize));
+            distanceFromLeft = physicalDistanceFromLeft / chunkSize;
+
+            //distanceFromRight
+            double physicaleDistanceFromRight = worldX - ((worldX % chunkSize) + 1);
+            distanceFromRight = physicaleDistanceFromRight / chunkSize;
+
+            Random dircetionOfLeftPointGen = new Random((worldX % chunkSize));
+            Random directionOfRightPointGen = new Random((worldX % chunkSize) + 1);
+
+            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 3) == 1;
+            directionOfRightChunk = directionOfRightPointGen.Next(1, 3) == 1;
+
+            if (directionOfLeftChunk)
+            {
+                leftDot = distanceFromLeft;
+            }
+            else if (!directionOfLeftChunk)
+            {
+                leftDot = distanceFromLeft * -1;
+            }
+
+            if (directionOfRightChunk)
+            {
+                rightDot = distanceFromRight;
+            }
+            else if (!directionOfRightChunk)
+            {
+                rightDot = distanceFromRight * -1;
+            }
+
+            double fadedTime = Fade(distanceFromLeft);
+            double interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));
+
+            return interpolatedValue;
+        }
+
+        private double Fade(double time)
+        {
+            return time * time * time * ((time * ((6 * time) + 15)) + 10);
         }
     }
 }
