@@ -51,8 +51,8 @@ namespace My_NEA_Project
             };
 
 
-            if (y < 0) return air;
-            if (y > -1) return dirt;
+            if (y < LoadingPerlin(x)) return air;
+            if (y > LoadingPerlin(x)) return dirt;
             else return air;
 
         }
@@ -71,7 +71,7 @@ namespace My_NEA_Project
         double bulletProgressionY = 0;
         public void WorldUpdate()
         {
-            
+            worldMap.loadingMap(playerX, playerY);
             foreach (Entity e in listOfLoadedEntities)
             {
                 if (e is Player)
@@ -178,7 +178,7 @@ namespace My_NEA_Project
 
                 
             }
-            worldMap.loadingMap(playerX,playerY);
+           
         }
         public void GravatationalPull(Entity e)
         {
