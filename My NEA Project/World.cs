@@ -51,8 +51,8 @@ namespace My_NEA_Project
             };
 
 
-            if (y < LoadingPerlin(x)) return air;
-            if (y > LoadingPerlin(x)) return dirt;
+            if (y < LoadingPerlin(x) * 10) return air;
+            if (y > LoadingPerlin(x) * 10) return dirt;
             else return air;
 
         }

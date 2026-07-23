@@ -44,6 +44,20 @@ namespace My_NEA_Project
                     int worldY = (chunkY * chunkSize) + vertical;
 
                     mapInfo[horizontal, vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
+
+
+                    if(worldX % chunkSize == 0 || worldY % chunkSize == 0)
+                    {
+                        mapInfo[horizontal, vertical] = new Material() 
+                        {
+                            name = "DebugEdge",
+                            solid = false,
+                            liquid = false,
+                            gas = true,
+                            slipery = false,
+                            decreaseSpeed = false
+                        };
+                    }
                 }
             }
             visualMap = new Bitmap(chunkSize * pixelScale, chunkSize * pixelScale);
@@ -52,9 +66,9 @@ namespace My_NEA_Project
                 int horrizontalPaintingPos = 0;
                 int verticalPaintingPos = 0;
 
-                for (int vertical = chunkSize - 1; vertical >= 0; vertical--)
+                for (int vertical = 0; vertical <= chunkSize - 1; vertical++)
                 {
-                    for (int horrizontal = chunkSize - 1; horrizontal >= 0; horrizontal--)
+                    for (int horrizontal = 0; horrizontal <= chunkSize - 1; horrizontal++)
                     {
                         switch (mapInfo[horrizontal, vertical].name)
                         {
@@ -65,6 +79,9 @@ namespace My_NEA_Project
                                 g.FillRectangle(new SolidBrush(Color.Brown), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
                                 break;
 
+                            case "DebugEdge":
+                                g.FillRectangle(new SolidBrush(Color.Yellow), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
+                                break;
 
                         }
                         horrizontalPaintingPos += pixelScale;

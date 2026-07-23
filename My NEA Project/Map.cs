@@ -45,6 +45,9 @@ namespace My_NEA_Project
             if (playerChunkXCoordLastFrame == (int)Math.Floor((double)playerX / chunkSize) && playerChunkYCoordLastFrame == (int)Math.Floor((double)playerY / chunkSize)) return;
             else
             {
+                playerChunkXCoordLastFrame = (int)Math.Floor((double)playerX / chunkSize);
+                playerChunkYCoordLastFrame = (int)Math.Floor((double)playerY / chunkSize);
+
                 visableChunks = new Chunk[renderDistanceX, renderDistanceY];
                 int xIndex = 0;
                 int yIndex = 0;
