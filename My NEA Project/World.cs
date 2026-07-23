@@ -25,6 +25,7 @@ namespace My_NEA_Project
             cam = playerPov;
 
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
+            this.seed = 18796;
         }
         public Material SquareFinder(int x, int y)
         {
@@ -50,10 +51,22 @@ namespace My_NEA_Project
 
             };
 
-            int octives = 7;
+            Material grass = new Material()
+            {
+                name = "Grass",
+                solid = true,
+                liquid = false,
+                gas = false,
+                slipery = false,
+                decreaseSpeed = false
+            };
 
-            if (y < LoadingPerlin(x,octives) * 5) return air;
-            if (y > LoadingPerlin(x,octives) * 5) return dirt;
+            int octives = 8;
+
+            int worldHeight = (int)Math.Truncate(LoadingPerlin(x, octives) * 3);
+            if (y < worldHeight) return air;
+            if (y > worldHeight) return dirt;
+            if (y == worldHeight) return grass;
             else return air;
 
         }

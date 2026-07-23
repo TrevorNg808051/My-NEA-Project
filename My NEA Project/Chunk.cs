@@ -78,6 +78,10 @@ namespace My_NEA_Project
                             case "Dirt":
                                 g.FillRectangle(new SolidBrush(Color.Brown), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
                                 break;
+                            case "Grass":
+                                g.FillRectangle(new SolidBrush(Color.YellowGreen), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
+                                break;
+
 
                             //case "DebugEdge":
                             //    g.FillRectangle(new SolidBrush(Color.Yellow), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
