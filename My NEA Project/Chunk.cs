@@ -46,18 +46,18 @@ namespace My_NEA_Project
                     mapInfo[horizontal, vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
 
 
-                    if(worldX % chunkSize == 0 || worldY % chunkSize == 0)
-                    {
-                        mapInfo[horizontal, vertical] = new Material() 
-                        {
-                            name = "DebugEdge",
-                            solid = false,
-                            liquid = false,
-                            gas = true,
-                            slipery = false,
-                            decreaseSpeed = false
-                        };
-                    }
+                    //if(worldX % chunkSize == 0 || worldY % chunkSize == 0)
+                    //{
+                    //    mapInfo[horizontal, vertical] = new Material() 
+                    //    {
+                    //        name = "DebugEdge",
+                    //        solid = false,
+                    //        liquid = false,
+                    //        gas = true,
+                    //        slipery = false,
+                    //        decreaseSpeed = false
+                    //    };
+                    //}
                 }
             }
             visualMap = new Bitmap(chunkSize * pixelScale, chunkSize * pixelScale);
@@ -79,9 +79,9 @@ namespace My_NEA_Project
                                 g.FillRectangle(new SolidBrush(Color.Brown), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
                                 break;
 
-                            case "DebugEdge":
-                                g.FillRectangle(new SolidBrush(Color.Yellow), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
-                                break;
+                            //case "DebugEdge":
+                            //    g.FillRectangle(new SolidBrush(Color.Yellow), horrizontalPaintingPos, verticalPaintingPos, pixelScale, pixelScale);
+                            //    break;
 
                         }
                         horrizontalPaintingPos += pixelScale;

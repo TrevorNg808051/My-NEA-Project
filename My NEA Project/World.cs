@@ -51,8 +51,8 @@ namespace My_NEA_Project
             };
 
 
-            if (y < LoadingPerlin(x) * 10) return air;
-            if (y > LoadingPerlin(x) * 10) return dirt;
+            if (y < LoadingPerlin(x) * 5) return air;
+            if (y > LoadingPerlin(x) * 5) return dirt;
             else return air;
 
         }
@@ -203,16 +203,21 @@ namespace My_NEA_Project
             double leftDot = 0;
             double rightDot = 0;
 
-            //distanceFromLeft
-            double physicalDistanceFromLeft = worldX - (worldX - (worldX % chunkSize));
-            distanceFromLeft = physicalDistanceFromLeft / chunkSize;
+            {
+                //distanceFromLeft
+                double physicalDistanceFromLeft = Math.Abs(worldX) % chunkSize;
+                distanceFromLeft = physicalDistanceFromLeft / chunkSize;
+            
 
-            //distanceFromRight
-            double physicaleDistanceFromRight = worldX - ((worldX % chunkSize) + 1);
-            distanceFromRight = physicaleDistanceFromRight / chunkSize;
+            
+                //distanceFromRight
+                double physicaleDistanceFromRight = physicalDistanceFromLeft - chunkSize;
+                distanceFromRight = physicaleDistanceFromRight / chunkSize;
 
-            Random dircetionOfLeftPointGen = new Random((worldX % chunkSize));
-            Random directionOfRightPointGen = new Random((worldX % chunkSize) + 1);
+            }
+
+            Random dircetionOfLeftPointGen = new Random((worldX - (worldX % chunkSize))/ chunkSize);
+            Random directionOfRightPointGen = new Random(((worldX - (worldX % chunkSize)) / chunkSize) + 1);
 
             directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 3) == 1;
             directionOfRightChunk = directionOfRightPointGen.Next(1, 3) == 1;
@@ -243,7 +248,7 @@ namespace My_NEA_Project
 
         private double Fade(double time)
         {
-            return time * time * time * ((time * ((6 * time) + 15)) + 10);
+            return time * time * time * ((time * ((6 * time) - 15)) + 10);
         }
     }
 }
