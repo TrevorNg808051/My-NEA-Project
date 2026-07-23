@@ -14,7 +14,7 @@ namespace My_NEA_Project
 
         public override Movement Move()
         {
-            return new Movement();
+            return new Movement() { horrizontalMovement = this.horrizontalVelocity , verticalMovement = this.currentVerticalVelocity};
         }
     }
 }

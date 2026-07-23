@@ -202,7 +202,7 @@ namespace My_NEA_Project
                 c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), c.ReturnCreatureCurrentVerticalVelocity() + 1);
                 if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
             }
-            if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + 1).solid) return;
+
             
         }
         private double LoadingPerlin(int worldX, int octives)
