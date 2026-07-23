@@ -50,9 +50,10 @@ namespace My_NEA_Project
 
             };
 
+            int octives = 7;
 
-            if (y < LoadingPerlin(x) * 5) return air;
-            if (y > LoadingPerlin(x) * 5) return dirt;
+            if (y < LoadingPerlin(x,octives) * 5) return air;
+            if (y > LoadingPerlin(x,octives) * 5) return dirt;
             else return air;
 
         }
@@ -191,7 +192,7 @@ namespace My_NEA_Project
             if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + 1).solid) return;
             
         }
-        private double LoadingPerlin(int worldX)
+        private double LoadingPerlin(int worldX, int octives)
         {
             int chunkSize = worldMap.ReturnVisableMap()[0, 0].ReturnChunkSize();
             bool directionOfLeftChunk;
@@ -207,17 +208,15 @@ namespace My_NEA_Project
                 //distanceFromLeft
                 double physicalDistanceFromLeft = Math.Abs(worldX) % chunkSize;
                 distanceFromLeft = physicalDistanceFromLeft / chunkSize;
-            
 
-            
                 //distanceFromRight
                 double physicaleDistanceFromRight = physicalDistanceFromLeft - chunkSize;
                 distanceFromRight = physicaleDistanceFromRight / chunkSize;
 
             }
 
-            Random dircetionOfLeftPointGen = new Random((worldX - (worldX % chunkSize))/ chunkSize);
-            Random directionOfRightPointGen = new Random(((worldX - (worldX % chunkSize)) / chunkSize) + 1);
+            Random dircetionOfLeftPointGen = new Random(((worldX - (worldX % chunkSize))/ chunkSize) * octives);
+            Random directionOfRightPointGen = new Random((((worldX - (worldX % chunkSize)) / chunkSize) + 1) * octives);
 
             directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 3) == 1;
             directionOfRightChunk = directionOfRightPointGen.Next(1, 3) == 1;
@@ -241,9 +240,17 @@ namespace My_NEA_Project
             }
 
             double fadedTime = Fade(distanceFromLeft);
-            double interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));
-
+            double interpolatedValue;
+            if (octives > 0)
+            {
+                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot)) + LoadingPerlin(worldX,octives - 1);
+            }
+            else
+            {
+                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));  
+            }
             return interpolatedValue;
+
         }
 
         private double Fade(double time)
