@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,15 +78,19 @@ namespace My_NEA_Project
             theFormThisWorldExistsIn.Controls.Add(thingToAdd.ReturnPictureBox());
         }
 
-        public void getWorldMap(Map worldMap)
+        public void GetWorldMap(Map worldMap)
         {
             this.worldMap = worldMap;
         }
         double bulletProgressionX = 0;
         double bulletProgressionY = 0;
-        public void WorldUpdate()
+        public async Task WorldUpdate()
         {
-            worldMap.loadingMap(playerX, playerY);
+            Task mapGen = new Task(() => worldMap.LoadingMap(playerX,playerY));
+            if (mapGen.Status != TaskStatus.Running)
+            {
+                mapGen.Start();
+            }
             foreach (Entity e in listOfLoadedEntities)
             {
                 if (e is Player)
@@ -190,7 +195,6 @@ namespace My_NEA_Project
                     GravatationalPull(e);
                 }
 
-                
             }
            
         }
@@ -207,7 +211,7 @@ namespace My_NEA_Project
         }
         private double LoadingPerlin(int worldX, int octives)
         {
-            int chunkSize = worldMap.ReturnVisableMap()[0, 0].ReturnChunkSize();
+            int chunkSize = worldMap.ReturnChunkSize();
             bool directionOfLeftChunk;
             bool directionOfRightChunk;
 
@@ -269,6 +273,11 @@ namespace My_NEA_Project
         private double Fade(double time)
         {
             return time * time * time * ((time * ((6 * time) - 15)) + 10);
+        }
+
+        public Point ReturnPlayerCoords()
+        {
+            return new Point() { X = playerX, Y = playerY };
         }
     }
 }

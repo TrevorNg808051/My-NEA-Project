@@ -18,7 +18,7 @@ namespace My_NEA_Project
         Player thePlayer;
         Camara thePlayerPov;
         Map theWorldMap;
-
+        int chunkSize = 50;
         
         public Form1()
         {
@@ -27,8 +27,8 @@ namespace My_NEA_Project
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,-10,60,100,10);
             theWorld = new World(thePlayerPov,this);
-            theWorldMap = new Map(theWorld,20);
-            theWorld.getWorldMap(theWorldMap);
+            theWorldMap = new Map(theWorld,chunkSize);
+            theWorld.GetWorldMap(theWorldMap);
 
             theWorld.AddEntity(thePlayer);
             theWorld.AddEntity(new DebugDummy(0,-20,60,100,10));
@@ -87,28 +87,59 @@ namespace My_NEA_Project
             if (e.KeyCode == Keys.Space) jump = true;
         }
 
+        Point playerLastChunkCoord = new Point { X = 0, Y = 0};
+        
         protected override void OnPaint(PaintEventArgs e)
         {
-            for(int vertical = 0; vertical < theWorldMap.ReturnRenderY(); vertical++)
+            try
             {
-                for (int horizontal = 0; horizontal < theWorldMap.ReturnRenderX(); horizontal++)
+                for (int vertical = 0; vertical < theWorldMap.ReturnRenderY(); vertical++)
                 {
-                    Chunk[,] loadedChunks = theWorldMap.ReturnVisableMap();
+                    for (int horizontal = 0; horizontal < theWorldMap.ReturnRenderX(); horizontal++)
+                    {
+                        Chunk[,] loadedChunks = theWorldMap.ReturnVisableMap();
 
-                    Bitmap currentChunkToLoad = loadedChunks[horizontal, vertical].ReturnChunk();
+                        Bitmap currentChunkToLoad = loadedChunks[horizontal, vertical].ReturnChunk();
 
-                    Graphics g = e.Graphics;
+                        Graphics g = e.Graphics;
 
-                    int worldX = loadedChunks[horizontal,vertical].ReturnChunkX() * loadedChunks[horizontal, vertical].ReturnChunkSize();
-                    int worldY = loadedChunks[horizontal,vertical].ReturnChunkY() * loadedChunks[horizontal, vertical].ReturnChunkSize();
+                        int worldX = loadedChunks[horizontal, vertical].ReturnChunkX() * loadedChunks[horizontal, vertical].ReturnChunkSize();
+                        int worldY = loadedChunks[horizontal, vertical].ReturnChunkY() * loadedChunks[horizontal, vertical].ReturnChunkSize();
 
-                    int screenCentreX = (Screen.PrimaryScreen.Bounds.Width / 2);
-                    int screenCentreY = (Screen.PrimaryScreen.Bounds.Height / 2);
+                        int screenCentreX = (Screen.PrimaryScreen.Bounds.Width / 2);
+                        int screenCentreY = (Screen.PrimaryScreen.Bounds.Height / 2);
 
-                    g.DrawImage(currentChunkToLoad, ((worldX - thePlayer.ReturnXCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreX, ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY, loadedChunks[horizontal,vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale(), loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale());
+                        int startingX = ((worldX - thePlayer.ReturnXCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreX;
+                        int startingY = ((worldY - thePlayer.ReturnYCoord()) * thePlayerPov.ReturnCamScale()) + screenCentreY;
 
+                        int width = loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale();
+                        int height = loadedChunks[horizontal, vertical].ReturnChunkSize() * thePlayerPov.ReturnCamScale();
+
+                        try
+                        {
+                            g.DrawImage(currentChunkToLoad, startingX, startingY, width, height);
+                        }
+                        catch (System.ArgumentException)
+                        {
+                            continue;
+                        }
+                        catch (System.InvalidOperationException)
+                        {
+                            continue;
+                        }
+
+                    }
                 }
             }
+            catch (System.ArgumentNullException)
+            {
+                return;
+            }
+            catch (System.NullReferenceException)
+            {
+                return;
+            }
+            
         }
     }
 }
