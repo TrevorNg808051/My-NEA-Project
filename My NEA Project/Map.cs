@@ -100,7 +100,7 @@ namespace My_NEA_Project
         }
 
         private void DeloadingChunks(Chunk[,] visableChunks)
-        {
+         {
             
             for(int y = 0; y < renderDistanceX; y++)
             {

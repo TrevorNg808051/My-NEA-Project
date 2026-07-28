@@ -26,7 +26,7 @@ namespace My_NEA_Project
             cam = playerPov;
 
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
-            this.seed = 18796;
+            this.seed = 849;
         }
         public Material SquareFinder(int x, int y)
         {
@@ -62,9 +62,9 @@ namespace My_NEA_Project
                 decreaseSpeed = false
             };
 
-            int octives = 8;
+            int octives = 4;
 
-            int worldHeight = (int)Math.Truncate(LoadingPerlin(x, octives) * 3);
+            int worldHeight = (int)Math.Truncate(LoadingPerlin(x, octives) * 10);
             if (y < worldHeight) return air;
             if (y > worldHeight) return dirt;
             if (y == worldHeight) return grass;
@@ -86,7 +86,7 @@ namespace My_NEA_Project
         double bulletProgressionY = 0;
         public async Task WorldUpdate()
         {
-            Task mapGen = new Task(() => worldMap.LoadingMap(playerX,playerY));
+            Task mapGen = new Task(() => worldMap.LoadingMap(playerX, playerY));
             if (mapGen.Status != TaskStatus.Running)
             {
                 mapGen.Start();
@@ -118,7 +118,7 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i > currentCreaturMovement.horrizontalMovement; i--)
                         {
-                            if (SquareFinder(e.ReturnXCoord() + i - 1,e.ReturnYCoord()).solid)
+                            if (SquareFinder(e.ReturnXCoord() + i - 1, e.ReturnYCoord()).solid)
                             {
                                 break;
                             }
@@ -141,7 +141,7 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i > currentCreaturMovement.verticalMovement; i--)
                         {
-                            if (SquareFinder(e.ReturnXCoord() , e.ReturnYCoord() + i - 1).solid)
+                            if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + i - 1).solid)
                             {
                                 break;
                             }
@@ -161,12 +161,12 @@ namespace My_NEA_Project
                     }
 
                     c.SetEntityCoords(c.ReturnXCoord() + FinalXValue, c.ReturnYCoord() + FinalYValue);
-                    
+
                 }
-                if(e is Bullet)
+                if (e is Bullet)
                 {
                     Bullet bullet = (Bullet)e;
-                  
+
                     if (bulletProgressionX >= 1 || bulletProgressionX <= -1 || bulletProgressionY >= 1 || bulletProgressionY <= -1)
                     {
                         int xIncrease = 0;
@@ -196,7 +196,7 @@ namespace My_NEA_Project
                 }
 
             }
-           
+            await mapGen;
         }
         public void GravatationalPull(Entity e)
         {
@@ -207,7 +207,7 @@ namespace My_NEA_Project
                 if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
             }
 
-            
+
         }
         private double LoadingPerlin(int worldX, int octives)
         {
@@ -223,20 +223,20 @@ namespace My_NEA_Project
 
             {
                 //distanceFromLeft
-                double physicalDistanceFromLeft = Math.Abs(worldX) % chunkSize;
-                distanceFromLeft = physicalDistanceFromLeft / chunkSize;
+                double physicalDistanceFromLeft = (Math.Abs(worldX) % chunkSize);
+                distanceFromLeft = (physicalDistanceFromLeft / chunkSize);
 
                 //distanceFromRight
                 double physicaleDistanceFromRight = physicalDistanceFromLeft - chunkSize;
-                distanceFromRight = physicaleDistanceFromRight / chunkSize;
+                distanceFromRight = (physicaleDistanceFromRight / chunkSize);
 
             }
 
-            Random dircetionOfLeftPointGen = new Random(((worldX - (worldX % chunkSize))/ chunkSize) * octives);
-            Random directionOfRightPointGen = new Random((((worldX - (worldX % chunkSize)) / chunkSize) + 1) * octives);
+            Random dircetionOfLeftPointGen = new Random((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) );
+            Random directionOfRightPointGen = new Random(((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) + 1) );
 
-            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 3) == 1;
-            directionOfRightChunk = directionOfRightPointGen.Next(1, 3) == 1;
+            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 1000) >= 500;
+            directionOfRightChunk = directionOfRightPointGen.Next(1, 1000) <= 500;
 
             if (directionOfLeftChunk)
             {
@@ -260,11 +260,11 @@ namespace My_NEA_Project
             double interpolatedValue;
             if (octives > 0)
             {
-                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot)) + LoadingPerlin(worldX,octives - 1);
+                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot)) + LoadingPerlin(worldX, octives - 1);
             }
             else
             {
-                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));  
+                interpolatedValue = leftDot + (fadedTime * (rightDot - leftDot));
             }
             return interpolatedValue;
 

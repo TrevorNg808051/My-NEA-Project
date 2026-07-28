@@ -25,7 +25,7 @@ namespace My_NEA_Project
             this.chunkX = chunkX;
             this.chunkY = chunkY;
             this.chunkSize = chunkSize;
-            this.pixelScale = 50;
+            this.pixelScale = 20;
             this.mapInfo = new Material[chunkSize, chunkSize];
         }
         public void LoadDirty()

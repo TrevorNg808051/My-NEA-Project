@@ -10,7 +10,7 @@ namespace My_NEA_Project
     internal class Player : Creature
     {
        
-        private bool gunEquipped;
+        private bool gunEquipped = false;
 
         private bool moveRight = false;
         private bool moveLeft = false;
@@ -23,7 +23,7 @@ namespace My_NEA_Project
 
             this.verticalAcceloration = 1;
 
-            this.gunEquipped = true;
+            this.gunEquipped = false;
 
         }
 
@@ -69,5 +69,9 @@ namespace My_NEA_Project
             return gunEquipped;
         }
 
+        public void ToggleGun()
+        {
+            gunEquipped = !gunEquipped;
+        }
     }
 }
