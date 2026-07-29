@@ -25,7 +25,7 @@ namespace My_NEA_Project
             this.chunkX = chunkX;
             this.chunkY = chunkY;
             this.chunkSize = chunkSize;
-            this.pixelScale = 20;
+            this.pixelScale = 16;
             this.mapInfo = new Material[chunkSize, chunkSize];
         }
         public void LoadDirty()
@@ -46,18 +46,18 @@ namespace My_NEA_Project
                     mapInfo[horizontal, vertical] = worldChunkIsIn.SquareFinder(worldX, worldY);
 
 
-                    if (worldX % chunkSize == 0 || worldY % chunkSize == 0)
-                    {
-                        mapInfo[horizontal, vertical] = new Material()
-                        {
-                            name = "DebugEdge",
-                            solid = false,
-                            liquid = false,
-                            gas = true,
-                            slipery = false,
-                            decreaseSpeed = false
-                        };
-                    }
+                    //if (worldX % chunkSize == 0 || worldY % chunkSize == 0)
+                    //{
+                    //    mapInfo[horizontal, vertical] = new Material()
+                    //    {
+                    //        name = "DebugEdge",
+                    //        solid = false,
+                    //        liquid = false,
+                    //        gas = true,
+                    //        slipery = false,
+                    //        decreaseSpeed = false
+                    //    };
+                    //}
                 }
             }
 

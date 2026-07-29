@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,13 +20,17 @@ namespace My_NEA_Project
         Camara thePlayerPov;
         Map theWorldMap;
         int chunkSize = 50;
+
+        UIManager uiManager;
         
         public Form1()
         {
             InitializeComponent();
+
             
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,-10,60,100,10);
+            
             theWorld = new World(thePlayerPov,this);
             theWorldMap = new Map(theWorld,chunkSize);
             theWorld.GetWorldMap(theWorldMap);
@@ -35,6 +40,7 @@ namespace My_NEA_Project
 
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
+            uiManager = new UIManager(this, thePlayer);
             FrameIntervalTracker.Start();
         }
         bool left, right, jump;
@@ -85,6 +91,8 @@ namespace My_NEA_Project
             if (e.KeyCode == Keys.D) right = true;
             if (e.KeyCode == Keys.A) left = true;
             if (e.KeyCode == Keys.Space) jump = true;
+
+            if (e.KeyCode == Keys.V) uiManager.ToggleCrafting();
         }
 
         Point playerLastChunkCoord = new Point { X = 0, Y = 0};
