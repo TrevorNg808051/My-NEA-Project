@@ -73,7 +73,7 @@ namespace WindowsFormsAppTestingGround
             this.hScrollBar1.TabIndex = 2;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             this.hScrollBar1.Minimum = 0;
-            this.hScrollBar1.Maximum = 10000;
+            this.hScrollBar1.Maximum = 9300;
 
         }
 

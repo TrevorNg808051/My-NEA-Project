@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class UpgradeStation : CraftingRecipies
+    internal class UpgradeStation : Iitem
     {
     }
 }

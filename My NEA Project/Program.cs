@@ -6,6 +6,11 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
+    public struct itemStack
+    {
+        public int stackCount;
+        public Iitem item;
+    }
     public struct Movement
     {
         public double horrizontalMovement;

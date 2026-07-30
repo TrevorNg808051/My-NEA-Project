@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class DroppedItems
+    internal class UpgradeStationRecipe : CraftingRecipies
     {
-        private Iitem item;
-
-        public void GetPickedUp()
+        public UpgradeStationRecipe()
         {
-
+            theItmeCrafted = new UpgradeStation();
         }
     }
 }

@@ -10,12 +10,18 @@ namespace My_NEA_Project
 {
     internal abstract class CraftingRecipies
     {
-        ICraftingMaterials[] materialsRequired;
-        PictureBox pictureOfCraftedItems;
-        Label listOfMaterials;
+        protected ICraftingMaterials[] materialsRequired;
+        protected PictureBox pictureOfCraftedItems;
+        protected Label listOfMaterials;
+        protected Iitem theItmeCrafted;
         public bool Craftable()
         {
             return true;
+        }
+        public Iitem Craft()
+        {
+           
+            return theItmeCrafted;
         }
 
     }

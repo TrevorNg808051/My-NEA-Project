@@ -16,6 +16,10 @@ namespace My_NEA_Project
         private bool moveLeft = false;
         private bool jump = false;
 
+        private itemStack[] inventory;
+
+        
+
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
         {
             this.horrizontalVelocity = 1;
@@ -24,7 +28,7 @@ namespace My_NEA_Project
             this.verticalAcceloration = 1;
 
             this.gunEquipped = false;
-
+            inventory = new itemStack[20];
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
@@ -72,6 +76,29 @@ namespace My_NEA_Project
         public void ToggleGun()
         {
             gunEquipped = !gunEquipped;
+        }
+
+        public void ReciveItem(Iitem itemRecived,int amountRecived)
+        {
+            int index = 0;
+            foreach(itemStack iS in inventory)
+            {
+                if(iS.item == null)
+                {
+                    break;
+                }
+                else if(iS.item == itemRecived)
+                {
+                    break;
+                }
+                index++;
+            }
+            inventory[index] = new itemStack() { item = itemRecived, stackCount = 0 };
+            inventory[index].stackCount += amountRecived;
+        }
+        public itemStack[] ReturnInventory()
+        {
+            return inventory;
         }
     }
 }
