@@ -8,9 +8,9 @@ namespace My_NEA_Project
 {
     internal class UpgradeStationRecipe : CraftingRecipies
     {
-        public UpgradeStationRecipe()
+        public UpgradeStationRecipe(Player whoIsCrafting) : base(whoIsCrafting)
         {
-            theItmeCrafted = new UpgradeStation();
+            theItmeCrafted = new UpgradeStation(whoIsCrafting);
         }
     }
 }

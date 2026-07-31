@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
-    internal class Camara
+    public class Camara
     {
         private int camWidth;
         private int camHeight;

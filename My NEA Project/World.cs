@@ -10,7 +10,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace My_NEA_Project
 {
-    internal class World
+    public class World
     {
         private List<Entity> listOfLoadedEntities;
         private Map worldMap;

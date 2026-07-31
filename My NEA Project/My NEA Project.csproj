@@ -59,6 +59,9 @@
     <Compile Include="Inventory.Designer.cs">
       <DependentUpon>Inventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventoryButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Item recipes\CraftingRecipies.cs" />
     <Compile Include="DebugDummy.cs" />
     <Compile Include="Entities\DroppedItems.cs" />
@@ -73,7 +76,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="ICraftingMaterials.cs" />
-    <Compile Include="Items\Iitem.cs" />
+    <Compile Include="Items\Item.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
@@ -81,7 +84,7 @@
     <Compile Include="Entities\ResourceVeins.cs" />
     <Compile Include="UIManager.cs" />
     <Compile Include="Item recipes\UpgradeStationRecipe.cs" />
-    <Compile Include="UpgradeStation.cs" />
+    <Compile Include="Items\UpgradeStation.cs" />
     <Compile Include="World.cs" />
     <EmbeddedResource Include="CraftingMenue.resx">
       <DependentUpon>CraftingMenue.cs</DependentUpon>

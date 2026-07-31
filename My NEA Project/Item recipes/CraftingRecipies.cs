@@ -13,12 +13,17 @@ namespace My_NEA_Project
         protected ICraftingMaterials[] materialsRequired;
         protected PictureBox pictureOfCraftedItems;
         protected Label listOfMaterials;
-        protected Iitem theItmeCrafted;
+        protected Item theItmeCrafted;
+        protected Player whosCrafting;
+        public CraftingRecipies(Player whoIsCrafting)
+        {
+            this.whosCrafting = whoIsCrafting;
+        }
         public bool Craftable()
         {
             return true;
         }
-        public Iitem Craft()
+        public Item Craft()
         {
            
             return theItmeCrafted;

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
-    internal class Map
+    public class Map
     {
         private Chunk[,] visableChunks;
         private int renderDistanceX;

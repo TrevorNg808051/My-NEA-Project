@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
-    internal class Entity
+    public class Entity
     {
         protected int xCoord;
         protected int yCoord;

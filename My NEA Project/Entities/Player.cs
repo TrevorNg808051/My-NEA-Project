@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class Player : Creature
+    public class Player : Creature
     {
-       
+
         private bool gunEquipped = false;
 
         private bool moveRight = false;
@@ -18,7 +18,7 @@ namespace My_NEA_Project
 
         private itemStack[] inventory;
 
-        
+
 
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
         {
@@ -28,7 +28,7 @@ namespace My_NEA_Project
             this.verticalAcceloration = 1;
 
             this.gunEquipped = false;
-            inventory = new itemStack[20];
+            inventory = new itemStack[50];
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
@@ -41,14 +41,14 @@ namespace My_NEA_Project
             {
                 this.jump = jump;
                 this.jumpingCounter = 3;
-                
+
             }
         }
         public override Movement Move()
         {
             Movement movementThisFrame = new Movement();
 
-            
+
             if (moveRight) movementThisFrame.horrizontalMovement = horrizontalVelocity;
             if (moveLeft) movementThisFrame.horrizontalMovement = horrizontalVelocity * -1;
             if (jump)
@@ -56,7 +56,7 @@ namespace My_NEA_Project
                 if (jumpingCounter > 0)
                 {
                     this.currentVerticalVelocity -= verticalAcceloration;
-                    
+
                     jumpingCounter--;
                 }
                 else
@@ -78,27 +78,41 @@ namespace My_NEA_Project
             gunEquipped = !gunEquipped;
         }
 
-        public void ReciveItem(Iitem itemRecived,int amountRecived)
+        public void ReciveItem(Item itemRecived, int amountRecived)
         {
             int index = 0;
-            foreach(itemStack iS in inventory)
+            foreach (itemStack iS in inventory)
             {
-                if(iS.item == null)
+                if (iS.item == null)
                 {
                     break;
                 }
-                else if(iS.item == itemRecived)
+                else if (iS.item == itemRecived)
                 {
                     break;
                 }
                 index++;
             }
-            inventory[index] = new itemStack() { item = itemRecived, stackCount = 0 };
-            inventory[index].stackCount += amountRecived;
+            if (!(index > 50))
+            {
+                if (inventory[index].item == null)
+                {
+                    inventory[index] = new itemStack() { item = itemRecived, stackCount = 0 };
+                    inventory[index].stackCount += amountRecived;
+                }
+                else if (inventory[index].item == itemRecived)
+                {
+                    inventory[index].stackCount += amountRecived;
+                }
+            }
         }
         public itemStack[] ReturnInventory()
         {
             return inventory;
+        }
+        public void PlaceStructure(Item structureToPlace)
+        {
+            // you left it here the code succesfully reached this bit 
         }
     }
 }

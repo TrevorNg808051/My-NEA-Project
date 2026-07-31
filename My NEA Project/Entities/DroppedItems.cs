@@ -8,7 +8,7 @@ namespace My_NEA_Project
 {
     internal class DroppedItems
     {
-        private Iitem item;
+        private Item item;
 
         public void GetPickedUp()
         {

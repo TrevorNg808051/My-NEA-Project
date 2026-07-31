@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project
 {
-    internal class Chunk
+    public class Chunk
     {
         private struct PerlinChart
         {

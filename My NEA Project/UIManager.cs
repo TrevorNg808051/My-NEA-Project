@@ -14,18 +14,23 @@ namespace My_NEA_Project
         private Form theFormUiWillBeIn;
         private Player thePlayer;
 
-        private CraftingMenue craftingMenue = new CraftingMenue();
-        private CraftingRecipies[] recipies = { new UpgradeStationRecipe()};
-
-        private Inventory inventory = new Inventory();
+        private CraftingMenue craftingMenue;
+        private CraftingRecipies[] recipies;
+        private Form formManagerWillBeIn;
+        private Inventory inventory;
 
         private bool craftingShown = false;
         private bool inventoryShown = false;
         public UIManager(Form theFormUiWillBeIn, Player thePlayer)
         {
+            recipies = new CraftingRecipies[]{ new UpgradeStationRecipe(thePlayer)};
+            
+            formManagerWillBeIn = theFormUiWillBeIn;
             this.theFormUiWillBeIn = theFormUiWillBeIn;
             this.thePlayer = thePlayer;
 
+            inventory = new Inventory(formManagerWillBeIn,thePlayer);
+            craftingMenue = new CraftingMenue();
             //
             //craftingMenue
             //
@@ -88,6 +93,7 @@ namespace My_NEA_Project
 
                 theFormUiWillBeIn.Controls.Add(craftingMenue);
                 craftingMenue.Hide();
+                craftingMenue.Enabled = false;
             }
             //
             //inventory
@@ -97,6 +103,7 @@ namespace My_NEA_Project
                 inventory.Size = new Size(350, 300);
                 theFormUiWillBeIn.Controls.Add(inventory);
                 inventory.Hide();
+                inventory.Enabled = false;
             }
         }
 
@@ -104,14 +111,17 @@ namespace My_NEA_Project
         {
             if (!craftingShown)
             {
+                craftingMenue.Enabled = true;
                 craftingMenue.Show();
                 craftingMenue.BringToFront();
+                
             }
             else if (craftingShown)
             {
 
-
+                craftingMenue.Enabled = false;
                 craftingMenue.Hide();
+                formManagerWillBeIn.Focus();
             }
 
             craftingShown = !craftingShown;
@@ -129,13 +139,15 @@ namespace My_NEA_Project
             if (!inventoryShown)
             {
                 inventory.RefreshInventory(thePlayer.ReturnInventory());
-
+                inventory.Enabled = true;
                 inventory.Show();
                 inventory.BringToFront();
             }
             else
             {
+                inventory.Enabled = false;
                 inventory.Hide();
+                theFormUiWillBeIn.Focus();
             }
             inventoryShown = !inventoryShown;
         }

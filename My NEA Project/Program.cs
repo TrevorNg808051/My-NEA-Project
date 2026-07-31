@@ -9,7 +9,7 @@ namespace My_NEA_Project
     public struct itemStack
     {
         public int stackCount;
-        public Iitem item;
+        public Item item;
     }
     public struct Movement
     {

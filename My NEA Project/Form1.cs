@@ -26,7 +26,7 @@ namespace My_NEA_Project
         public Form1()
         {
             InitializeComponent();
-
+            KeyPreview = true;
             
             thePlayerPov = new Camara(theWorldMap);
             thePlayer = new Player(0,-10,60,100,10);
