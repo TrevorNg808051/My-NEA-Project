@@ -16,7 +16,7 @@ namespace My_NEA_Project
         protected int height;
         protected PictureBox entitySprite;
 
-        public Entity(int xCoord,int yCoord, int width, int height)
+        public Entity(int xCoord,int yCoord, int width, int height,Camara pov)
         {
             this.xCoord = xCoord;
             this.yCoord = yCoord;
@@ -25,8 +25,8 @@ namespace My_NEA_Project
 
             this.entitySprite = new PictureBox();
             entitySprite.BackColor = Color.Green;
-            entitySprite.Width = width;
-            entitySprite.Height = height;
+            entitySprite.Width = width * pov.ReturnCamScale();
+            entitySprite.Height = height * pov.ReturnCamScale();
         }
         public int ReturnXCoord()
         {

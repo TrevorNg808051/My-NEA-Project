@@ -11,7 +11,7 @@ namespace My_NEA_Project
         private Movement distanceMovedPerFrame;
         private double answerOfTheBullet;
         private int bulletSpeed;
-        public Bullet(int xCoord, int yCoord, int width, int height,double destinationX, double destinationY, int speed) : base(xCoord, yCoord, width, height)
+        public Bullet(int xCoord, int yCoord, int width, int height,double destinationX, double destinationY, int speed,Camara pov) : base(xCoord, yCoord, width, height,pov)
         {
             this.bulletSpeed = speed;
 

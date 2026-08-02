@@ -12,6 +12,7 @@ namespace My_NEA_Project
         protected string nameOfItem;
         protected bool usable;
         protected Player ownerOfItem;
+        
         public Item(Player itemOwner)
         {
             ownerOfItem = itemOwner;

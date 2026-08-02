@@ -29,14 +29,15 @@ namespace My_NEA_Project
             KeyPreview = true;
             
             thePlayerPov = new Camara(theWorldMap);
-            thePlayer = new Player(0,-10,60,100,10);
+            
             
             theWorld = new World(thePlayerPov,this);
+            thePlayer = new Player(0, -10, 1, 2, 10, theWorld,thePlayerPov);
             theWorldMap = new Map(theWorld,chunkSize);
             theWorld.GetWorldMap(theWorldMap);
 
             theWorld.AddEntity(thePlayer);
-            theWorld.AddEntity(new DebugDummy(0,-20,60,100,10));
+            theWorld.AddEntity(new DebugDummy(0,-20,1,2,10,thePlayerPov));
 
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
@@ -80,7 +81,7 @@ namespace My_NEA_Project
                 double destinationX = thePlayer.ReturnXCoord() + Math.Floor((double)((p.X - (this.Width / 2)) / thePlayerPov.ReturnCamScale()));
                 double destinationY = thePlayer.ReturnYCoord() + Math.Floor((double)((p.Y - (this.Height / 2)) / thePlayerPov.ReturnCamScale()));
 
-                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),5,5,destinationX,destinationY,bulletSpeed));
+                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),5,5,destinationX,destinationY,bulletSpeed,thePlayerPov));
 
             }
         }
@@ -149,6 +150,11 @@ namespace My_NEA_Project
                 return;
             }
             
+        }
+
+        public Point ReturnMousePos()
+        {
+            return MousePosition;
         }
     }
 }

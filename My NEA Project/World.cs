@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -16,11 +17,11 @@ namespace My_NEA_Project
         private Map worldMap;
         private int seed;
         private Camara cam;
-        Form theFormThisWorldExistsIn;
+        Form1 theFormThisWorldExistsIn;
 
         int playerX;
         int playerY;
-        public World(Camara playerPov, Form theFormThisWorldExistsIn)
+        public World(Camara playerPov, Form1 theFormThisWorldExistsIn)
         {
             listOfLoadedEntities = new List<Entity>();
             cam = playerPov;
@@ -62,7 +63,7 @@ namespace My_NEA_Project
                 decreaseSpeed = false
             };
 
-            int octives = 4;
+            int octives = 6;
 
             int worldHeight = (int)Math.Truncate(LoadingPerlin(x, octives) * 10);
             if (y < worldHeight) return air;
@@ -196,6 +197,36 @@ namespace My_NEA_Project
                 }
 
             }
+            if(structureSprite != null)
+            {
+                bool placible = false;
+
+                int onScreenX = (int)Math.Floor((double)theFormThisWorldExistsIn.ReturnMousePos().X/cam.ReturnCamScale());
+                int onScreenY = (int)Math.Floor((double)theFormThisWorldExistsIn.ReturnMousePos().Y / cam.ReturnCamScale());
+                Point displayLocation = new Point(onScreenX * cam.ReturnCamScale(),onScreenY * cam.ReturnCamScale());
+                structureSprite.Location = displayLocation;
+
+                structureX = (structureSprite.Left / cam.ReturnCamScale()) + cam.ReturnStaringX();
+                structureY = (structureSprite.Top / cam.ReturnCamScale()) + cam.ReturnStartingY();
+
+                for (int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
+                {
+                    if (!SquareFinder(structureX + i, structureY + 1).solid)
+                    {
+                        placible = false;
+                        break;
+                    }
+                    placible = true;
+                }
+                if (placible)
+                {
+                    structureSprite.BackColor = Color.LightGreen;
+                }
+                else if (!placible)
+                {
+                    structureSprite.BackColor = Color.Red;
+                }
+            }
             await mapGen;
         }
         public void GravatationalPull(Entity e)
@@ -278,6 +309,37 @@ namespace My_NEA_Project
         public Point ReturnPlayerCoords()
         {
             return new Point() { X = playerX, Y = playerY };
+        }
+
+        Placible structureBeingPlaced;
+        PictureBox structureSprite;
+        int structureX;
+        int structureY;
+        
+        public void PreviewSturcturePlacement(Placible structureToPlace)
+        {
+            structureBeingPlaced = structureToPlace;
+            structureSprite = structureToPlace.ReturnSprite();
+
+            structureSprite.Size = new Size(structureToPlace.ReturnWidth() * cam.ReturnCamScale(), structureToPlace.ReturnHeight() * cam.ReturnCamScale());
+            structureSprite.BackColor = Color.Red;
+            structureSprite.Click += new System.EventHandler(placementConfirmed);
+            theFormThisWorldExistsIn.Controls.Add(structureSprite);
+
+        
+        }
+        private void placementConfirmed(object sender, EventArgs e)
+        {
+            for(int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
+            {
+                if(!SquareFinder(structureX + i,structureY + 1).solid)
+                {
+                    return;
+                }
+            }
+            AddEntity(structureBeingPlaced.placeStructure(structureX, structureY, cam));
+            structureBeingPlaced = null;
+            structureSprite = null;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace My_NEA_Project
 {
     internal class DebugDummy : Creature
     {
-        public DebugDummy(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
+        public DebugDummy(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity,Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity,pov)
         {
         }
 

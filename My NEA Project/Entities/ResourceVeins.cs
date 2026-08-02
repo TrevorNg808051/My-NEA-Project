@@ -12,7 +12,7 @@ namespace My_NEA_Project
         protected int hitPoint;
         protected int numOfDrops;
 
-        public ResourceVeins(int xCoord, int yCoord, int width, int height) : base(xCoord, yCoord, width, height)
+        public ResourceVeins(int xCoord, int yCoord, int width, int height,Camara pov) : base(xCoord, yCoord, width, height,pov)
         {
         }
         protected void SetListOfDrops()

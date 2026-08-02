@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,6 +94,10 @@ namespace My_NEA_Project
                 switch (option)
                 {
                     case "Use":
+                        if(itemBeingUsed is Placible)
+                        {
+                            this.Hide();
+                        }
                         itemBeingUsed.Use();
                         break;
                     case "Drop":

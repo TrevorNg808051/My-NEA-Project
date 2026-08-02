@@ -53,6 +53,7 @@
     <Compile Include="CraftingMenue.Designer.cs">
       <DependentUpon>CraftingMenue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Items\Placible.cs" />
     <Compile Include="Inventory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -63,7 +64,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Item recipes\CraftingRecipies.cs" />
-    <Compile Include="DebugDummy.cs" />
+    <Compile Include="Entities\DebugDummy.cs" />
     <Compile Include="Entities\DroppedItems.cs" />
     <Compile Include="Entities\Bullet.cs" />
     <Compile Include="Camara.cs" />
@@ -82,9 +83,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ResourceVeins.cs" />
+    <Compile Include="Entities\Structure.cs" />
     <Compile Include="UIManager.cs" />
     <Compile Include="Item recipes\UpgradeStationRecipe.cs" />
     <Compile Include="Items\UpgradeStation.cs" />
+    <Compile Include="Entities\UpgradeStationBuilding.cs" />
     <Compile Include="World.cs" />
     <EmbeddedResource Include="CraftingMenue.resx">
       <DependentUpon>CraftingMenue.cs</DependentUpon>

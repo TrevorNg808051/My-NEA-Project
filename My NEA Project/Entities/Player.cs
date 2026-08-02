@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace My_NEA_Project
 
         private bool gunEquipped = false;
 
+        private World theWorldPlayerIsIn;
         private bool moveRight = false;
         private bool moveLeft = false;
         private bool jump = false;
@@ -20,8 +22,10 @@ namespace My_NEA_Project
 
 
 
-        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity) : base(xCoord, yCoord, width, height, maximumVerticalVelocity)
+        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity,World theWorldPlayerIsIn,Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity,pov)
         {
+            this.theWorldPlayerIsIn = theWorldPlayerIsIn;
+
             this.horrizontalVelocity = 1;
             this.maxVerticalVelocity = 5;
 
@@ -110,9 +114,9 @@ namespace My_NEA_Project
         {
             return inventory;
         }
-        public void PlaceStructure(Item structureToPlace)
+        public void PlaceStructure(Placible structureToPlace)
         {
-            // you left it here the code succesfully reached this bit 
+            theWorldPlayerIsIn.PreviewSturcturePlacement(structureToPlace);
         }
     }
 }
