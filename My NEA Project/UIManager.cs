@@ -18,9 +18,11 @@ namespace My_NEA_Project
         private CraftingRecipies[] recipies;
         private Form formManagerWillBeIn;
         private Inventory inventory;
+        private EquationFormation equationFormation;
 
         private bool craftingShown = false;
         private bool inventoryShown = false;
+        private bool equaitonForm = false;
         public UIManager(Form theFormUiWillBeIn, Player thePlayer)
         {
             recipies = new CraftingRecipies[]{ new UpgradeStationRecipe(thePlayer)};
@@ -105,6 +107,18 @@ namespace My_NEA_Project
                 inventory.Hide();
                 inventory.Enabled = false;
             }
+            //
+            //equationFormation
+            //
+            {
+                this.equationFormation = new EquationFormation();
+                equationFormation.Location = new Point(0, (Screen.PrimaryScreen.Bounds.Height / 2));
+                equationFormation.Size = new Size(Screen.PrimaryScreen.Bounds.Width, (Screen.PrimaryScreen.Bounds.Height / 5)* 2);
+                equationFormation.InitializeComponent();
+                theFormUiWillBeIn.Controls.Add(equationFormation);
+                equationFormation.Hide();
+                equationFormation.Enabled = false;
+            }
         }
 
         public void ToggleCrafting()
@@ -132,7 +146,23 @@ namespace My_NEA_Project
         }
         public void ToggleEquationForming()
         {
-            throw new NotImplementedException();
+            if (!equaitonForm)
+            {
+                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-'},3);
+                equationFormation.Enabled = true;
+                equationFormation.Show();
+                equationFormation.BringToFront();
+
+            }
+            else if (equaitonForm)
+            {
+                equationFormation.ClearEquationFormation();
+                equationFormation.Enabled = false;
+                equationFormation.Hide();
+                formManagerWillBeIn.Focus();
+            }
+
+            equaitonForm = !equaitonForm;
         }
         public void ToggleInventory()
         {

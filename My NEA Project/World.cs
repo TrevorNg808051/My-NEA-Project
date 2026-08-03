@@ -94,6 +94,7 @@ namespace My_NEA_Project
             }
             foreach (Entity e in listOfLoadedEntities)
             {
+                
                 if (e is Player)
                 {
                     Player player = (Player)e;
@@ -104,8 +105,7 @@ namespace My_NEA_Project
                     playerX = player.ReturnXCoord();
                     playerY = player.ReturnYCoord();
                 }
-
-                worldMap.DisplayEntity(e, cam);
+              
                 if (e is Creature)
                 {
                     Creature c = (Creature)e;
@@ -196,6 +196,7 @@ namespace My_NEA_Project
                     GravatationalPull(e);
                 }
 
+                worldMap.DisplayEntity(e, cam);
             }
             if(structureSprite != null)
             {

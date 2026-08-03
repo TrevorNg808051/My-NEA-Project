@@ -53,6 +53,12 @@
     <Compile Include="CraftingMenue.Designer.cs">
       <DependentUpon>CraftingMenue.cs</DependentUpon>
     </Compile>
+    <Compile Include="EquationFormation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EquationFormation.Designer.cs">
+      <DependentUpon>EquationFormation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Items\Placible.cs" />
     <Compile Include="Inventory.cs">
       <SubType>UserControl</SubType>
@@ -91,6 +97,9 @@
     <Compile Include="World.cs" />
     <EmbeddedResource Include="CraftingMenue.resx">
       <DependentUpon>CraftingMenue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquationFormation.resx">
+      <DependentUpon>EquationFormation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

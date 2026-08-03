@@ -95,6 +95,7 @@ namespace My_NEA_Project
 
             if (e.KeyCode == Keys.V) uiManager.ToggleCrafting();
             if (e.KeyCode == Keys.I) uiManager.ToggleInventory();
+            if (e.KeyCode == Keys.R) uiManager.ToggleEquationForming();
         }
 
         Point playerLastChunkCoord = new Point { X = 0, Y = 0};
