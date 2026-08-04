@@ -17,7 +17,7 @@ namespace My_NEA_Project
         private bool moveRight = false;
         private bool moveLeft = false;
         private bool jump = false;
-
+        private int gunLv;
         private itemStack[] inventory;
 
 
@@ -28,10 +28,10 @@ namespace My_NEA_Project
 
             this.horrizontalVelocity = 1;
             this.maxVerticalVelocity = 5;
-
+            this.gunLv = 1;
             this.verticalAcceloration = 1;
 
-            this.gunEquipped = false;
+            this.gunEquipped = false ;
             inventory = new itemStack[50];
         }
 
@@ -117,6 +117,18 @@ namespace My_NEA_Project
         public void PlaceStructure(Placible structureToPlace)
         {
             theWorldPlayerIsIn.PreviewSturcturePlacement(structureToPlace);
+        }
+        public void Interact()
+        {
+            theWorldPlayerIsIn.PlayerInteraction(this);
+        }
+        public int ReturnGunLv()
+        {
+            return gunLv;
+        }
+        public void UpgradGun()
+        {
+            gunLv++;
         }
     }
 }

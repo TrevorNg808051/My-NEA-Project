@@ -13,5 +13,9 @@ namespace My_NEA_Project
         {
             
         }
+        public override void Interaction(Player p)
+        {
+            p.UpgradGun();
+        }
     }
 }

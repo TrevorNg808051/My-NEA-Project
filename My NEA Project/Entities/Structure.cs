@@ -13,5 +13,10 @@ namespace My_NEA_Project
         {
             this.entitySprite = structureSprite;
         }
+        public virtual void Interaction(Player p)
+        {
+
+        }
+
     }
 }

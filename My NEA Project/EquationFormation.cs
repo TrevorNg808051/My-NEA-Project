@@ -93,7 +93,7 @@ namespace My_NEA_Project
         {
             buttonBeingDraged = (Button)sender;
             dragging = true;
-            Control form = buttonBeingDraged.Parent.Parent.Parent;
+            Control form = this;
             buttonBeingDraged.Parent.Controls.Remove(buttonBeingDraged);
             if (!form.Controls.Contains(buttonBeingDraged))
             {
@@ -154,6 +154,28 @@ namespace My_NEA_Project
         {
             
             buttonBeingDraged.Location = this.PointToClient(MousePosition);
+        }
+        public string ReturnEquation()
+        {
+            // this function needs fixing It won't return anything if not all the slots are filled
+            string equation = "";
+            try
+            {
+                foreach (TableLayoutPanel tlp in slots)
+                {
+                    Button btn = (Button)tlp.Controls[0];
+                    equation += btn.Text;
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return null;
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+            return equation;
         }
     }
 }

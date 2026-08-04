@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -71,18 +72,21 @@ namespace My_NEA_Project
 
         private void Shoot(object sender, MouseEventArgs e)
         {
-
             Point p = PointToClient(MousePosition);
             label2.Text = $"{p.X},{p.Y}";
-            if (thePlayer.GunEqquiped())
+            if (thePlayer.GunEqquiped() && GetEquation() != null)
             {
 
                 int bulletSpeed = 2;
                 double destinationX = thePlayer.ReturnXCoord() + Math.Floor((double)((p.X - (this.Width / 2)) / thePlayerPov.ReturnCamScale()));
                 double destinationY = thePlayer.ReturnYCoord() + Math.Floor((double)((p.Y - (this.Height / 2)) / thePlayerPov.ReturnCamScale()));
 
-                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),5,5,destinationX,destinationY,bulletSpeed,thePlayerPov));
+                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),1,1,destinationX,destinationY,bulletSpeed,thePlayerPov));
 
+            }
+            if (GetEquation() == null)
+            {
+                MessageBox.Show("gun is not loaded");
             }
         }
 
@@ -96,6 +100,11 @@ namespace My_NEA_Project
             if (e.KeyCode == Keys.V) uiManager.ToggleCrafting();
             if (e.KeyCode == Keys.I) uiManager.ToggleInventory();
             if (e.KeyCode == Keys.R) uiManager.ToggleEquationForming();
+
+            if(e.KeyCode == Keys.E)
+            {
+                thePlayer.Interact();
+            }
         }
 
         Point playerLastChunkCoord = new Point { X = 0, Y = 0};
@@ -156,6 +165,15 @@ namespace My_NEA_Project
         public Point ReturnMousePos()
         {
             return MousePosition;
+        }
+        public string GetEquation()
+        {
+            string equation = uiManager.ReturnEquation();
+            if(equation == null)
+            {
+                return null;
+            }
+            return equation;
         }
     }
 }

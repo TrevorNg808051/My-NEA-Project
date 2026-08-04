@@ -94,7 +94,7 @@ namespace My_NEA_Project
             }
             foreach (Entity e in listOfLoadedEntities)
             {
-                
+
                 if (e is Player)
                 {
                     Player player = (Player)e;
@@ -105,7 +105,7 @@ namespace My_NEA_Project
                     playerX = player.ReturnXCoord();
                     playerY = player.ReturnYCoord();
                 }
-              
+
                 if (e is Creature)
                 {
                     Creature c = (Creature)e;
@@ -168,6 +168,7 @@ namespace My_NEA_Project
                 {
                     Bullet bullet = (Bullet)e;
 
+
                     if (bulletProgressionX >= 1 || bulletProgressionX <= -1 || bulletProgressionY >= 1 || bulletProgressionY <= -1)
                     {
                         int xIncrease = 0;
@@ -188,8 +189,22 @@ namespace My_NEA_Project
                         bullet.SetEntityCoords(bullet.ReturnXCoord() + xIncrease, bullet.ReturnYCoord() + yIncrease);
                     }
 
+
                     bulletProgressionX += bullet.Travel().horrizontalMovement;
                     bulletProgressionY += bullet.Travel().verticalMovement;
+
+                    foreach (Entity entity in listOfLoadedEntities)
+                    {
+                        if (entity is Creature)
+                        {
+                            if (bullet.ReturnPictureBox().Bounds.IntersectsWith(entity.ReturnPictureBox().Bounds))
+                            {
+                                bullet.FormAnswer(theFormThisWorldExistsIn.GetEquation());
+                                bullet.ReturnAnswerOfBullet();
+                            }
+                        }
+                    }
+
                 }
                 else
                 {
@@ -198,13 +213,13 @@ namespace My_NEA_Project
 
                 worldMap.DisplayEntity(e, cam);
             }
-            if(structureSprite != null)
+            if (structureSprite != null)
             {
                 bool placible = false;
 
-                int onScreenX = (int)Math.Floor((double)theFormThisWorldExistsIn.ReturnMousePos().X/cam.ReturnCamScale());
+                int onScreenX = (int)Math.Floor((double)theFormThisWorldExistsIn.ReturnMousePos().X / cam.ReturnCamScale());
                 int onScreenY = (int)Math.Floor((double)theFormThisWorldExistsIn.ReturnMousePos().Y / cam.ReturnCamScale());
-                Point displayLocation = new Point(onScreenX * cam.ReturnCamScale(),onScreenY * cam.ReturnCamScale());
+                Point displayLocation = new Point(onScreenX * cam.ReturnCamScale(), onScreenY * cam.ReturnCamScale());
                 structureSprite.Location = displayLocation;
 
                 structureX = (structureSprite.Left / cam.ReturnCamScale()) + cam.ReturnStaringX();
@@ -264,8 +279,8 @@ namespace My_NEA_Project
 
             }
 
-            Random dircetionOfLeftPointGen = new Random((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) );
-            Random directionOfRightPointGen = new Random(((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) + 1) );
+            Random dircetionOfLeftPointGen = new Random((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives));
+            Random directionOfRightPointGen = new Random(((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) + 1));
 
             directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 1000) >= 500;
             directionOfRightChunk = directionOfRightPointGen.Next(1, 1000) <= 500;
@@ -316,7 +331,7 @@ namespace My_NEA_Project
         PictureBox structureSprite;
         int structureX;
         int structureY;
-        
+
         public void PreviewSturcturePlacement(Placible structureToPlace)
         {
             structureBeingPlaced = structureToPlace;
@@ -324,16 +339,16 @@ namespace My_NEA_Project
 
             structureSprite.Size = new Size(structureToPlace.ReturnWidth() * cam.ReturnCamScale(), structureToPlace.ReturnHeight() * cam.ReturnCamScale());
             structureSprite.BackColor = Color.Red;
-            structureSprite.Click += new System.EventHandler(placementConfirmed);
+            structureSprite.Click += new System.EventHandler(PlacementConfirmed);
             theFormThisWorldExistsIn.Controls.Add(structureSprite);
 
-        
+
         }
-        private void placementConfirmed(object sender, EventArgs e)
+        private void PlacementConfirmed(object sender, EventArgs e)
         {
-            for(int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
+            for (int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
             {
-                if(!SquareFinder(structureX + i,structureY + 1).solid)
+                if (!SquareFinder(structureX + i, structureY + 1).solid)
                 {
                     return;
                 }
@@ -341,6 +356,21 @@ namespace My_NEA_Project
             AddEntity(structureBeingPlaced.placeStructure(structureX, structureY, cam));
             structureBeingPlaced = null;
             structureSprite = null;
+        }
+
+        public void PlayerInteraction(Player player)
+        {
+            foreach (Entity e in listOfLoadedEntities)
+            {
+                if (player.ReturnPictureBox().Bounds.IntersectsWith(e.ReturnPictureBox().Bounds))
+                {
+                    if(e is Structure)
+                    {
+                        Structure structure = (Structure)e;
+                        structure.Interaction(player);
+                    }
+                }
+            }
         }
     }
 }

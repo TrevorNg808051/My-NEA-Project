@@ -148,7 +148,7 @@ namespace My_NEA_Project
         {
             if (!equaitonForm)
             {
-                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-'},3);
+                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-'},thePlayer.ReturnGunLv());
                 equationFormation.Enabled = true;
                 equationFormation.Show();
                 equationFormation.BringToFront();
@@ -156,6 +156,7 @@ namespace My_NEA_Project
             }
             else if (equaitonForm)
             {
+                equation = equationFormation.ReturnEquation();
                 equationFormation.ClearEquationFormation();
                 equationFormation.Enabled = false;
                 equationFormation.Hide();
@@ -189,6 +190,12 @@ namespace My_NEA_Project
             {
                 thePlayer.ReciveItem(recipies[int.Parse(tLP.Name)].Craft(), 1);
             }
+        }
+
+        string equation;
+        public string ReturnEquation()
+        {
+            return equation;
         }
     }
 }
