@@ -45,20 +45,21 @@ namespace My_NEA_Project
             uiManager = new UIManager(this, thePlayer);
             FrameIntervalTracker.Start();
         }
-        bool left, right, jump;
+        bool left, right, jump,sprinting;
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.D) right = false;
             if (e.KeyCode == Keys.A) left = false ;
             if (e.KeyCode == Keys.Space) jump = false;
+            if (e.KeyCode == Keys.S) sprinting = false;
         }
 
         private void FrameIntervalTracker_Tick(object sender, EventArgs e)
         {
             label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
-            thePlayer.SetMovement(right, left, jump);
+            thePlayer.SetMovement(right, left, jump,sprinting);
 
             this.Invalidate();
         }
@@ -96,6 +97,8 @@ namespace My_NEA_Project
             if (e.KeyCode == Keys.D) right = true;
             if (e.KeyCode == Keys.A) left = true;
             if (e.KeyCode == Keys.Space) jump = true;
+            if (e.KeyCode == Keys.S)
+                sprinting = true;
 
             if (e.KeyCode == Keys.V) uiManager.ToggleCrafting();
             if (e.KeyCode == Keys.I) uiManager.ToggleInventory();

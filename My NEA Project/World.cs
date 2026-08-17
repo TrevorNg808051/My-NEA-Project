@@ -253,8 +253,6 @@ namespace My_NEA_Project
                 c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), c.ReturnCreatureCurrentVerticalVelocity() + 1);
                 if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
             }
-
-
         }
         private double LoadingPerlin(int worldX, int octives)
         {
@@ -346,16 +344,19 @@ namespace My_NEA_Project
         }
         private void PlacementConfirmed(object sender, EventArgs e)
         {
-            for (int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
+            if (structureBeingPlaced != null)
             {
-                if (!SquareFinder(structureX + i, structureY + 1).solid)
+                for (int i = 0; i < structureBeingPlaced.ReturnWidth(); i++)
                 {
-                    return;
+                    if (!SquareFinder(structureX + i, structureY + 1).solid)
+                    {
+                        return;
+                    }
                 }
+                AddEntity(structureBeingPlaced.placeStructure(structureX, structureY, cam));
+                structureBeingPlaced = null;
+                structureSprite = null;
             }
-            AddEntity(structureBeingPlaced.placeStructure(structureX, structureY, cam));
-            structureBeingPlaced = null;
-            structureSprite = null;
         }
 
         public void PlayerInteraction(Player player)

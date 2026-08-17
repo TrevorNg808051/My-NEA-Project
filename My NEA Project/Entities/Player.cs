@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 namespace My_NEA_Project
 {
     public class Player : Creature
@@ -20,6 +20,7 @@ namespace My_NEA_Project
         private int gunLv;
         private itemStack[] inventory;
 
+        private bool sprinting = false;
 
 
         public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity,World theWorldPlayerIsIn,Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity,pov)
@@ -35,26 +36,30 @@ namespace My_NEA_Project
             inventory = new itemStack[50];
         }
 
-        public void SetMovement(bool moveRight, bool moveLeft, bool jump)
+        public void SetMovement(bool moveRight, bool moveLeft, bool jump,bool sprinting)
         {
             if (moveRight && moveLeft) { moveRight = false; moveLeft = false; }
             this.moveRight = moveRight;
             this.moveLeft = moveLeft;
 
-            if (jump)
+            if (jump && theWorldPlayerIsIn.SquareFinder(xCoord,yCoord+1).solid)
             {
                 this.jump = jump;
                 this.jumpingCounter = 3;
-
             }
+            this.sprinting = sprinting;
         }
         public override Movement Move()
         {
             Movement movementThisFrame = new Movement();
 
-
-            if (moveRight) movementThisFrame.horrizontalMovement = horrizontalVelocity;
-            if (moveLeft) movementThisFrame.horrizontalMovement = horrizontalVelocity * -1;
+            int trueHorrizontalVelocity = horrizontalVelocity;
+            if (sprinting)
+            {
+                trueHorrizontalVelocity = horrizontalVelocity * 2;
+            }
+            if (moveRight) movementThisFrame.horrizontalMovement = trueHorrizontalVelocity;
+            if (moveLeft) movementThisFrame.horrizontalMovement = trueHorrizontalVelocity * -1;
             if (jump)
             {
                 if (jumpingCounter > 0)
