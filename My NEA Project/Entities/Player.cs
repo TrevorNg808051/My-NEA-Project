@@ -38,7 +38,7 @@ namespace My_NEA_Project
 
         }
 
-        public void SetMovement(bool moveRight, bool moveLeft, bool jump, bool sprinting)
+        public void SetMovement(bool moveRight, bool moveLeft, bool jump)
         {
             if (moveRight && moveLeft) { moveRight = false; moveLeft = false; }
             this.moveRight = moveRight;
@@ -54,17 +54,12 @@ namespace My_NEA_Project
             {
                 doubleJump = 2;
             }
-            this.sprinting = sprinting;
         }
         public override Movement Move()
         {
             Movement movementThisFrame = new Movement();
 
             int trueHorrizontalVelocity = horrizontalVelocity;
-            if (sprinting)
-            {
-                trueHorrizontalVelocity = horrizontalVelocity * 2;
-            }
             if (moveRight) movementThisFrame.horrizontalMovement = trueHorrizontalVelocity;
             if (moveLeft) movementThisFrame.horrizontalMovement = trueHorrizontalVelocity * -1;
             if (jump)

@@ -252,7 +252,7 @@ namespace My_NEA_Project
             if (e is Creature)
             {
                 Creature c = (Creature)e;
-                double preciceGravity = c.ReturnCreatureCurrentVerticalVelocity() + 1;
+                int preciceGravity = (int)c.ReturnCreatureCurrentVerticalVelocity() + 1;
 
                 c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), preciceGravity);
                 if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
