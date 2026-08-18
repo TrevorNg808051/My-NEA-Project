@@ -245,12 +245,16 @@ namespace My_NEA_Project
             }
             await mapGen;
         }
+
+
         public void GravatationalPull(Entity e)
         {
             if (e is Creature)
             {
                 Creature c = (Creature)e;
-                c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), c.ReturnCreatureCurrentVerticalVelocity() + 1);
+                double preciceGravity = c.ReturnCreatureCurrentVerticalVelocity() + 1;
+
+                c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), preciceGravity);
                 if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
             }
         }

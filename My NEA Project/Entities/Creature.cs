@@ -9,7 +9,7 @@ namespace My_NEA_Project
 {
     public abstract class Creature : Entity
     {
-        protected int currentVerticalVelocity;
+        protected double currentVerticalVelocity;
         protected int maxVerticalVelocity;
         protected int verticalAcceloration;
         protected int currentHorrizontalVelocity;
@@ -34,7 +34,7 @@ namespace My_NEA_Project
         {
             return currentHorrizontalVelocity;
         }
-        public int ReturnCreatureCurrentVerticalVelocity()
+        public double ReturnCreatureCurrentVerticalVelocity()
         {
             return currentVerticalVelocity;
         }
@@ -55,7 +55,7 @@ namespace My_NEA_Project
             throw new NotImplementedException();
         }
 
-        public void CreatureSetVelocity(int horrizontalVelocity,int verticalVelocity)
+        public void CreatureSetVelocity(int horrizontalVelocity,double verticalVelocity)
         {
             this.currentHorrizontalVelocity = horrizontalVelocity;
             this.currentVerticalVelocity = verticalVelocity;

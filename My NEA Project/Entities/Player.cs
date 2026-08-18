@@ -21,9 +21,9 @@ namespace My_NEA_Project
         private itemStack[] inventory;
 
         private bool sprinting = false;
+        private int doubleJump;
 
-
-        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity,World theWorldPlayerIsIn,Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity,pov)
+        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, World theWorldPlayerIsIn, Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov)
         {
             this.theWorldPlayerIsIn = theWorldPlayerIsIn;
 
@@ -32,20 +32,27 @@ namespace My_NEA_Project
             this.gunLv = 1;
             this.verticalAcceloration = 1;
 
-            this.gunEquipped = false ;
+            this.gunEquipped = false;
             inventory = new itemStack[50];
+            doubleJump = 2;
+
         }
 
-        public void SetMovement(bool moveRight, bool moveLeft, bool jump,bool sprinting)
+        public void SetMovement(bool moveRight, bool moveLeft, bool jump, bool sprinting)
         {
             if (moveRight && moveLeft) { moveRight = false; moveLeft = false; }
             this.moveRight = moveRight;
             this.moveLeft = moveLeft;
 
-            if (jump && theWorldPlayerIsIn.SquareFinder(xCoord,yCoord+1).solid)
+            if ((jump && theWorldPlayerIsIn.SquareFinder(xCoord, yCoord + 1).solid) || (jump && doubleJump > 0))
             {
                 this.jump = jump;
                 this.jumpingCounter = 3;
+                doubleJump--;
+            }
+            if (theWorldPlayerIsIn.SquareFinder(xCoord, yCoord + 1).solid)
+            {
+                doubleJump = 2;
             }
             this.sprinting = sprinting;
         }
@@ -64,6 +71,7 @@ namespace My_NEA_Project
             {
                 if (jumpingCounter > 0)
                 {
+                    this.currentVerticalVelocity = 0;
                     this.currentVerticalVelocity -= verticalAcceloration;
 
                     jumpingCounter--;
