@@ -18,14 +18,14 @@ namespace My_NEA_Project
         static protected Random equationGen;
         protected int answer;
         protected int jumpingCounter;
-
+        protected World worldCreatureIsIn;
         protected bool onTheGround;
 
        
-        public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov) : base(xCoord, yCoord, width, height,pov)
+        public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov)
         {
             this.maxVerticalVelocity = maximumVerticalVelocity;
-
+            this.worldCreatureIsIn = worldCreatureIsIn;
             
         }
         public abstract Movement Move();

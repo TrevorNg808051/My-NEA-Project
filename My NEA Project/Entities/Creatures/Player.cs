@@ -23,7 +23,7 @@ namespace My_NEA_Project
         private bool sprinting = false;
         private int doubleJump;
 
-        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, World theWorldPlayerIsIn, Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov)
+        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, World theWorldPlayerIsIn, Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov,theWorldPlayerIsIn)
         {
             this.theWorldPlayerIsIn = theWorldPlayerIsIn;
 
