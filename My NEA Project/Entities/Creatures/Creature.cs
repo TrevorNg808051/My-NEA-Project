@@ -13,7 +13,7 @@ namespace My_NEA_Project
         protected int maxVerticalVelocity;
         protected int verticalAcceloration;
         protected int currentHorrizontalVelocity;
-        protected int horrizontalVelocity;// movement on the horrizontal plain is designed to have no accelortation
+        protected int horrizontalVelocity;
         protected Label equationBar;
         static protected Random equationGen;
         protected int answer;
@@ -21,8 +21,7 @@ namespace My_NEA_Project
 
         protected bool onTheGround;
 
-        // so a little tweak to the original idea the max vertical speed of the creature will always be positive and independent to the gravity.
-        // also the creature when jumping would start at the max vertical velocity and decelorate to a stop by gravity so acceloration of the crature will be removed and gravity will be handled by the World class
+       
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov) : base(xCoord, yCoord, width, height,pov)
         {
             this.maxVerticalVelocity = maximumVerticalVelocity;

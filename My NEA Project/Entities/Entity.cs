@@ -19,9 +19,10 @@ namespace My_NEA_Project
         public Entity(int xCoord,int yCoord, int width, int height,Camara pov)
         {
             this.xCoord = xCoord;
-            this.yCoord = yCoord;
+            
             this.width = width;
             this.height = height;
+            this.yCoord = yCoord;
 
             this.entitySprite = new PictureBox();
             entitySprite.BackColor = Color.Green;
@@ -56,7 +57,7 @@ namespace My_NEA_Project
         public void MoveSprite(Camara cam)
         {
             this.entitySprite.Left = (xCoord - cam.ReturnStaringX()) * cam.ReturnCamScale();
-            this.entitySprite.Top = (yCoord - cam.ReturnStartingY()) * cam.ReturnCamScale();
+            this.entitySprite.Top = (yCoord - cam.ReturnStartingY()) * cam.ReturnCamScale() - ((this.height - 2) * cam.ReturnCamScale());
 
         }
         public void SetEntityCoords(int xCoord, int yCoord)

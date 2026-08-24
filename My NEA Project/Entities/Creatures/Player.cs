@@ -11,7 +11,7 @@ namespace My_NEA_Project
     public class Player : Creature
     {
 
-        private bool gunEquipped = false;
+        private bool gunEquipped;
 
         private World theWorldPlayerIsIn;
         private bool moveRight = false;

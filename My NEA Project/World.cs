@@ -1,4 +1,5 @@
 ﻿using My_NEA_Project.Entities;
+using My_NEA_Project.Entities.Creatures;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -153,7 +154,9 @@ namespace My_NEA_Project
                     {
                         for (int i = 0; i < currentCreaturMovement.verticalMovement; i++)
                         {
-                            if (SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + i + 1).solid)
+                            int x = e.ReturnXCoord();
+                            int y = e.ReturnYCoord() + i + 1;
+                            if (SquareFinder(x, y).solid)
                             {
                                 break;
                             }
@@ -255,7 +258,25 @@ namespace My_NEA_Project
                 int preciceGravity = (int)c.ReturnCreatureCurrentVerticalVelocity() + 1;
 
                 c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), preciceGravity);
-                if (SquareFinder(c.ReturnXCoord(), c.ReturnYCoord() + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
+
+                int creatureX = c.ReturnXCoord();
+                int creatureY = c.ReturnYCoord();
+
+               
+                if (e is AdditionMonster1)
+                {
+                    Material m = SquareFinder(creatureX, creatureY + 1);
+                    if (SquareFinder(creatureX, creatureY + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
+                }
+                else if(e is Player)
+                {
+                    Material m = SquareFinder(creatureX, creatureY + 1);
+                    if (SquareFinder(creatureX, creatureY + 1 ).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
+                }
+                else if (!(e is AdditionMonster1))
+                {
+                    if (SquareFinder(creatureX, creatureY + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
+                }
             }
         }
         private double LoadingPerlin(int worldX, int octives)
