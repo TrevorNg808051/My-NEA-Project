@@ -9,10 +9,10 @@ namespace My_NEA_Project.Entities.Creatures
     public class AdditionMonster1 : Creature
     {
 
-        bool incombat, roaming;
+        bool inCombat, roaming;
         public AdditionMonster1(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, Camara pov,World worldMonsterIsIn) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov,worldMonsterIsIn)
         {
-            this.incombat = false;
+            this.inCombat = false;
             this.roaming = true;
             this.horrizontalVelocity = 1;
         }
@@ -118,7 +118,7 @@ namespace My_NEA_Project.Entities.Creatures
                     }
                 }
             }
-            else if (incombat)
+            else if (inCombat)
             {
                 // not today
             }

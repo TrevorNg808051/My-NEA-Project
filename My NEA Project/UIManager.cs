@@ -19,6 +19,7 @@ namespace My_NEA_Project
         private Form formManagerWillBeIn;
         private Inventory inventory;
         private EquationFormation equationFormation;
+        private PictureBox healthDisplay;
 
         private bool craftingShown = false;
         private bool inventoryShown = false;
@@ -33,6 +34,8 @@ namespace My_NEA_Project
 
             inventory = new Inventory(formManagerWillBeIn,thePlayer);
             craftingMenue = new CraftingMenue();
+            equationFormation = new EquationFormation();
+            healthDisplay = new PictureBox();
             //
             //craftingMenue
             //
@@ -110,14 +113,21 @@ namespace My_NEA_Project
             //
             //equationFormation
             //
-            {
-                this.equationFormation = new EquationFormation();
+            {        
                 equationFormation.Location = new Point(0, (Screen.PrimaryScreen.Bounds.Height / 2));
                 equationFormation.Size = new Size(Screen.PrimaryScreen.Bounds.Width, (Screen.PrimaryScreen.Bounds.Height / 5)* 2);
                 equationFormation.InitializeComponent();
                 theFormUiWillBeIn.Controls.Add(equationFormation);
                 equationFormation.Hide();
                 equationFormation.Enabled = false;
+            }
+            //
+            //pictureBox for the health
+            //
+            {
+                healthDisplay.Location = new Point(Screen.PrimaryScreen.Bounds.Left,Screen.PrimaryScreen.Bounds.Top);
+                healthDisplay.Size = new Size(100,100);
+                theFormUiWillBeIn.Controls.Add(healthDisplay);
             }
         }
 
@@ -182,7 +192,46 @@ namespace My_NEA_Project
             }
             inventoryShown = !inventoryShown;
         }
+        public void ShowHealth()
+        {
+            double maxHealth = thePlayer.ReturnMaxHealth();
+            double currentHealth = thePlayer.ReturnCurrentHealth();
+            double healthRatio = currentHealth / maxHealth;
 
+            switch(healthRatio)
+            {
+                case 1:
+                    healthDisplay.BackColor = Color.DarkGreen;
+                    break;
+                case 0.9:
+                    healthDisplay.BackColor = Color.Green;
+                    break;
+                case 0.8:
+                    healthDisplay.BackColor = Color.LightGreen;
+                    break;
+                case 0.7:
+                    healthDisplay.BackColor = Color.GreenYellow;
+                    break;
+                case 0.6:
+                    healthDisplay.BackColor = Color.YellowGreen;
+                    break;
+                case 0.5:
+                    healthDisplay.BackColor = Color.Yellow;
+                    break;
+                case 0.4:
+                    healthDisplay.BackColor = Color.LightSalmon;
+                    break;
+                case 0.3:
+                    healthDisplay.BackColor = Color.Orange;
+                    break;
+                case 0.2:
+                    healthDisplay.BackColor = Color.DarkOrange;
+                    break;
+                case 0.1:
+                    healthDisplay.BackColor = Color.Red;
+                    break;
+            }
+        }
         public void RecipeSelected(object sender, EventArgs e)
         {
             TableLayoutPanel tLP = (TableLayoutPanel)sender;

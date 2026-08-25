@@ -35,7 +35,8 @@ namespace My_NEA_Project
             this.gunEquipped = false;
             inventory = new itemStack[50];
             doubleJump = 2;
-
+            this.health = 2;
+            this.maxHealth = 5;
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)

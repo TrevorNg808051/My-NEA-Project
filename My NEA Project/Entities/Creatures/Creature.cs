@@ -20,7 +20,8 @@ namespace My_NEA_Project
         protected int jumpingCounter;
         protected World worldCreatureIsIn;
         protected bool onTheGround;
-
+        protected int health;
+        protected int maxHealth;
        
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov)
         {
@@ -58,6 +59,14 @@ namespace My_NEA_Project
         {
             this.currentHorrizontalVelocity = horrizontalVelocity;
             this.currentVerticalVelocity = verticalVelocity;
+        }
+        public int ReturnCurrentHealth()
+        {
+            return health;
+        }
+        public int ReturnMaxHealth()
+        {
+            return maxHealth;
         }
     }
  

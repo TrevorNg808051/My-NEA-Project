@@ -61,7 +61,7 @@ namespace My_NEA_Project
             label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
             thePlayer.SetMovement(right, left, jump);
-
+            uiManager.ShowHealth();
             this.Invalidate();
         }
 
