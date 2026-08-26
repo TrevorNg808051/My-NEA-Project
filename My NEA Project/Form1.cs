@@ -40,7 +40,7 @@ namespace My_NEA_Project
 
             theWorld.AddEntity(thePlayer);
             theWorld.AddEntity(new DebugDummy(0,-20,1,2,10,thePlayerPov,theWorld));
-            theWorld.AddEntity(new AdditionMonster1(10,-10,3,5,10,thePlayerPov,theWorld));
+            theWorld.AddEntity(new AdditionMonster1(100,-10,3,5,10,thePlayerPov,theWorld));
 
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
