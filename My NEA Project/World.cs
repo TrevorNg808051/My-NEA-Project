@@ -1,5 +1,6 @@
 ﻿using My_NEA_Project.Entities;
 using My_NEA_Project.Entities.Creatures;
+using My_NEA_Project.Entities.Creatures.EnemyAttacks;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -93,9 +94,9 @@ namespace My_NEA_Project
             {
                 mapGen.Start();
             }
-            foreach (Entity e in listOfLoadedEntities)
+            for(int interger = 0; interger <listOfLoadedEntities.Count;interger++)
             {
-
+                Entity e = listOfLoadedEntities[interger];
                 if (e is Player)
                 {
                     Player player = (Player)e;
@@ -109,6 +110,17 @@ namespace My_NEA_Project
 
                 if (e is Creature)
                 {
+                    if(e is EnemyAttack)
+                    {
+                        EnemyAttack attack = (EnemyAttack)e;
+                        int attackTimeToLive = attack.ReturnTimeToLive();
+                        if(attackTimeToLive <= 0)
+                        {
+                            
+                            listOfLoadedEntities.Remove(attack);
+                            attack.RemoveSprite();
+                        }
+                    }
                     Creature c = (Creature)e;
 
                     Movement currentCreaturMovement = c.Move();
@@ -252,7 +264,7 @@ namespace My_NEA_Project
 
         public void GravatationalPull(Entity e)
         {
-            if (e is Creature)
+            if (e is Creature && !(e is EnemyAttack))
             {
                 Creature c = (Creature)e;
                 int preciceGravity = (int)c.ReturnCreatureCurrentVerticalVelocity() + 1;

@@ -54,6 +54,8 @@
       <DependentUpon>CraftingMenue.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\Creatures\additionMonster1.cs" />
+    <Compile Include="Entities\Creatures\EnemyAttacks\EnemyAttack.cs" />
+    <Compile Include="Entities\Creatures\EnemyAttacks\Stomp.cs" />
     <Compile Include="EquationFormation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -130,5 +132,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

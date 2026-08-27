@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities.Creatures.EnemyAttacks;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -131,33 +132,59 @@ namespace My_NEA_Project.Entities.Creatures
             }
             else if (inCombat)
             {
-                bool playerIsRightOfMonster = this.xCoord - worldCreatureIsIn.ReturnPlayerCoords().X <= 0;
-                if (playerIsRightOfMonster)
+                if (pause > 0)
                 {
-                    if (this.worldCreatureIsIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
-                    {
-                        this.currentHorrizontalVelocity = horrizontalVelocity;
-                        this.currentVerticalVelocity = -2;
-                    }
-                    else
-                    {
-
-                        this.currentHorrizontalVelocity = horrizontalVelocity;
-                    }
+                    pause--;
+                   
+                    return new Movement { horrizontalMovement = this.currentHorrizontalVelocity, verticalMovement = this.currentVerticalVelocity };
                 }
-                else if (!playerIsRightOfMonster)
+                bool playerIsRightOfMonster = this.xCoord - worldCreatureIsIn.ReturnPlayerCoords().X <= 0;
+
+                if (Math.Abs(this.xCoord - worldCreatureIsIn.ReturnPlayerCoords().X) <= 3)
                 {
-                    if (this.worldCreatureIsIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
+                    this.currentHorrizontalVelocity = 0;
+                    if (playerIsRightOfMonster)
                     {
-                        this.currentHorrizontalVelocity = horrizontalVelocity * -1;
-                        this.currentVerticalVelocity = -2;
+                        Stomp stomp = new Stomp(this.xCoord + 3,this.yCoord,3,1,0,cam,worldCreatureIsIn);
+                        worldCreatureIsIn.AddEntity(stomp);
                     }
-                    else
+                    else if (!playerIsRightOfMonster)
                     {
-
-                        this.currentHorrizontalVelocity = horrizontalVelocity * -1;
+                        Stomp stomp = new Stomp(this.xCoord - 3, this.yCoord, 3, 1, 0, cam, worldCreatureIsIn);
+                        worldCreatureIsIn.AddEntity(stomp);
                     }
+                    pause = 20;
+                }
+                else
+                {
+                    
+                    if (playerIsRightOfMonster)
+                    {
+                        if (this.worldCreatureIsIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
+                        {
+                            this.currentHorrizontalVelocity = horrizontalVelocity;
+                            this.currentVerticalVelocity = -2;
+                        }
+                        else
+                        {
 
+                            this.currentHorrizontalVelocity = horrizontalVelocity;
+                        }
+                    }
+                    else if (!playerIsRightOfMonster)
+                    {
+                        if (this.worldCreatureIsIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
+                        {
+                            this.currentHorrizontalVelocity = horrizontalVelocity * -1;
+                            this.currentVerticalVelocity = -2;
+                        }
+                        else
+                        {
+
+                            this.currentHorrizontalVelocity = horrizontalVelocity * -1;
+                        }
+
+                    }
                 }
 
             }

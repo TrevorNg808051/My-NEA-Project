@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace My_NEA_Project
 {
@@ -15,6 +16,7 @@ namespace My_NEA_Project
         protected int width;
         protected int height;
         protected PictureBox entitySprite;
+        protected Camara cam;
 
         public Entity(int xCoord,int yCoord, int width, int height,Camara pov)
         {
@@ -28,6 +30,8 @@ namespace My_NEA_Project
             entitySprite.BackColor = Color.Green;
             entitySprite.Width = width * pov.ReturnCamScale();
             entitySprite.Height = height * pov.ReturnCamScale();
+
+            cam = pov;
         }
         public int ReturnXCoord()
         {
@@ -64,6 +68,10 @@ namespace My_NEA_Project
         {
             this.xCoord = xCoord;
             this.yCoord = yCoord;
+        }
+        public void RemoveSprite()
+        {
+            this.entitySprite.Dispose();
         }
     }
 }
