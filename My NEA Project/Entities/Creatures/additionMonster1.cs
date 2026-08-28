@@ -153,7 +153,7 @@ namespace My_NEA_Project.Entities.Creatures
                         Stomp stomp = new Stomp(this.xCoord - 3, this.yCoord, 3, 1, 0, cam, worldCreatureIsIn);
                         worldCreatureIsIn.AddEntity(stomp);
                     }
-                    pause = 20;
+                    pause = 40;
                 }
                 else
                 {
@@ -191,6 +191,11 @@ namespace My_NEA_Project.Entities.Creatures
 
             return new Movement() { horrizontalMovement = this.currentHorrizontalVelocity, verticalMovement = this.currentVerticalVelocity };
 
+        }
+
+        public override string EquationGenerator()
+        {
+            return "debug";
         }
     }
 }

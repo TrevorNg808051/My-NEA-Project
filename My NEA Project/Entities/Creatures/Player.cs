@@ -139,5 +139,10 @@ namespace My_NEA_Project
         {
             gunLv++;
         }
+
+        public override string EquationGenerator()
+        {
+            throw null;
+        }
     }
 }

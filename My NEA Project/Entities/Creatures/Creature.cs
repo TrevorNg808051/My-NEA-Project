@@ -1,9 +1,11 @@
-﻿using System;
+﻿using My_NEA_Project.Entities.Creatures;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace My_NEA_Project
 {
@@ -22,11 +24,21 @@ namespace My_NEA_Project
         protected bool onTheGround;
         protected int health;
         protected int maxHealth;
+
        
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov)
         {
             this.maxVerticalVelocity = maximumVerticalVelocity;
             this.worldCreatureIsIn = worldCreatureIsIn;
+
+            if(!(this is Player))
+            {
+                equationBar = new Label();
+                equationBar.Text = EquationGenerator();
+                equationBar.Location = new Point(this.entitySprite.Location.X,this.entitySprite.Location.Y + 10);
+
+
+            }
             
         }
         public abstract Movement Move();
@@ -50,10 +62,8 @@ namespace My_NEA_Project
             }
         }
 
-        public string EquationGenerator()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract string EquationGenerator();
+
 
         public void CreatureSetVelocity(int horrizontalVelocity,double verticalVelocity)
         {
@@ -67,6 +77,20 @@ namespace My_NEA_Project
         public int ReturnMaxHealth()
         {
             return maxHealth;
+        }
+
+        public Label ReturnEquaationBar()
+        {
+            return equationBar;
+        }
+
+        public override void MoveSprite(Camara cam)
+        {
+            base.MoveSprite(cam);
+            if (!(this is Player) && !(this is EnemyAttack))
+            {
+                this.equationBar.Location = new Point(this.entitySprite.Location.X, this.entitySprite.Top - 75);
+            }
         }
     }
  

@@ -79,6 +79,12 @@ namespace My_NEA_Project
         {
             listOfLoadedEntities.Add(thingToAdd);
             theFormThisWorldExistsIn.Controls.Add(thingToAdd.ReturnPictureBox());
+
+            if(thingToAdd is Creature && !(thingToAdd is Player) && !(thingToAdd is EnemyAttack))
+            {
+                Creature c = (Creature)thingToAdd;
+                theFormThisWorldExistsIn.Controls.Add(c.ReturnEquaationBar());
+            }
         }
 
         public void GetWorldMap(Map worldMap)

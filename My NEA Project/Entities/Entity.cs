@@ -1,4 +1,5 @@
-﻿using System;
+﻿using My_NEA_Project.Entities.Creatures;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace My_NEA_Project
         {
             return width;
         } 
-
+            
         public void GetHit()
         {
 
@@ -58,7 +59,7 @@ namespace My_NEA_Project
         {
             return entitySprite;
         }
-        public void MoveSprite(Camara cam)
+        public virtual void MoveSprite(Camara cam)
         {
             this.entitySprite.Left = (xCoord - cam.ReturnStaringX()) * cam.ReturnCamScale();
             this.entitySprite.Top = (yCoord - cam.ReturnStartingY()) * cam.ReturnCamScale() - ((this.height - 2) * cam.ReturnCamScale());

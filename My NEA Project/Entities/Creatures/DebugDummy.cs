@@ -12,6 +12,11 @@ namespace My_NEA_Project
         {
         }
 
+        public override string EquationGenerator()
+        {
+            return "debug";
+        }
+
         public override Movement Move()
         {
             return new Movement() { horrizontalMovement = this.horrizontalVelocity , verticalMovement = this.currentVerticalVelocity};
