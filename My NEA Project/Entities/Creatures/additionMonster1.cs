@@ -17,7 +17,8 @@ namespace My_NEA_Project.Entities.Creatures
         {
             this.inCombat = false;
             this.roaming = true;
-            this.horrizontalVelocity = 1;
+            this.horrizontalVelocity = 1; 
+            
         }
 
 
@@ -195,7 +196,23 @@ namespace My_NEA_Project.Entities.Creatures
 
         public override string EquationGenerator()
         {
-            return "debug";
+            int numOfVariables = equationGen.Next(2, 4);
+            int valueUntilAnswer = this.answer;
+
+            string finalEquation = "";
+            for(int i = 1; i <= numOfVariables - 1; i++)
+            {
+                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / numOfVariables - 1));
+
+
+                finalEquation += numToAddToEquation + " + ";
+
+                valueUntilAnswer -= numToAddToEquation;
+            }
+            finalEquation += valueUntilAnswer;
+
+
+            return finalEquation;
         }
     }
 }

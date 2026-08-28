@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace My_NEA_Project
 {
@@ -17,7 +18,7 @@ namespace My_NEA_Project
         protected int currentHorrizontalVelocity;
         protected int horrizontalVelocity;
         protected Label equationBar;
-        static protected Random equationGen;
+        static protected Random equationGen = new Random();
         protected int answer;
         protected int jumpingCounter;
         protected World worldCreatureIsIn;
@@ -31,8 +32,10 @@ namespace My_NEA_Project
             this.maxVerticalVelocity = maximumVerticalVelocity;
             this.worldCreatureIsIn = worldCreatureIsIn;
 
+           
             if(!(this is Player))
             {
+                answer = equationGen.Next(1, 11);
                 equationBar = new Label();
                 equationBar.Text = EquationGenerator();
                 equationBar.Location = new Point(this.entitySprite.Location.X,this.entitySprite.Location.Y + 10);
