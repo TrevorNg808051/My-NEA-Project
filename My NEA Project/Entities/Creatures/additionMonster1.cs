@@ -202,7 +202,7 @@ namespace My_NEA_Project.Entities.Creatures
             string finalEquation = "";
             for(int i = 1; i <= numOfVariables - 1; i++)
             {
-                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / numOfVariables - 1));
+                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / numOfVariables - i));
 
 
                 finalEquation += numToAddToEquation + " + ";

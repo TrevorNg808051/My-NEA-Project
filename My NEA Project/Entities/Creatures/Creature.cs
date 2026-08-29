@@ -35,7 +35,7 @@ namespace My_NEA_Project
            
             if(!(this is Player))
             {
-                answer = equationGen.Next(1, 11);
+                answer = equationGen.Next(10, 100);
                 equationBar = new Label();
                 equationBar.Text = EquationGenerator();
                 equationBar.Location = new Point(this.entitySprite.Location.X,this.entitySprite.Location.Y + 10);

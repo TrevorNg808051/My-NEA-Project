@@ -126,6 +126,23 @@ namespace My_NEA_Project
                             listOfLoadedEntities.Remove(attack);
                             attack.RemoveSprite();
                         }
+
+                        foreach (Entity p in listOfLoadedEntities)
+                        {
+                            if (p is Player)
+                            {
+                                if (attack.ReturnDangeriousOrNot())
+                                {
+                                    if (attack.ReturnPictureBox().Bounds.IntersectsWith(p.ReturnPictureBox().Bounds))
+                                    {
+                                        p.GetHit();
+                                        listOfLoadedEntities.Remove(attack);
+                                        attack.RemoveSprite();
+                                    }
+                                }
+                            }
+                        
+                        }
                     }
                     Creature c = (Creature)e;
 

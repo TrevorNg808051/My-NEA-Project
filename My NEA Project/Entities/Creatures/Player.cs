@@ -35,7 +35,7 @@ namespace My_NEA_Project
             this.gunEquipped = false;
             inventory = new itemStack[50];
             doubleJump = 2;
-            this.health = 2;
+            this.health = 5;
             this.maxHealth = 5;
         }
 
@@ -143,6 +143,11 @@ namespace My_NEA_Project
         public override string EquationGenerator()
         {
             throw null;
+        }
+
+        public override void GetHit()
+        {
+            this.health--;
         }
     }
 }

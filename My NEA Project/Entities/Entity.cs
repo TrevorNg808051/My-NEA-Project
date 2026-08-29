@@ -51,8 +51,8 @@ namespace My_NEA_Project
             return width;
         } 
             
-        public void GetHit()
-        {
+        public virtual void GetHit()
+        { 
 
         }
         public PictureBox ReturnPictureBox()
