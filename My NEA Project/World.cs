@@ -29,7 +29,7 @@ namespace My_NEA_Project
             cam = playerPov;
 
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
-            this.seed = 849;
+            this.seed = 4546787;
         }
         public Material SquareFinder(int x, int y)
         {
@@ -281,6 +281,7 @@ namespace My_NEA_Project
                     structureSprite.BackColor = Color.Red;
                 }
             }
+            SpawiningEntities();
             await mapGen;
         }
 
@@ -431,6 +432,60 @@ namespace My_NEA_Project
                         structure.Interaction(player);
                     }
                 }
+            }
+        }
+
+        public void SpawiningEntities()
+        {
+            Player thePlayer = null;
+            AdditionMonster1 hostileCreature = null;
+
+            foreach(Entity e in listOfLoadedEntities)
+            {
+                if(e is Player)
+                {
+                    thePlayer = (Player)e;
+                }
+                else if(e is AdditionMonster1)
+                {
+                    if (hostileCreature == null)
+                    {
+                        hostileCreature = (AdditionMonster1)e;
+                    }
+                    else if( hostileCreature != null)
+                    {
+                        listOfLoadedEntities.Remove(e);
+                        break;
+                    }
+                }
+            }
+
+            if( hostileCreature == null)
+            {
+                Random ran = new Random();
+                AdditionMonster1 newCreature;
+
+                bool rightOfPlayer = ran.Next(1, 3) == 2;
+                int playerX = thePlayer.ReturnXCoord();
+                if (rightOfPlayer)
+                {
+                    newCreature = new AdditionMonster1(thePlayer.ReturnXCoord() + ran.Next(100, 300), -15, 3, 5, 10, cam, this);                   
+                }
+                else
+                {
+                    newCreature = new AdditionMonster1(thePlayer.ReturnXCoord() - ran.Next(100, 300), -15, 3, 5, 10, cam, this);
+                }
+                AddEntity(newCreature);
+                MessageBox.Show($"the creature has been spawned at {newCreature.ReturnXCoord()}, {newCreature.ReturnYCoord()}");
+                //spawn a creature;
+            }
+
+            int hostilX = hostileCreature.ReturnXCoord();
+            if(Math.Abs(playerX - hostilX) > 500)
+            {
+                listOfLoadedEntities.Remove(hostileCreature);
+                hostileCreature.RemoveSprite();
+                MessageBox.Show("creature has been removed");
             }
         }
     }

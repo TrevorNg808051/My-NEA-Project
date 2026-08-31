@@ -24,7 +24,7 @@ namespace My_NEA_Project.Entities.Creatures
 
         int roamingCounter = 0;
         bool longTravel = true;
-        bool goingRight = false;
+        bool goingRight = true;
         int pause = 0;
         public override Movement Move()
         {
@@ -186,6 +186,13 @@ namespace My_NEA_Project.Entities.Creatures
                         }
 
                     }
+                }
+
+                Point playerCoords = worldCreatureIsIn.ReturnPlayerCoords();
+                if ((Math.Abs(this.xCoord - playerCoords.X) > 12) && (Math.Abs(this.yCoord - playerCoords.Y) > 12))
+                {
+                    roaming = true;
+                    inCombat = false;
                 }
 
             }
