@@ -32,7 +32,7 @@ namespace My_NEA_Project
             this.gunLv = 1;
             this.verticalAcceloration = 1;
 
-            this.gunEquipped = false;
+            this.gunEquipped = true;
             inventory = new itemStack[50];
             doubleJump = 2;
             this.health = 5;

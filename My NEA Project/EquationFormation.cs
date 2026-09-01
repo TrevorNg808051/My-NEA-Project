@@ -155,16 +155,16 @@ namespace My_NEA_Project
             
             buttonBeingDraged.Location = this.PointToClient(MousePosition);
         }
-        public string ReturnEquation()
+        public List<string> ReturnEquation()
         {
             // this function needs fixing It won't return anything if not all the slots are filled
-            string equation = "";
+            List<string> equation = new List<string>();
             try
             {
                 foreach (TableLayoutPanel tlp in slots)
                 {
                     Button btn = (Button)tlp.Controls[0];
-                    equation += btn.Text;
+                    equation.Add(btn.Text);
                 }
             }
             catch (ArgumentOutOfRangeException)

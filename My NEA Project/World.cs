@@ -238,7 +238,7 @@ namespace My_NEA_Project
                             if (bullet.ReturnPictureBox().Bounds.IntersectsWith(entity.ReturnPictureBox().Bounds))
                             {
                                 bullet.FormAnswer(theFormThisWorldExistsIn.GetEquation());
-                                bullet.ReturnAnswerOfBullet();
+                                double answer = bullet.ReturnAnswerOfBullet();
                             }
                         }
                     }
@@ -476,7 +476,7 @@ namespace My_NEA_Project
                     newCreature = new AdditionMonster1(thePlayer.ReturnXCoord() - ran.Next(100, 300), -15, 3, 5, 10, cam, this);
                 }
                 AddEntity(newCreature);
-                MessageBox.Show($"the creature has been spawned at {newCreature.ReturnXCoord()}, {newCreature.ReturnYCoord()}");
+                
                 //spawn a creature;
             }
 
@@ -485,7 +485,7 @@ namespace My_NEA_Project
             {
                 listOfLoadedEntities.Remove(hostileCreature);
                 hostileCreature.RemoveSprite();
-                MessageBox.Show("creature has been removed");
+
             }
         }
     }

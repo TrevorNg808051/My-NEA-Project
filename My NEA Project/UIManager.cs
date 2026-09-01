@@ -154,11 +154,12 @@ namespace My_NEA_Project
         {
             throw new NotImplementedException();
         }
+
         public void ToggleEquationForming()
         {
             if (!equaitonForm)
             {
-                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-'},thePlayer.ReturnGunLv());
+                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-', '×', '÷' },thePlayer.ReturnGunLv());
                 equationFormation.Enabled = true;
                 equationFormation.Show();
                 equationFormation.BringToFront();
@@ -241,8 +242,8 @@ namespace My_NEA_Project
             }
         }
 
-        string equation;
-        public string ReturnEquation()
+        List<string> equation;
+        public List<string> ReturnEquation()
         {
             return equation;
         }

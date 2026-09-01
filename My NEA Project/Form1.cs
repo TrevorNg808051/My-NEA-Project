@@ -167,9 +167,9 @@ namespace My_NEA_Project
         {
             return MousePosition;
         }
-        public string GetEquation()
+        public List<string> GetEquation()
         {
-            string equation = uiManager.ReturnEquation();
+            List<string> equation = uiManager.ReturnEquation();
             if(equation == null)
             {
                 return null;
