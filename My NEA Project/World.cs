@@ -233,12 +233,20 @@ namespace My_NEA_Project
 
                     foreach (Entity entity in listOfLoadedEntities)
                     {
-                        if (entity is Creature)
+                        if (entity is AdditionMonster1)
                         {
+                            AdditionMonster1 monster = (AdditionMonster1)entity;
                             if (bullet.ReturnPictureBox().Bounds.IntersectsWith(entity.ReturnPictureBox().Bounds))
                             {
                                 bullet.FormAnswer(theFormThisWorldExistsIn.GetEquation());
                                 double answer = bullet.ReturnAnswerOfBullet();
+
+                                if (monster.CheckAnswer(answer))
+                                {
+                                    listOfLoadedEntities.Remove(monster);
+                                    monster.RemoveSprite();
+                                    break;
+                                }
                             }
                         }
                     }

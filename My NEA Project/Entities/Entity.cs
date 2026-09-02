@@ -70,7 +70,7 @@ namespace My_NEA_Project
             this.xCoord = xCoord;
             this.yCoord = yCoord;
         }
-        public void RemoveSprite()
+        public virtual void RemoveSprite()
         {
             this.entitySprite.Dispose();
         }

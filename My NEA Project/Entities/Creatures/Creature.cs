@@ -95,6 +95,11 @@ namespace My_NEA_Project
                 this.equationBar.Location = new Point(this.entitySprite.Location.X, this.entitySprite.Top - 75);
             }
         }
+        public override void RemoveSprite()
+        {
+            base.RemoveSprite();
+            this.equationBar.Dispose();
+        }
     }
  
 }

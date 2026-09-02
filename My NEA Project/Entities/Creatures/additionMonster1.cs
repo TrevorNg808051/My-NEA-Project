@@ -221,5 +221,17 @@ namespace My_NEA_Project.Entities.Creatures
 
             return finalEquation;
         }
+
+        public bool CheckAnswer(double answerToCompare)
+        {
+            if(answerToCompare == this.answer)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -159,7 +159,7 @@ namespace My_NEA_Project
         {
             if (!equaitonForm)
             {
-                equationFormation.RefreshEquationFormation(new int[] {1,2,3},new char[] {'+','-', '×', '÷' },thePlayer.ReturnGunLv());
+                equationFormation.RefreshEquationFormation(new int[] {1,2,3,4,5,6,7,8,9},new char[] {'+','-', '×', '÷', '×' },thePlayer.ReturnGunLv());
                 equationFormation.Enabled = true;
                 equationFormation.Show();
                 equationFormation.BringToFront();
