@@ -56,6 +56,12 @@
     <Compile Include="Entities\Creatures\additionMonster1.cs" />
     <Compile Include="Entities\Creatures\EnemyAttacks\EnemyAttack.cs" />
     <Compile Include="Entities\Creatures\EnemyAttacks\Stomp.cs" />
+    <Compile Include="Menue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menue.Designer.cs">
+      <DependentUpon>Menue.cs</DependentUpon>
+    </Compile>
     <Compile Include="EquationFormation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menue.resx">
+      <DependentUpon>Menue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
