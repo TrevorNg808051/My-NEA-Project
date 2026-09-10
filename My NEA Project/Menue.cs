@@ -24,10 +24,15 @@ namespace My_NEA_Project
 
             startBtn = new Button();
             startBtn.Text = "Start";
+            startBtn.Click += new EventHandler(WorldBuilding);
+
             settingBtn = new Button();
             settingBtn.Text = "Settings";
+            settingBtn.Click += new EventHandler(Settings);
+
             quitBtn = new Button();
             quitBtn.Text = "Quit";
+            quitBtn.Click += new EventHandler(QuitApplication); 
 
             title = new Label();
             title.AutoSize = false;
@@ -48,6 +53,50 @@ namespace My_NEA_Project
                 this.Controls.Add(btn);
                 btn.BackColor = Color.Gray;
             }
+        }
+
+        private void WorldBuilding(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            Button loadSaveBtn = new Button();
+            Button newWorldBtn = new Button();
+
+            
+            loadSaveBtn = new Button();
+            loadSaveBtn.Text = "Load Save";
+            loadSaveBtn.Click += new EventHandler(LoadSave);
+
+            newWorldBtn = new Button();
+            newWorldBtn.Text = "Creat New World";
+            newWorldBtn.Click += new EventHandler(NewWorld);
+
+            int yCoord = 0;
+            foreach (Button btn in new Button[] { loadSaveBtn,newWorldBtn })
+            {
+                btn.Size = new Size(500, 150);
+                btn.Location = new Point((this.Width / 2) - (btn.Width / 2), 250 + yCoord);
+                yCoord += 200;
+                this.Controls.Add(btn);
+                btn.BackColor = Color.Gray;
+            }
+        }
+        private void Settings(object sender, EventArgs e)
+        {
+
+        }
+        private void QuitApplication(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void NewWorld(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoadSave (object sender, EventArgs e)
+        {
+
         }
     }
 }
