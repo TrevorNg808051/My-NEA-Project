@@ -12,8 +12,8 @@ namespace My_NEA_Project
 {
     public partial class Menue : Form
     {
-        private Button startBtn, settingBtn, quitBtn;
 
+        private Button lastScreenBtn = new Button();
 
         private Label title;
         public Menue()
@@ -22,6 +22,17 @@ namespace My_NEA_Project
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
 
+            StartingScreen(null,new EventArgs());
+
+            lastScreenBtn.Size = new Size(50, 50);
+            lastScreenBtn.Location = new Point(50, 50);
+            lastScreenBtn.BackColor = Color.Red;
+            lastScreenBtn.Click += new EventHandler(LastScreen);
+
+        }
+        private void StartingScreen(object sender, EventArgs e)
+        {
+            Button startBtn, settingBtn, quitBtn;
             startBtn = new Button();
             startBtn.Text = "Start";
             startBtn.Click += new EventHandler(WorldBuilding);
@@ -32,7 +43,7 @@ namespace My_NEA_Project
 
             quitBtn = new Button();
             quitBtn.Text = "Quit";
-            quitBtn.Click += new EventHandler(QuitApplication); 
+            quitBtn.Click += new EventHandler(QuitApplication);
 
             title = new Label();
             title.AutoSize = false;
@@ -47,20 +58,22 @@ namespace My_NEA_Project
             int yCoord = 0;
             foreach (Button btn in new Button[] { startBtn, settingBtn, quitBtn })
             {
-                btn.Size = new Size(500,150);
-                btn.Location = new Point((this.Width/2) - (btn.Width/ 2) , 250 + yCoord);
+                btn.Size = new Size(500, 150);
+                btn.Location = new Point((this.Width / 2) - (btn.Width / 2), 250 + yCoord);
                 yCoord += 200;
                 this.Controls.Add(btn);
                 btn.BackColor = Color.Gray;
             }
         }
 
+        private string lastScreen = "";
         private void WorldBuilding(object sender, EventArgs e)
         {
             this.Controls.Clear();
             Button loadSaveBtn = new Button();
             Button newWorldBtn = new Button();
 
+            
             
             loadSaveBtn = new Button();
             loadSaveBtn.Text = "Load Save";
@@ -79,6 +92,9 @@ namespace My_NEA_Project
                 this.Controls.Add(btn);
                 btn.BackColor = Color.Gray;
             }
+            lastScreen = "startingScreen";
+
+            this.Controls.Add(lastScreenBtn);
         }
         private void Settings(object sender, EventArgs e)
         {
@@ -97,6 +113,16 @@ namespace My_NEA_Project
         private void LoadSave (object sender, EventArgs e)
         {
 
+        }
+        public void LastScreen(object sender, EventArgs e)
+        {
+            this.Controls.Clear();
+            switch (lastScreen)
+            {
+                case "startingScreen":
+                    StartingScreen(null, new EventArgs());
+                    break;
+            }
         }
     }
 }
