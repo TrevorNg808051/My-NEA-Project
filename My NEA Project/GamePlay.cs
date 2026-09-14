@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace My_NEA_Project
 {
 
-    public partial class Form1 : Form
+    public partial class GamePlay : Form
     {
         World theWorld;
         Player thePlayer;
@@ -25,7 +25,7 @@ namespace My_NEA_Project
 
         UIManager uiManager;
         
-        public Form1()
+        public GamePlay()
         {
             InitializeComponent();
             KeyPreview = true;
@@ -175,6 +175,11 @@ namespace My_NEA_Project
                 return null;
             }
             return equation;
+        }
+
+        public void SetDifficulty(string difficulty)
+        {
+
         }
     }
 }

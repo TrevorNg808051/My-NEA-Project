@@ -1,6 +1,6 @@
 ﻿namespace My_NEA_Project
 {
-    partial class Form1
+    partial class GamePlay
     {
         /// <summary>
         /// Required designer variable.

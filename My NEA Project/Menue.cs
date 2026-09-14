@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -81,7 +82,7 @@ namespace My_NEA_Project
 
             newWorldBtn = new Button();
             newWorldBtn.Text = "Creat New World";
-            newWorldBtn.Click += new EventHandler(NewWorld);
+            newWorldBtn.Click += new EventHandler(ChooseDifficulty);
 
             int yCoord = 0;
             foreach (Button btn in new Button[] { loadSaveBtn,newWorldBtn })
@@ -94,6 +95,8 @@ namespace My_NEA_Project
             }
             lastScreen = "startingScreen";
 
+
+
             this.Controls.Add(lastScreenBtn);
         }
         private void Settings(object sender, EventArgs e)
@@ -105,9 +108,56 @@ namespace My_NEA_Project
             Application.Exit();
         }
 
-        private void NewWorld(object sender, EventArgs e)
+        private void ChooseDifficulty(object sender, EventArgs e)
         {
+            this.Controls.Clear();
+            Button hardDif = new Button();
+            hardDif.Text = "Hard";
+            Button normalDif = new Button();
+            normalDif.Text = "Normal";
+            Button easyDif = new Button();
+            easyDif.Text = "Easy";
 
+            int yCoord = 0;
+            foreach (Button btn in new Button[] { hardDif, normalDif, easyDif })
+            {
+                btn.Click += new EventHandler(SettingDifficulty);
+                btn.Size = new Size(500, 150);
+                btn.Location = new Point((this.Width / 2) - (btn.Width / 2), 250 + yCoord);
+                yCoord += 200;
+                this.Controls.Add(btn);
+                btn.BackColor = Color.Gray;
+            }
+            lastScreen = "worldBuildingScreen";
+
+
+            title = new Label();
+            title.AutoSize = false;
+            title.Size = new Size(800, 200);
+            title.Font = new Font("Microsoft Uighur", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title.TextAlign = ContentAlignment.MiddleCenter;
+            title.Text = "Choose Your Difficulty";
+            title.Location = new Point((this.Width / 2) - (title.Width / 2), 50);
+            this.Controls.Add(title);
+
+            this.Controls.Add(lastScreenBtn);
+        }
+
+        string difficultyChosen = "";
+        private void SettingDifficulty(object sender, EventArgs e)
+        {
+            Button difficultySet = (Button)sender;
+            difficultyChosen = difficultySet.Text;
+            MakeWorld();
+        }
+        private void MakeWorld()
+        {
+            this.Hide();
+            using (GamePlay gamePlay = new GamePlay())
+            {
+                gamePlay.ShowDialog();
+            }
+            this.Close();
         }
 
         private void LoadSave (object sender, EventArgs e)
@@ -122,6 +172,10 @@ namespace My_NEA_Project
                 case "startingScreen":
                     StartingScreen(null, new EventArgs());
                     break;
+                case "worldBuildingScreen":
+                    WorldBuilding(null, new EventArgs());
+                    break;
+
             }
         }
     }

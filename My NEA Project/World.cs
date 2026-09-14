@@ -19,11 +19,11 @@ namespace My_NEA_Project
         private Map worldMap;
         private int seed;
         private Camara cam;
-        Form1 theFormThisWorldExistsIn;
+        GamePlay theFormThisWorldExistsIn;
 
         int playerX;
         int playerY;
-        public World(Camara playerPov, Form1 theFormThisWorldExistsIn)
+        public World(Camara playerPov, GamePlay theFormThisWorldExistsIn)
         {
             listOfLoadedEntities = new List<Entity>();
             cam = playerPov;
