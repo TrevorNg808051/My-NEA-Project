@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 namespace My_NEA_Project
 {
     public class Player : Creature
@@ -23,7 +24,7 @@ namespace My_NEA_Project
         private bool sprinting = false;
         private int doubleJump;
 
-        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, World theWorldPlayerIsIn, Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov,theWorldPlayerIsIn)
+        public Player(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, World theWorldPlayerIsIn, Camara pov) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov, theWorldPlayerIsIn)
         {
             this.theWorldPlayerIsIn = theWorldPlayerIsIn;
 
@@ -35,8 +36,8 @@ namespace My_NEA_Project
             this.gunEquipped = true;
             inventory = new itemStack[50];
             doubleJump = 2;
-            this.health = 5;
-            this.maxHealth = 5;
+            
+        
         }
 
         public void SetMovement(bool moveRight, bool moveLeft, bool jump)
@@ -148,6 +149,25 @@ namespace My_NEA_Project
         public override void GetHit()
         {
             this.health--;
+        }
+        public void setHealth()
+        {
+            switch (worldDifficulty)
+            {
+                case 1:
+                    this.health = 10;
+                    this.maxHealth = 10;
+                    break;
+                case 2:
+                    this.health = 5;
+                    this.maxHealth = 5;
+                    break;
+                case 3:
+                    this.maxHealth = 1;
+                    this.health = 1;
+                    break;
+            }
+
         }
     }
 }

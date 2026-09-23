@@ -496,5 +496,11 @@ namespace My_NEA_Project
 
             }
         }
+
+        public int ReturnDifficulty()
+        {
+            int difficulty = theFormThisWorldExistsIn.ReturnDifficulty();
+            return difficulty;
+        }
     }
 }

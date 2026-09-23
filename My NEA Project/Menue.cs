@@ -155,6 +155,7 @@ namespace My_NEA_Project
             this.Hide();
             using (GamePlay gamePlay = new GamePlay())
             {
+                gamePlay.SetDifficulty(difficultyChosen);
                 gamePlay.ShowDialog();
             }
             this.Close();

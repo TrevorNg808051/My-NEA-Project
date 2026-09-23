@@ -26,12 +26,13 @@ namespace My_NEA_Project
         protected int health;
         protected int maxHealth;
 
+        protected int worldDifficulty;
        
         public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov)
         {
             this.maxVerticalVelocity = maximumVerticalVelocity;
             this.worldCreatureIsIn = worldCreatureIsIn;
-
+            this.worldDifficulty = worldCreatureIsIn.ReturnDifficulty();
            
             if(!(this is Player))
             {

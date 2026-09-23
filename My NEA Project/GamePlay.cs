@@ -24,7 +24,8 @@ namespace My_NEA_Project
         int chunkSize = 50;
 
         UIManager uiManager;
-        
+
+        int difficulty = 0;
         public GamePlay()
         {
             InitializeComponent();
@@ -68,7 +69,7 @@ namespace My_NEA_Project
         {
             theWorld.WorldUpdate();
             this.DoubleBuffered = true;
-
+            
         }
 
         private void Shoot(object sender, MouseEventArgs e)
@@ -179,7 +180,22 @@ namespace My_NEA_Project
 
         public void SetDifficulty(string difficulty)
         {
-
+            switch (difficulty)
+            {
+                case "Easy":
+                    this.difficulty = 1;
+                    break;
+                case "Normal":
+                    this.difficulty = 2;
+                    break;
+                case "Hard":
+                    this.difficulty = 3;
+                    break;
+            }
+        }
+        public int ReturnDifficulty()
+        {
+            return difficulty;
         }
     }
 }
