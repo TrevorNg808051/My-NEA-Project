@@ -163,8 +163,13 @@ namespace My_NEA_Project
             {
                 foreach (TableLayoutPanel tlp in slots)
                 {
+                    if (tlp.Controls.Count <= 0)
+                    {
+                        return equation;
+                    }
                     Button btn = (Button)tlp.Controls[0];
                     equation.Add(btn.Text);
+                   
                 }
             }
             catch (ArgumentOutOfRangeException)
