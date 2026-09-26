@@ -153,9 +153,8 @@ namespace My_NEA_Project
         private void MakeWorld()
         {
             this.Hide();
-            using (GamePlay gamePlay = new GamePlay())
+            using (GamePlay gamePlay = new GamePlay(difficultyChosen))
             {
-                gamePlay.SetDifficulty(difficultyChosen);
                 gamePlay.ShowDialog();
             }
             this.Close();

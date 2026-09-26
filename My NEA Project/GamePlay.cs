@@ -26,11 +26,24 @@ namespace My_NEA_Project
         UIManager uiManager;
 
         int difficulty = 0;
-        public GamePlay()
+        public GamePlay(string difficulty)
         {
             InitializeComponent();
             KeyPreview = true;
-            
+
+            switch (difficulty)
+            {
+                case "Easy":
+                    this.difficulty = 1;
+                    break;
+                case "Normal":
+                    this.difficulty = 2;
+                    break;
+                case "Hard":
+                    this.difficulty = 3;
+                    break;
+            }
+
             thePlayerPov = new Camara(theWorldMap);
             
             
@@ -178,21 +191,7 @@ namespace My_NEA_Project
             return equation;
         }
 
-        public void SetDifficulty(string difficulty)
-        {
-            switch (difficulty)
-            {
-                case "Easy":
-                    this.difficulty = 1;
-                    break;
-                case "Normal":
-                    this.difficulty = 2;
-                    break;
-                case "Hard":
-                    this.difficulty = 3;
-                    break;
-            }
-        }
+       
         public int ReturnDifficulty()
         {
             return difficulty;

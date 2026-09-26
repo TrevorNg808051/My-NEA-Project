@@ -154,7 +154,21 @@ namespace My_NEA_Project.Entities.Creatures
                         Stomp stomp = new Stomp(this.xCoord - 3, this.yCoord, 3, 1, 0, cam, worldCreatureIsIn);
                         worldCreatureIsIn.AddEntity(stomp);
                     }
-                    pause = 40;
+
+                    switch (worldDifficulty)
+                    {
+                        case 1:
+                            pause = 60;
+                            break;
+                        case 2:
+                            pause = 40;
+                            break;
+                        case 3:
+                            pause = 20;
+                            break;
+                    }
+
+                    
                 }
                 else
                 {
@@ -209,7 +223,7 @@ namespace My_NEA_Project.Entities.Creatures
             string finalEquation = "";
             for(int i = 1; i <= numOfVariables - 1; i++)
             {
-                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / numOfVariables - i));
+                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / (numOfVariables - i)));
 
 
                 finalEquation += numToAddToEquation + " + ";

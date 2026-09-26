@@ -36,7 +36,8 @@ namespace My_NEA_Project
             this.gunEquipped = true;
             inventory = new itemStack[50];
             doubleJump = 2;
-            
+
+            setHealth();
         
         }
 
@@ -150,7 +151,7 @@ namespace My_NEA_Project
         {
             this.health--;
         }
-        public void setHealth()
+        private void setHealth()
         {
             switch (worldDifficulty)
             {
