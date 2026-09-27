@@ -205,7 +205,14 @@ namespace My_NEA_Project
                 if (e is Bullet)
                 {
                     Bullet bullet = (Bullet)e;
+                    if(bullet.returnTimeToLive() <= 0)
+                    {
+                        bullet.RemoveSprite();
+                        listOfLoadedEntities.Remove(bullet);
 
+                        bulletProgressionX = 0;
+                        bulletProgressionY = 0;
+                    }
 
                     if (bulletProgressionX >= 1 || bulletProgressionX <= -1 || bulletProgressionY >= 1 || bulletProgressionY <= -1)
                     {

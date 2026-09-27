@@ -11,6 +11,7 @@ namespace My_NEA_Project
         private Movement distanceMovedPerFrame;
         private double answerOfTheBullet;
         private int bulletSpeed;
+        private int timeToLive = 10;
         public Bullet(int xCoord, int yCoord, int width, int height, double destinationX, double destinationY, int speed, Camara pov) : base(xCoord, yCoord, width, height, pov)
         {
             this.bulletSpeed = speed;
@@ -108,6 +109,11 @@ namespace My_NEA_Project
         public double ReturnAnswerOfBullet()
         {
             return answerOfTheBullet;
+        }
+        public int returnTimeToLive()
+        {
+            timeToLive--;
+            return timeToLive;
         }
     }
 }

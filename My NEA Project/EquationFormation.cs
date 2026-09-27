@@ -89,20 +89,30 @@ namespace My_NEA_Project
             OperationFlowLayout.Controls.Clear();
         }
 
-        public void HoldButton(object sender, MouseEventArgs e)
+        bool fromEquation = false;
+        private void HoldButton(object sender, MouseEventArgs e)
         {
             buttonBeingDraged = (Button)sender;
             dragging = true;
             Control form = this;
+            if(!(buttonBeingDraged.Parent is FlowLayoutPanel))
+            {
+                fromEquation = true;
+            }
+            else
+            {
+                fromEquation = false;
+            }
             buttonBeingDraged.Parent.Controls.Remove(buttonBeingDraged);
             if (!form.Controls.Contains(buttonBeingDraged))
             {
                 form.Controls.Add(buttonBeingDraged);
             }
+            buttonBeingDraged.Location = this.PointToClient(new Point(MousePosition.X - 10, MousePosition.Y - 10));
             buttonBeingDraged.BringToFront();
             draggingActionTimer.Start();
         }
-        public void LetGoButton(object sender, MouseEventArgs e)
+        private void LetGoButton(object sender, MouseEventArgs e)
         {
             bool buttonCantFindAPlace = true;
             draggingActionTimer.Stop();
@@ -110,19 +120,23 @@ namespace My_NEA_Project
             {
                 if (buttonBeingDraged.Bounds.IntersectsWith(tlp.Bounds))
                 {
-                    if (int.TryParse(buttonBeingDraged.Text, out _) && tlp.Name.Contains("NumberSlot"))
+                    try
                     {
-                        tlp.Controls.Add(buttonBeingDraged);
+                        int.Parse(buttonBeingDraged.Text);
+                        if (tlp.Name.Contains("NumberSlot"))
+                        {
+                            tlp.Controls.Add(buttonBeingDraged);
+                            buttonCantFindAPlace = false;
+                        }
                     }
-                    else if(!int.TryParse(buttonBeingDraged.Text, out _) && tlp.Name.Contains("OperationSlot"))
+                    catch (FormatException)
                     {
-                        tlp.Controls.Add(buttonBeingDraged);
+                        if (tlp.Name.Contains("OperationSlot"))
+                        {
+                            tlp.Controls.Add(buttonBeingDraged);
+                            buttonCantFindAPlace = false;
+                        }
                     }
-                    else
-                    {
-                        continue;
-                    }
-                    buttonCantFindAPlace = false;
                     break;
                 }
                 else
@@ -134,17 +148,60 @@ namespace My_NEA_Project
 
             if (buttonCantFindAPlace)
             {
-                this.Controls.Remove(buttonBeingDraged);
-                if (int.TryParse(buttonBeingDraged.Text, out _))
+                if (fromEquation)
                 {
+                    try
+                    {
+                        int.Parse(buttonBeingDraged.Text);
+                        NumberFlowLayout.Controls.Add(buttonBeingDraged);
 
-                    NumberFlowLayout.Controls.Add(buttonBeingDraged);
+                    }
+                    catch (FormatException)
+                    {
+                        OperationFlowLayout.Controls.Add(buttonBeingDraged);
+                    }
                 }
-                else if (!int.TryParse(buttonBeingDraged.Text, out _))
+                else
                 {
-
-                    OperationFlowLayout.Controls.Add(buttonBeingDraged);
+                    bool thereIsSpaceAvaliableForButton = false;
+                    foreach (TableLayoutPanel tlp in slots)
+                    {
+                        try
+                        {
+                            int.Parse(buttonBeingDraged.Text);
+                            if (tlp.Controls.Count <= 0 && tlp.Name.Contains("NumberSlot"))
+                            {
+                                thereIsSpaceAvaliableForButton = true;
+                                tlp.Controls.Add(buttonBeingDraged);
+                                break;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            if (tlp.Controls.Count <= 0 && tlp.Name.Contains("OperationSlot"))
+                            {
+                                thereIsSpaceAvaliableForButton = true;
+                                tlp.Controls.Add(buttonBeingDraged);
+                                break;
+                            }
+                        }
+                    }
+                    if (!thereIsSpaceAvaliableForButton)
+                    {
+                        this.Controls.Remove(buttonBeingDraged);
+                        try
+                        {
+                            int.Parse(buttonBeingDraged.Text);
+                            NumberFlowLayout.Controls.Add(buttonBeingDraged);
+                        }
+                        catch (FormatException)
+                        {
+                            OperationFlowLayout.Controls.Add(buttonBeingDraged);
+                        }
+                    }
                 }
+              
+                
             }
             buttonBeingDraged = null;
             dragging = false;
@@ -153,11 +210,11 @@ namespace My_NEA_Project
         public void DraggingTick(object sender, EventArgs e)
         {
             
-            buttonBeingDraged.Location = this.PointToClient(MousePosition);
+            buttonBeingDraged.Location = this.PointToClient(new Point(MousePosition.X-10,MousePosition.Y-10));
         }
         public List<string> ReturnEquation()
         {
-            // this function needs fixing It won't return anything if not all the slots are filled
+            
             List<string> equation = new List<string>();
             try
             {
