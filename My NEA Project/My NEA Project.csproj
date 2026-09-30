@@ -53,9 +53,11 @@
     <Compile Include="CraftingMenue.Designer.cs">
       <DependentUpon>CraftingMenue.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Creatures\additionMonster1.cs" />
+    <Compile Include="Entities\Creatures\hostileCreatures\addtitonMonster.cs" />
+    <Compile Include="Entities\Creatures\hostileCreatures\hostileMonster.cs" />
     <Compile Include="Entities\Creatures\EnemyAttacks\EnemyAttack.cs" />
     <Compile Include="Entities\Creatures\EnemyAttacks\Stomp.cs" />
+    <Compile Include="Entities\Creatures\hostileCreatures\subtractionMonster.cs" />
     <Compile Include="Menue.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +97,7 @@
     <Compile Include="Items\Item.cs" />
     <Compile Include="Entities\Creatures\Player.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Entities\Creatures\hostileCreatures\multiplicationMonster.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ResourceVeins.cs" />

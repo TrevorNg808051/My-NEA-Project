@@ -240,9 +240,9 @@ namespace My_NEA_Project
 
                     foreach (Entity entity in listOfLoadedEntities)
                     {
-                        if (entity is AdditionMonster1)
+                        if (entity is hostileMonster)
                         {
-                            AdditionMonster1 monster = (AdditionMonster1)entity;
+                            hostileMonster monster = (hostileMonster)entity;
                             if (bullet.ReturnPictureBox().Bounds.IntersectsWith(entity.ReturnPictureBox().Bounds))
                             {
                                 bullet.FormAnswer(theFormThisWorldExistsIn.GetEquation());
@@ -314,7 +314,7 @@ namespace My_NEA_Project
                 int creatureY = c.ReturnYCoord();
 
                
-                if (e is AdditionMonster1)
+                if (e is hostileMonster)
                 {
                     Material m = SquareFinder(creatureX, creatureY + 1);
                     if (SquareFinder(creatureX, creatureY + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
@@ -324,7 +324,7 @@ namespace My_NEA_Project
                     Material m = SquareFinder(creatureX, creatureY + 1);
                     if (SquareFinder(creatureX, creatureY + 1 ).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
                 }
-                else if (!(e is AdditionMonster1))
+                else if (!(e is hostileMonster))
                 {
                     if (SquareFinder(creatureX, creatureY + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
                 }
@@ -453,7 +453,7 @@ namespace My_NEA_Project
         public void SpawiningEntities()
         {
             Player thePlayer = null;
-            AdditionMonster1 hostileCreature = null;
+            hostileMonster hostileCreature = null;
 
             foreach(Entity e in listOfLoadedEntities)
             {
@@ -461,11 +461,11 @@ namespace My_NEA_Project
                 {
                     thePlayer = (Player)e;
                 }
-                else if(e is AdditionMonster1)
+                else if(e is hostileMonster)
                 {
                     if (hostileCreature == null)
                     {
-                        hostileCreature = (AdditionMonster1)e;
+                        hostileCreature = (hostileMonster)e;
                     }
                     else if( hostileCreature != null)
                     {
@@ -478,17 +478,17 @@ namespace My_NEA_Project
             if( hostileCreature == null)
             {
                 Random ran = new Random();
-                AdditionMonster1 newCreature;
+                hostileMonster newCreature;
 
                 bool rightOfPlayer = ran.Next(1, 3) == 2;
                 int playerX = thePlayer.ReturnXCoord();
                 if (rightOfPlayer)
                 {
-                    newCreature = new AdditionMonster1(thePlayer.ReturnXCoord() + ran.Next(10, 11), -15, 3, 5, 10, cam, this);                   
+                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() + ran.Next(5, 10), -15, 3, 5, 10, cam, this);                   
                 }
                 else
                 {
-                    newCreature = new AdditionMonster1(thePlayer.ReturnXCoord() - ran.Next(10, 11), -15, 3, 5, 10, cam, this);
+                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() - ran.Next(5, 10), -15, 3, 5, 10, cam, this);
                 }
                 AddEntity(newCreature);
                 
@@ -496,7 +496,7 @@ namespace My_NEA_Project
             }
 
             int hostilX = hostileCreature.ReturnXCoord();
-            if(Math.Abs(playerX - hostilX) > 500)
+            if(Math.Abs(playerX - hostilX) > 1500)
             {
                 listOfLoadedEntities.Remove(hostileCreature);
                 hostileCreature.RemoveSprite();

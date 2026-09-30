@@ -40,8 +40,6 @@ namespace My_NEA_Project
                 equationBar = new Label();
                 equationBar.Text = EquationGenerator();
                 equationBar.Location = new Point(this.entitySprite.Location.X,this.entitySprite.Location.Y + 10);
-
-
             }
             
         }

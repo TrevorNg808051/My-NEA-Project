@@ -9,11 +9,11 @@ using System.Windows.Forms;
 
 namespace My_NEA_Project.Entities.Creatures
 {
-    public class AdditionMonster1 : Creature
+    public abstract class hostileMonster : Creature
     {
 
         bool inCombat, roaming;
-        public AdditionMonster1(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, Camara pov,World worldMonsterIsIn) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov,worldMonsterIsIn)
+        public hostileMonster(int xCoord, int yCoord, int width, int height, int maximumVerticalVelocity, Camara pov,World worldMonsterIsIn) : base(xCoord, yCoord, width, height, maximumVerticalVelocity, pov,worldMonsterIsIn)
         {
             this.inCombat = false;
             this.roaming = true;
@@ -213,27 +213,6 @@ namespace My_NEA_Project.Entities.Creatures
 
             return new Movement() { horrizontalMovement = this.currentHorrizontalVelocity, verticalMovement = this.currentVerticalVelocity };
 
-        }
-
-        public override string EquationGenerator()
-        {
-            int numOfVariables = equationGen.Next(2, 4);
-            int valueUntilAnswer = this.answer;
-
-            string finalEquation = "";
-            for(int i = 1; i <= numOfVariables - 1; i++)
-            {
-                int numToAddToEquation = equationGen.Next(1, (valueUntilAnswer / (numOfVariables - i)));
-
-
-                finalEquation += numToAddToEquation + " + ";
-
-                valueUntilAnswer -= numToAddToEquation;
-            }
-            finalEquation += valueUntilAnswer;
-
-
-            return finalEquation;
         }
 
         public bool CheckAnswer(double answerToCompare)
