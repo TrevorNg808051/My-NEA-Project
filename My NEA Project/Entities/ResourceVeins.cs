@@ -15,14 +15,16 @@ namespace My_NEA_Project
         public ResourceVeins(int xCoord, int yCoord, int width, int height,Camara pov) : base(xCoord, yCoord, width, height,pov)
         {
         }
-        protected void SetListOfDrops()
+        protected virtual void SetListOfDrops()
         {
 
         }
 
-        protected void DropItem()
+        protected void DropItem(World theWorldDropedItemWillBeIn)
         {
-
+            Random ran = new Random();
+            int itemToBeDropped = ran.Next(0,listOfDrops.Count - 1);
+            theWorldDropedItemWillBeIn.AddEntity(new DroppedItems(this.xCoord, this.yCoord, 1, 1, this.cam, listOfDrops[itemToBeDropped]));
         }
 
         

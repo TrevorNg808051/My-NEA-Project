@@ -446,6 +446,11 @@ namespace My_NEA_Project
                         Structure structure = (Structure)e;
                         structure.Interaction(player);
                     }
+                    else if(e is ResourceVeins)
+                    {
+                        ResourceVeins resourceVein = (ResourceVeins)e;
+
+                    }
                 }
             }
         }

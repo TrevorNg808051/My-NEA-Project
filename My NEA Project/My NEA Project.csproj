@@ -58,6 +58,7 @@
     <Compile Include="Entities\Creatures\EnemyAttacks\EnemyAttack.cs" />
     <Compile Include="Entities\Creatures\EnemyAttacks\Stomp.cs" />
     <Compile Include="Entities\Creatures\hostileCreatures\subtractionMonster.cs" />
+    <Compile Include="Entities\Stone.cs" />
     <Compile Include="Menue.cs">
       <SubType>Form</SubType>
     </Compile>
