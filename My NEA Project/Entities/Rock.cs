@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace My_NEA_Project.Entities
 {
-    internal class Stone : ResourceVeins
+    internal class Rock : ResourceVeins
     {
-        public Stone(int xCoord, int yCoord, int width, int height, Camara pov) : base(xCoord, yCoord, width, height, pov)
+        public Rock(int xCoord, int yCoord, int width, int height, Camara pov) : base(xCoord, yCoord, width, height, pov)
         {
         }
         protected override void SetListOfDrops()
         {
-            
+            this.listOfDrops = new List<Item> { new Stone()};
         }
     }
 }

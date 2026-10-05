@@ -17,6 +17,10 @@ namespace My_NEA_Project
         {
             ownerOfItem = itemOwner;
         }
+        public Item()
+        {
+
+        }
         public string ReturnName()
         {
             return nameOfItem;
