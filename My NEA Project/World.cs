@@ -30,6 +30,8 @@ namespace My_NEA_Project
 
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
             this.seed = 4546787;
+
+            this.AddEntity(new Rock(10, -2, 3, 3, cam, this));
         }
         public Material SquareFinder(int x, int y)
         {
@@ -109,6 +111,18 @@ namespace My_NEA_Project
                     int camHorizontalStartingCoord = player.ReturnXCoord() - ((Screen.PrimaryScreen.Bounds.Width / cam.ReturnCamScale()) / 2);
                     int camVerticalStartingCoord = (player.ReturnYCoord()) - ((Screen.PrimaryScreen.Bounds.Height / cam.ReturnCamScale()) / 2);
                     cam.SetCamStartingCoords(camHorizontalStartingCoord, camVerticalStartingCoord);
+
+                    for (int i = 0; i < listOfLoadedEntities.Count; i++)
+                    {
+                        if (listOfLoadedEntities[i] is DroppedItems)
+                        {
+                            if (player.ReturnPictureBox().Bounds.IntersectsWith(listOfLoadedEntities[i].ReturnPictureBox().Bounds))
+                            {
+                                DroppedItems droppedItem = (DroppedItems)listOfLoadedEntities[i];
+                                droppedItem.GetPickedUp(player);
+                            }
+                        }
+                    }
 
                     playerX = player.ReturnXCoord();
                     playerY = player.ReturnYCoord();
@@ -437,19 +451,19 @@ namespace My_NEA_Project
 
         public void PlayerInteraction(Player player)
         {
-            foreach (Entity e in listOfLoadedEntities)
+            for (int interger = 0; interger < listOfLoadedEntities.Count; interger++)
             {
-                if (player.ReturnPictureBox().Bounds.IntersectsWith(e.ReturnPictureBox().Bounds))
+                if (player.ReturnPictureBox().Bounds.IntersectsWith(listOfLoadedEntities[interger].ReturnPictureBox().Bounds))
                 {
-                    if(e is Structure)
+                    if (listOfLoadedEntities[interger] is Structure)
                     {
-                        Structure structure = (Structure)e;
+                        Structure structure = (Structure)listOfLoadedEntities[interger];
                         structure.Interaction(player);
                     }
-                    else if(e is ResourceVeins)
+                    else if (listOfLoadedEntities[interger] is ResourceVeins)
                     {
-                        ResourceVeins resourceVein = (ResourceVeins)e;
-
+                        ResourceVeins resourceVein = (ResourceVeins)listOfLoadedEntities[interger];
+                        resourceVein.GetHit();
                     }
                 }
             }
@@ -489,11 +503,11 @@ namespace My_NEA_Project
                 int playerX = thePlayer.ReturnXCoord();
                 if (rightOfPlayer)
                 {
-                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() + ran.Next(5, 10), -15, 3, 5, 10, cam, this);                   
+                    newCreature = new subtractionMonster(thePlayer.ReturnXCoord() + ran.Next(500, 1000), -15, 3, 5, 10, cam, this);                   
                 }
                 else
                 {
-                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() - ran.Next(5, 10), -15, 3, 5, 10, cam, this);
+                    newCreature = new addtitonMonster(thePlayer.ReturnXCoord() - ran.Next(500, 1000), -15, 3, 5, 10, cam, this);
                 }
                 AddEntity(newCreature);
                 
@@ -514,5 +528,11 @@ namespace My_NEA_Project
             int difficulty = theFormThisWorldExistsIn.ReturnDifficulty();
             return difficulty;
         }
+        public List<Entity> ReturnListOfEntities()
+        {
+            return listOfLoadedEntities;
+        }
+
     }
+    
 }

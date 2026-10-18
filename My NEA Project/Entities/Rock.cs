@@ -8,8 +8,9 @@ namespace My_NEA_Project.Entities
 {
     internal class Rock : ResourceVeins
     {
-        public Rock(int xCoord, int yCoord, int width, int height, Camara pov) : base(xCoord, yCoord, width, height, pov)
+        public Rock(int xCoord, int yCoord, int width, int height, Camara pov,World theWorldRockIsIn) : base(xCoord, yCoord, width, height, pov,theWorldRockIsIn)
         {
+            SetListOfDrops();
         }
         protected override void SetListOfDrops()
         {

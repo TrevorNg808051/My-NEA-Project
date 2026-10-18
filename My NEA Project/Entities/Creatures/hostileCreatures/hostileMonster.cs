@@ -30,7 +30,7 @@ namespace My_NEA_Project.Entities.Creatures
         {
             if (roaming)
             {
-                if (worldCreatureIsIn.SquareFinder(this.xCoord, this.yCoord + 1).solid)
+                if (theWorldEntityExistIn.SquareFinder(this.xCoord, this.yCoord + 1).solid)
                 {
                     if (roamingCounter < 300)
                     {
@@ -49,7 +49,7 @@ namespace My_NEA_Project.Entities.Creatures
                             {
                                 if (goingRight)
                                 {
-                                    if (this.worldCreatureIsIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
+                                    if (this.theWorldEntityExistIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
                                     {
                                         this.currentHorrizontalVelocity = horrizontalVelocity;
                                         this.currentVerticalVelocity = -2;
@@ -63,7 +63,7 @@ namespace My_NEA_Project.Entities.Creatures
                                 }
                                 else if (!goingRight)
                                 {
-                                    if (this.worldCreatureIsIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
+                                    if (this.theWorldEntityExistIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
                                     {
                                         this.currentHorrizontalVelocity = horrizontalVelocity * -1;
                                         this.currentVerticalVelocity = -2;
@@ -82,7 +82,7 @@ namespace My_NEA_Project.Entities.Creatures
                         {
                             if (goingRight)
                             {
-                                if (this.worldCreatureIsIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
+                                if (this.theWorldEntityExistIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
                                 {
                                     this.currentHorrizontalVelocity = horrizontalVelocity;
                                     this.currentVerticalVelocity = -2;
@@ -96,7 +96,7 @@ namespace My_NEA_Project.Entities.Creatures
                             }
                             else if (!goingRight)
                             {
-                                if (this.worldCreatureIsIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
+                                if (this.theWorldEntityExistIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
                                 {
                                     this.currentHorrizontalVelocity = horrizontalVelocity * -1;
                                     this.currentVerticalVelocity = -2;
@@ -123,7 +123,7 @@ namespace My_NEA_Project.Entities.Creatures
                 }
 
 
-                Point playerCoords = worldCreatureIsIn.ReturnPlayerCoords();
+                Point playerCoords = theWorldEntityExistIn.ReturnPlayerCoords();
 
                 if((Math.Abs(this.xCoord - playerCoords.X) < 12) && (Math.Abs(this.yCoord - playerCoords.Y) < 12))
                 {
@@ -139,20 +139,20 @@ namespace My_NEA_Project.Entities.Creatures
                    
                     return new Movement { horrizontalMovement = this.currentHorrizontalVelocity, verticalMovement = this.currentVerticalVelocity };
                 }
-                bool playerIsRightOfMonster = this.xCoord - worldCreatureIsIn.ReturnPlayerCoords().X <= 0;
+                bool playerIsRightOfMonster = this.xCoord - theWorldEntityExistIn.ReturnPlayerCoords().X <= 0;
 
-                if (Math.Abs(this.xCoord - worldCreatureIsIn.ReturnPlayerCoords().X) <= 3)
+                if (Math.Abs(this.xCoord - theWorldEntityExistIn.ReturnPlayerCoords().X) <= 3)
                 {
                     this.currentHorrizontalVelocity = 0;
                     if (playerIsRightOfMonster)
                     {
-                        Stomp stomp = new Stomp(this.xCoord + 3,this.yCoord,3,1,0,cam,worldCreatureIsIn);
-                        worldCreatureIsIn.AddEntity(stomp);
+                        Stomp stomp = new Stomp(this.xCoord + 3,this.yCoord,3,1,0,cam,theWorldEntityExistIn);
+                        theWorldEntityExistIn.AddEntity(stomp);
                     }
                     else if (!playerIsRightOfMonster)
                     {
-                        Stomp stomp = new Stomp(this.xCoord - 3, this.yCoord, 3, 1, 0, cam, worldCreatureIsIn);
-                        worldCreatureIsIn.AddEntity(stomp);
+                        Stomp stomp = new Stomp(this.xCoord - 3, this.yCoord, 3, 1, 0, cam, theWorldEntityExistIn);
+                        theWorldEntityExistIn.AddEntity(stomp);
                     }
 
                     switch (worldDifficulty)
@@ -175,7 +175,7 @@ namespace My_NEA_Project.Entities.Creatures
                     
                     if (playerIsRightOfMonster)
                     {
-                        if (this.worldCreatureIsIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
+                        if (this.theWorldEntityExistIn.SquareFinder(this.xCoord + this.horrizontalVelocity, this.yCoord).solid)
                         {
                             this.currentHorrizontalVelocity = horrizontalVelocity;
                             this.currentVerticalVelocity = -2;
@@ -188,7 +188,7 @@ namespace My_NEA_Project.Entities.Creatures
                     }
                     else if (!playerIsRightOfMonster)
                     {
-                        if (this.worldCreatureIsIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
+                        if (this.theWorldEntityExistIn.SquareFinder(this.xCoord - this.horrizontalVelocity, this.yCoord).solid)
                         {
                             this.currentHorrizontalVelocity = horrizontalVelocity * -1;
                             this.currentVerticalVelocity = -2;
@@ -202,7 +202,7 @@ namespace My_NEA_Project.Entities.Creatures
                     }
                 }
 
-                Point playerCoords = worldCreatureIsIn.ReturnPlayerCoords();
+                Point playerCoords = theWorldEntityExistIn.ReturnPlayerCoords();
                 if ((Math.Abs(this.xCoord - playerCoords.X) > 12) && (Math.Abs(this.yCoord - playerCoords.Y) > 12))
                 {
                     roaming = true;
