@@ -34,7 +34,7 @@ namespace My_NEA_Project
             this.worldCreatureIsIn = worldCreatureIsIn;
             this.worldDifficulty = worldCreatureIsIn.ReturnDifficulty();
            
-            if(!(this is Player) && !(this is ResourceVein))
+            if(!(this is Player) )
             {
                 answer = equationGen.Next(5,21);
                 equationBar = new Label();

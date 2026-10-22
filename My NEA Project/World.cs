@@ -489,11 +489,11 @@ namespace My_NEA_Project
                 int playerX = thePlayer.ReturnXCoord();
                 if (rightOfPlayer)
                 {
-                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() + ran.Next(5, 10), -15, 3, 5, 10, cam, this);                   
+                    newCreature = new subtractionMonster(thePlayer.ReturnXCoord() + ran.Next(5, 10), -15, 3, 5, 10, cam, this);                   
                 }
                 else
                 {
-                    newCreature = new multiplicationMonster(thePlayer.ReturnXCoord() - ran.Next(5, 10), -15, 3, 5, 10, cam, this);
+                    newCreature = new addtitonMonster(thePlayer.ReturnXCoord() - ran.Next(5, 10), -15, 3, 5, 10, cam, this);
                 }
                 AddEntity(newCreature);
                 
