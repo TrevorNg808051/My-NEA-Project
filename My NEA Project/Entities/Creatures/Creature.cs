@@ -1,12 +1,7 @@
 ﻿using My_NEA_Project.Entities.Creatures;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace My_NEA_Project
 {
@@ -21,17 +16,17 @@ namespace My_NEA_Project
         static protected Random equationGen = new Random();
         protected int answer;
         protected int jumpingCounter;
-        protected World worldCreatureIsIn;
+
         protected bool onTheGround;
         protected int health;
         protected int maxHealth;
 
         protected int worldDifficulty;
        
-        public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov)
+        public Creature(int xCoord, int yCoord, int width, int height,int maximumVerticalVelocity,Camara pov,World worldCreatureIsIn) : base(xCoord, yCoord, width, height,pov,worldCreatureIsIn)
         {
             this.maxVerticalVelocity = maximumVerticalVelocity;
-            this.worldCreatureIsIn = worldCreatureIsIn;
+            this.theWorldEntityExistIn = worldCreatureIsIn;
             this.worldDifficulty = worldCreatureIsIn.ReturnDifficulty();
            
             if(!(this is Player) )

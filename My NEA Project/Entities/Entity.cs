@@ -19,13 +19,16 @@ namespace My_NEA_Project
         protected PictureBox entitySprite;
         protected Camara cam;
 
-        public Entity(int xCoord,int yCoord, int width, int height,Camara pov)
+        protected World theWorldEntityExistIn;
+
+        public Entity(int xCoord,int yCoord, int width, int height,Camara pov,World theWorldEntityIsIn)
         {
             this.xCoord = xCoord;
             
             this.width = width;
             this.height = height;
             this.yCoord = yCoord;
+            this.theWorldEntityExistIn = theWorldEntityIsIn;
 
             this.entitySprite = new PictureBox();
             entitySprite.BackColor = Color.Green;

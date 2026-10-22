@@ -13,7 +13,7 @@ namespace My_NEA_Project
     {
 
         private bool gunEquipped;
-
+        
         private World theWorldPlayerIsIn;
         private bool moveRight = false;
         private bool moveLeft = false;
@@ -169,6 +169,11 @@ namespace My_NEA_Project
                     break;
             }
 
+        }
+
+        public World ReturnWorldPlayerIsIn()
+        {
+            return theWorldPlayerIsIn;
         }
     }
 }

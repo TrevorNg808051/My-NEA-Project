@@ -12,7 +12,7 @@ namespace My_NEA_Project
         private double answerOfTheBullet;
         private int bulletSpeed;
         private int timeToLive = 10;
-        public Bullet(int xCoord, int yCoord, int width, int height, double destinationX, double destinationY, int speed, Camara pov) : base(xCoord, yCoord, width, height, pov)
+        public Bullet(int xCoord, int yCoord, int width, int height, double destinationX, double destinationY, int speed, Camara pov,World theWorldBulletIsIn) : base(xCoord, yCoord, width, height, pov,theWorldBulletIsIn)
         {
             this.bulletSpeed = speed;
 

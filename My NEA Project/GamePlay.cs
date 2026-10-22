@@ -95,7 +95,7 @@ namespace My_NEA_Project
                 double destinationX = thePlayer.ReturnXCoord() + Math.Floor((double)((p.X - (this.Width / 2)) / thePlayerPov.ReturnCamScale()));
                 double destinationY = thePlayer.ReturnYCoord() + Math.Floor((double)((p.Y - (this.Height / 2)) / thePlayerPov.ReturnCamScale()));
 
-                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),1,1,destinationX,destinationY,bulletSpeed,thePlayerPov));
+                theWorld.AddEntity(new Bullet(thePlayer.ReturnXCoord(),thePlayer.ReturnYCoord(),1,1,destinationX,destinationY,bulletSpeed,thePlayerPov,theWorld));
 
             }
             if (GetEquation() == null)

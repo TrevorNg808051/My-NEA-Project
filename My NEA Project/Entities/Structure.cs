@@ -9,7 +9,7 @@ namespace My_NEA_Project
 {
     public class Structure : Entity
     {
-        public Structure(int xCoord, int yCoord, int width, int height,PictureBox structureSprite,Camara pov) : base(xCoord, yCoord, width, height , pov)
+        public Structure(int xCoord, int yCoord, int width, int height,PictureBox structureSprite,Camara pov,World theWorldStructureIsIn) : base(xCoord, yCoord, width, height , pov,theWorldStructureIsIn)
         {
             this.entitySprite = structureSprite;
         }
