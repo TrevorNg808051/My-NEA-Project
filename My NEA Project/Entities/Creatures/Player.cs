@@ -102,7 +102,7 @@ namespace My_NEA_Project
                 {
                     break;
                 }
-                else if (iS.item == itemRecived)
+                else if (iS.item.ReturnName() == itemRecived.ReturnName())
                 {
                     break;
                 }
