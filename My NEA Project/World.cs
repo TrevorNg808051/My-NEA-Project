@@ -343,6 +343,10 @@ namespace My_NEA_Project
                     if (SquareFinder(creatureX, creatureY + 1).solid) c.CreatureSetVelocity(c.ReturnCreatureCurrentHorrizontalVelocity(), 0);
                 }
             }
+            else
+            {
+                if (!SquareFinder(e.ReturnXCoord(), e.ReturnYCoord() + 1).solid) e.SetEntityCoords(e.ReturnXCoord(),e.ReturnYCoord() + 1);
+            }
         }
         private double LoadingPerlin(int worldX, int octives)
         {
@@ -474,6 +478,7 @@ namespace My_NEA_Project
             Player thePlayer = null;
             hostileMonster hostileCreature = null;
 
+            int countOfResourceVeins = 0;
             foreach(Entity e in listOfLoadedEntities)
             {
                 if(e is Player)
@@ -491,6 +496,10 @@ namespace My_NEA_Project
                         listOfLoadedEntities.Remove(e);
                         break;
                     }
+                }
+                else if(e is ResourceVeins)
+                {
+                    countOfResourceVeins++;
                 }
             }
 
@@ -512,6 +521,26 @@ namespace My_NEA_Project
                 AddEntity(newCreature);
                 
                 //spawn a creature;
+            }
+
+            if(countOfResourceVeins < 10)
+            {
+                Random ran = new Random();
+                ResourceVeins resource;
+
+                bool rightOfPlayer = ran.Next(1, 3) == 2;
+                int playerX = thePlayer.ReturnXCoord();
+                if (rightOfPlayer)
+                {
+                    resource = new Rock(thePlayer.ReturnXCoord() + ran.Next(0, 50), -15, 3, 3, cam, this);
+                }
+                else
+                {
+                    resource = new Rock(thePlayer.ReturnXCoord() - ran.Next(0, 50), -15, 3, 3, cam, this);
+                }
+                AddEntity(resource);
+
+                //spawn a resourceVein
             }
 
             int hostilX = hostileCreature.ReturnXCoord();
