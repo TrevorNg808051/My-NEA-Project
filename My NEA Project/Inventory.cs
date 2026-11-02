@@ -134,5 +134,10 @@ namespace My_NEA_Project
             this.Focus();
             formThisWillBeIn.KeyPreview = true;
         }
+
+        public itemStack[] ReturnInventoryContents()
+        {
+            return allItemsInCurrentInventory;
+        }
     }
 }

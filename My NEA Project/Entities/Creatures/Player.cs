@@ -115,7 +115,7 @@ namespace My_NEA_Project
                     inventory[index] = new itemStack() { item = itemRecived, stackCount = 0 };
                     inventory[index].stackCount += amountRecived;
                 }
-                else if (inventory[index].item == itemRecived)
+                else if (inventory[index].item.ReturnName() == itemRecived.ReturnName())
                 {
                     inventory[index].stackCount += amountRecived;
                 }

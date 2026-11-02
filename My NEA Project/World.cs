@@ -29,9 +29,8 @@ namespace My_NEA_Project
             cam = playerPov;
 
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
-            this.seed = 4546787;
-
-            this.AddEntity(new Rock(10, -2, 3, 3, cam, this));
+            Random ran = new Random();
+            this.seed = ran.Next(1000,9999);
         }
         public Material SquareFinder(int x, int y)
         {
@@ -530,17 +529,50 @@ namespace My_NEA_Project
 
                 bool rightOfPlayer = ran.Next(1, 3) == 2;
                 int playerX = thePlayer.ReturnXCoord();
+
+                int spawnXCoord;
                 if (rightOfPlayer)
                 {
-                    resource = new Rock(thePlayer.ReturnXCoord() + ran.Next(0, 50), -15, 3, 3, cam, this);
+                    spawnXCoord = thePlayer.ReturnXCoord() + ran.Next(0, 1000);
                 }
                 else
                 {
-                    resource = new Rock(thePlayer.ReturnXCoord() - ran.Next(0, 50), -15, 3, 3, cam, this);
+                    spawnXCoord = thePlayer.ReturnXCoord() - ran.Next(0, 1000);
                 }
+
+                switch (ran.Next(1, 3))
+                {
+                    case 1:
+                        resource = new Rock(spawnXCoord, -15, 3, 3, cam, this);
+                        break;
+
+                    case 2:
+                        resource = new Tree(spawnXCoord, -15, 2, 4, cam, this);
+                        break;
+                    default:
+                        resource = new Tree(spawnXCoord, -15, 2, 4, cam, this);
+                        break;
+                }
+                
                 AddEntity(resource);
 
-                //spawn a resourceVein
+            }
+            else if(countOfResourceVeins >= 10)
+            {
+                foreach(Entity e in listOfLoadedEntities)
+                {
+                    if(e is ResourceVeins)
+                    {
+                        ResourceVeins resource = (ResourceVeins)e;
+                        int resoruceX = resource.ReturnXCoord();
+                        if(Math.Abs(playerX - resource.ReturnXCoord()) > 5000)
+                        {
+                            listOfLoadedEntities.Remove(resource);
+                            resource.RemoveSprite();
+                            break;
+                        }
+                    }
+                }
             }
 
             int hostilX = hostileCreature.ReturnXCoord();
@@ -550,6 +582,8 @@ namespace My_NEA_Project
                 hostileCreature.RemoveSprite();
 
             }
+
+            
         }
 
         public int ReturnDifficulty()

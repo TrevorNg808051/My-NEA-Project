@@ -78,7 +78,11 @@ namespace My_NEA_Project
                     listOfMaterialsForRecipe.Name = "label1";
                     listOfMaterialsForRecipe.Size = new System.Drawing.Size(35, 13);
                     listOfMaterialsForRecipe.TabIndex = 1;
-                    listOfMaterialsForRecipe.Text = "label1";
+                    listOfMaterialsForRecipe.Text = "";
+                    foreach(itemStack iS in cr.ReturnItemRequirement())
+                    {
+                        listOfMaterialsForRecipe.Text += $"{iS.item.ReturnName()} x {iS.stackCount}\n";
+                    }
 
                     // 
                     // pictureBox1
@@ -109,6 +113,7 @@ namespace My_NEA_Project
                 theFormUiWillBeIn.Controls.Add(inventory);
                 inventory.Hide();
                 inventory.Enabled = false;
+                inventory.RefreshInventory(thePlayer.ReturnInventory());
             }
             //
             //equationFormation
@@ -236,9 +241,17 @@ namespace My_NEA_Project
         public void RecipeSelected(object sender, EventArgs e)
         {
             TableLayoutPanel tLP = (TableLayoutPanel)sender;
-            if (recipies[int.Parse(tLP.Name)].Craftable()) 
+            if (recipies[int.Parse(tLP.Name)].Craftable(inventory)) 
             {
                 thePlayer.ReciveItem(recipies[int.Parse(tLP.Name)].Craft(), 1);
+                foreach(itemStack iS in recipies[int.Parse(tLP.Name)].ReturnItemRequirement())
+                {
+                    thePlayer.ReciveItem(iS.item, iS.stackCount * -1);
+                }
+            }
+            else
+            {
+                MessageBox.Show("not enough mateirals");
             }
         }
 
