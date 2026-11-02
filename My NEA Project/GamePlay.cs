@@ -110,6 +110,7 @@ namespace My_NEA_Project
 
         private void FrameIntervalTracker_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine("this is ticking");
             label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
             thePlayer.SetMovement(right, left, jump);
@@ -236,7 +237,13 @@ namespace My_NEA_Project
             {
                 if (File.Exists(filePath) && filePath == fileName)
                 {
+                    gameSaved = true;
+                    string gameData = theWorld.ReturnGameData();
+                    using (StreamWriter sw = new StreamWriter(filePath))
+                    {
+                        sw.Write(gameData);
 
+                    }
                 }
                 else if(File.Exists(filePath) && filePath != fileName)
                 {
@@ -245,9 +252,10 @@ namespace My_NEA_Project
                 }
                 else
                 {
-                    using (StreamWriter sr = new StreamWriter(filePath))
+                    using (StreamWriter sw = new StreamWriter(filePath))
                     {
-                        sr.Write("");
+                        sw.Write("");
+                       
                     }
                 }
             }

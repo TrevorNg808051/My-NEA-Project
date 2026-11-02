@@ -596,6 +596,12 @@ namespace My_NEA_Project
             return listOfLoadedEntities;
         }
 
+        public string ReturnGameData()
+        {
+            //Returns the contents that needs to be saved in a standarised string format.
+            throw new NotImplementedException();
+        }
+
     }
     
 }

@@ -59,7 +59,7 @@
             // 
             // AutoSaveTimer
             // 
-            this.AutoSaveTimer.Interval = 1200000;
+            this.AutoSaveTimer.Interval = 120000;
             this.AutoSaveTimer.Tick += new System.EventHandler(this.AutoSaveTimer_Tick);
             // 
             // GamePlay

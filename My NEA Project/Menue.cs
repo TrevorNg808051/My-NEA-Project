@@ -16,7 +16,7 @@ namespace My_NEA_Project
     {
 
         private Button lastScreenBtn = new Button();
-
+        
         private Label title;
         public Menue()
         {
@@ -30,6 +30,8 @@ namespace My_NEA_Project
             lastScreenBtn.Location = new Point(50, 50);
             lastScreenBtn.BackColor = Color.Red;
             lastScreenBtn.Click += new EventHandler(LastScreen);
+            lastScreenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lastScreenBtn.Text = "X";
 
         }
         private void StartingScreen(object sender, EventArgs e)
@@ -83,10 +85,12 @@ namespace My_NEA_Project
             loadSaveBtn = new Button();
             loadSaveBtn.Text = "Load Save";
             loadSaveBtn.Click += new EventHandler(LoadSave);
+            loadSaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             newWorldBtn = new Button();
             newWorldBtn.Text = "Creat New World";
             newWorldBtn.Click += new EventHandler(ChooseDifficulty);
+            newWorldBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             int yCoord = 0;
             foreach (Button btn in new Button[] { loadSaveBtn,newWorldBtn })
@@ -131,6 +135,7 @@ namespace My_NEA_Project
                 yCoord += 200;
                 this.Controls.Add(btn);
                 btn.BackColor = Color.Gray;
+                btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             }
             lastScreen = "worldBuildingScreen";
 
@@ -166,18 +171,23 @@ namespace My_NEA_Project
 
         private void LoadSave (object sender, EventArgs e)
         {
-            
+            lastScreen = "worldBuildingScreen";
+            this.Controls.Clear();
             bool thereAreStillFiles = true;
             int fileNum = 1;
             int yCoord = 0;
+            
             while (thereAreStillFiles)
             {
                 if (File.Exists("SaveFile_" + fileNum + ".txt"))
                 {
                     Button fileSaveBtn = new Button();
-                    fileSaveBtn.Text = "SaveFile_" + fileNum + ".txt";
+                    fileSaveBtn.Text = "SaveFile_" + fileNum;
                     fileSaveBtn.Size = new Size(500, 150);
                     fileSaveBtn.Location = new Point((this.Width / 2) - (fileSaveBtn.Width / 2), 250 + yCoord);
+                    fileSaveBtn.TextAlign = ContentAlignment.MiddleCenter;
+                    fileSaveBtn.BackColor = Color.Gray;
+                    this.Controls.Add(fileSaveBtn);
                     yCoord += 200;
 
                     fileNum++;
@@ -187,6 +197,12 @@ namespace My_NEA_Project
                     thereAreStillFiles = false;
                 }
             }
+            if(fileNum <= 1)
+            {
+                MessageBox.Show("Currently there is no saves");
+                LastScreen(null, new EventArgs());
+            }
+
         }
         public void LastScreen(object sender, EventArgs e)
         {
@@ -199,6 +215,7 @@ namespace My_NEA_Project
                 case "worldBuildingScreen":
                     WorldBuilding(null, new EventArgs());
                     break;
+               
 
             }
         }
