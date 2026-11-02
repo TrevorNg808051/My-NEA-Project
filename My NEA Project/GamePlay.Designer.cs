@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.FrameIntervalTracker = new System.Windows.Forms.Timer(this.components);
             this.label2 = new System.Windows.Forms.Label();
+            this.AutoSaveTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -56,14 +57,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "label2";
             // 
-            // Form1
+            // AutoSaveTimer
+            // 
+            this.AutoSaveTimer.Interval = 1200000;
+            this.AutoSaveTimer.Tick += new System.EventHandler(this.AutoSaveTimer_Tick);
+            // 
+            // GamePlay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "GamePlay";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -79,6 +85,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer FrameIntervalTracker;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer AutoSaveTimer;
     }
 }
 

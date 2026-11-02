@@ -532,11 +532,11 @@ namespace My_NEA_Project
                 int playerX = thePlayer.ReturnXCoord();
                 if (rightOfPlayer)
                 {
-                    resource = new Rock(thePlayer.ReturnXCoord() + ran.Next(0, 50), -15, 3, 3, cam, this);
+                    resource = new Rock(thePlayer.ReturnXCoord() + ran.Next(0, 5000), -15, 3, 3, cam, this);
                 }
                 else
                 {
-                    resource = new Rock(thePlayer.ReturnXCoord() - ran.Next(0, 50), -15, 3, 3, cam, this);
+                    resource = new Rock(thePlayer.ReturnXCoord() - ran.Next(0, 5000), -15, 3, 3, cam, this);
                 }
                 AddEntity(resource);
 

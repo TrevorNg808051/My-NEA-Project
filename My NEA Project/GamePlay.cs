@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -24,6 +25,8 @@ namespace My_NEA_Project
         int chunkSize = 50;
 
         UIManager uiManager;
+
+        string saveFile = "";
 
         int difficulty = 0;
         public GamePlay(string difficulty)
@@ -58,6 +61,43 @@ namespace My_NEA_Project
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             uiManager = new UIManager(this, thePlayer);
             FrameIntervalTracker.Start();
+            AutoSaveTimer.Start();
+        }
+        public GamePlay(string filePath, string difficulty)
+        {
+            saveFile = filePath;
+
+            InitializeComponent();
+            KeyPreview = true;
+
+            switch (difficulty)
+            {
+                case "Easy":
+                    this.difficulty = 1;
+                    break;
+                case "Normal":
+                    this.difficulty = 2;
+                    break;
+                case "Hard":
+                    this.difficulty = 3;
+                    break;
+            }
+
+            thePlayerPov = new Camara(theWorldMap);
+
+
+            theWorld = new World(thePlayerPov, this);
+            thePlayer = new Player(0, -10, 1, 2, 10, theWorld, thePlayerPov);
+            theWorldMap = new Map(theWorld, chunkSize);
+            theWorld.GetWorldMap(theWorldMap);
+
+            theWorld.AddEntity(thePlayer);
+
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
+            this.Height = Screen.PrimaryScreen.Bounds.Height;
+            uiManager = new UIManager(this, thePlayer);
+            FrameIntervalTracker.Start();
+            AutoSaveTimer.Start();
         }
         bool left, right, jump;
 
@@ -180,6 +220,39 @@ namespace My_NEA_Project
         {
             return MousePosition;
         }
+
+        private void AutoSaveTimer_Tick(object sender, EventArgs e)
+        {
+            SaveGame();
+        }
+
+        private void SaveGame(string fileName = "SaveFile_1.txt")
+        {
+            int fileNum = 1;
+            string filePath = "SaveFile_" + fileNum + ".txt";
+            bool gameSaved = false;
+
+            while (!gameSaved)
+            {
+                if (File.Exists(filePath) && filePath == fileName)
+                {
+
+                }
+                else if(File.Exists(filePath) && filePath != fileName)
+                {
+                    fileNum++;
+                    filePath = "SaveFile_" + fileNum + ".txt";
+                }
+                else
+                {
+                    using (StreamWriter sr = new StreamWriter(filePath))
+                    {
+                        sr.Write("");
+                    }
+                }
+            }
+        }
+
         public List<string> GetEquation()
         {
             List<string> equation = uiManager.ReturnEquation();
