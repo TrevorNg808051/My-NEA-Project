@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -37,14 +38,17 @@ namespace My_NEA_Project
             startBtn = new Button();
             startBtn.Text = "Start";
             startBtn.Click += new EventHandler(WorldBuilding);
+            startBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             settingBtn = new Button();
             settingBtn.Text = "Settings";
             settingBtn.Click += new EventHandler(Settings);
+            settingBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             quitBtn = new Button();
             quitBtn.Text = "Quit";
             quitBtn.Click += new EventHandler(QuitApplication);
+            quitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             title = new Label();
             title.AutoSize = false;
@@ -162,7 +166,27 @@ namespace My_NEA_Project
 
         private void LoadSave (object sender, EventArgs e)
         {
+            
+            bool thereAreStillFiles = true;
+            int fileNum = 1;
+            int yCoord = 0;
+            while (thereAreStillFiles)
+            {
+                if (File.Exists("SaveFile_" + fileNum + ".txt"))
+                {
+                    Button fileSaveBtn = new Button();
+                    fileSaveBtn.Text = "SaveFile_" + fileNum + ".txt";
+                    fileSaveBtn.Size = new Size(500, 150);
+                    fileSaveBtn.Location = new Point((this.Width / 2) - (fileSaveBtn.Width / 2), 250 + yCoord);
+                    yCoord += 200;
 
+                    fileNum++;
+                }
+                else
+                {
+                    thereAreStillFiles = false;
+                }
+            }
         }
         public void LastScreen(object sender, EventArgs e)
         {
