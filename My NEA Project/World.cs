@@ -369,11 +369,13 @@ namespace My_NEA_Project
                 distanceFromRight = (physicaleDistanceFromRight / chunkSize);
 
             }
+            int chunkX = worldX + seed - (worldX % chunkSize) ;
+            int numForDirectonaOfLeftPointGenerator = chunkX * octives;
+            int numForDirectionOfRightPointGenerator = chunkX * octives + 1;
+            Random dircetionOfLeftPointGen = new Random(numForDirectonaOfLeftPointGenerator );
+            Random directionOfRightPointGen = new Random(numForDirectionOfRightPointGenerator);
 
-            Random dircetionOfLeftPointGen = new Random((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives));
-            Random directionOfRightPointGen = new Random(((((worldX + seed - (worldX % chunkSize)) / chunkSize) * octives) + 1));
-
-            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 1000) >= 500;
+            directionOfLeftChunk = dircetionOfLeftPointGen.Next(1, 1000) <= 500;
             directionOfRightChunk = directionOfRightPointGen.Next(1, 1000) <= 500;
 
             if (directionOfLeftChunk)
@@ -599,7 +601,43 @@ namespace My_NEA_Project
         public string ReturnGameData()
         {
             //Returns the contents that needs to be saved in a standarised string format.
-            throw new NotImplementedException();
+            // Im only going to enter the number so I will write the order of the numbers here in comments
+            // 1. Difficulty
+            // 2. PlayerY
+            // 3. PlayerX
+            // 4. Seed
+            // 5. Every structure's coords
+            // 6. Inventory content
+            string dataToStore = "";
+            itemStack[] inventory = null;
+            dataToStore += $"{ReturnDifficulty()}\n";
+            dataToStore += $"{playerX}\n";
+            dataToStore += $"{playerY}\n";
+            dataToStore += $"{seed}\n";
+            foreach(Entity e in listOfLoadedEntities)
+            {
+                if(e is Structure)
+                {
+                    if(e is UpgradeStationBuilding)
+                    {
+                        dataToStore += "UpgradeStationBuilding\n";
+                    }
+                    dataToStore += e.ReturnXCoord() + "\n";
+                    dataToStore += e.ReturnYCoord() + "\n";
+                }
+                if(e is Player)
+                {
+                    Player player = (Player)e;
+                    inventory = player.ReturnInventory();
+                }
+            }
+            foreach(itemStack iS in inventory)
+            {
+                if(iS.item != null)
+                dataToStore += iS.item.ReturnName() + "," + iS.stackCount + "\n";
+            }
+
+             return dataToStore;
         }
 
     }

@@ -110,7 +110,6 @@ namespace My_NEA_Project
 
         private void FrameIntervalTracker_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("this is ticking");
             label1.Text = $"{thePlayer.ReturnXCoord()},{thePlayer.ReturnYCoord()}";
             theWorld.WorldUpdate();
             thePlayer.SetMovement(right, left, jump);
