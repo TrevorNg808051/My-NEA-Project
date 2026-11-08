@@ -25,12 +25,17 @@ namespace My_NEA_Project
         {
             return nameOfItem;
         }
-        public virtual void Use()
+        public virtual bool Use()
         {
             if (!usable)
             {
-                return;
+                return false;
             }
+            return true;
+        }
+        public Player ReturnOwner()
+        {
+            return ownerOfItem;
         }
 
     }

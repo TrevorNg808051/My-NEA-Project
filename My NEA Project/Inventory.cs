@@ -38,6 +38,7 @@ namespace My_NEA_Project
         }
         public void RefreshInventory(itemStack[] allItemsInInventory)
         {
+            tableLayoutPanel1.Controls.Clear();
             allItemsInCurrentInventory = allItemsInInventory;
             int numIndex = 0;
             foreach (itemStack stack in allItemsInInventory)
@@ -60,10 +61,13 @@ namespace My_NEA_Project
                     int column = numIndex % 5;
                     int row = (int)Math.Floor((float)(numIndex / 5));
                     tableLayoutPanel1.Controls.Add(buttonRepresentingItem, column, row);
+                       
+
                 }
                 else if (currentButton.ReturnName() == stack.item.ReturnName())
                 {
                     currentButton.Text = $"{stack.item.ReturnName()} x {stack.stackCount}";
+                    tableLayoutPanel1.Controls.Add(currentButton);
                 }
 
 
@@ -71,9 +75,9 @@ namespace My_NEA_Project
 
             }
         }
-        private void textBox1_Click(object sender, EventArgs e)
+        private void SearchBarClick(object sender, EventArgs e)
         {
-            textBox1.ReadOnly = false;
+            searchBar.ReadOnly = false;
             formThisWillBeIn.KeyPreview = false;
 
         }
@@ -98,7 +102,11 @@ namespace My_NEA_Project
                         {
                             this.Hide();
                         }
-                        itemBeingUsed.Use();
+                        if (itemBeingUsed.Use())
+                        {
+                            itemBeingUsed.ReturnOwner().ReciveItem(itemBeingUsed, -1);
+                        }
+                        
                         break;
                     case "Drop":
                         throw new NotImplementedException();
@@ -123,14 +131,14 @@ namespace My_NEA_Project
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            textBox1.ReadOnly = true;
+            searchBar.ReadOnly = true;
             this.Focus();
             formThisWillBeIn.KeyPreview = true;
         }
 
         private void textBox1_MouseLeave(object sender, EventArgs e)
         {
-            textBox1.ReadOnly = true;
+            searchBar.ReadOnly = true;
             this.Focus();
             formThisWillBeIn.KeyPreview = true;
         }

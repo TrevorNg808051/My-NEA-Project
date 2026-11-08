@@ -192,6 +192,7 @@ namespace My_NEA_Project
             }
             else
             {
+
                 inventory.Enabled = false;
                 inventory.Hide();
                 theFormUiWillBeIn.Focus();

@@ -27,13 +27,14 @@ namespace My_NEA_Project
             sprite.Height = height * pov.ReturnCamScale();
 
             sprite.BackColor = Color.AliceBlue;
-            return new UpgradeStationBuilding(x,y,3,1,sprite,pov,this.ownerOfItem.ReturnWorldPlayerIsIn());
+            return new UpgradeStationBuilding(x,y,sprite,pov,this.ownerOfItem.ReturnWorldPlayerIsIn());
         }
 
-        public override void Use()
+        public override bool Use()
         {
             base.Use();
             ownerOfItem.PlaceStructure(this);
+            return true;
         }
     }
 }

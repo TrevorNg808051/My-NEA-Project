@@ -29,16 +29,17 @@ namespace My_NEA_Project
                 bool hasItme = false;
                 bool hasEnough = false;
 
-                foreach (itemStack inventory in contentsOfInventory)
+                foreach (itemStack stackOfItems in contentsOfInventory)
                 {
                     try
                     {
-                        if (iS.item.ReturnName() == inventory.item.ReturnName())
+                        if (iS.item.ReturnName() == stackOfItems.item.ReturnName())
                         {
                             hasItme = true;
-                            if (inventory.stackCount >= iS.stackCount)
+                            if (stackOfItems.stackCount >= iS.stackCount)
                             {
                                 hasEnough = true;
+                                break;
                             }
                         }
                     }

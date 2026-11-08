@@ -123,6 +123,19 @@ namespace My_NEA_Project
         }
         public itemStack[] ReturnInventory()
         {
+            foreach(itemStack iS in inventory)
+            {
+                if (iS.item != null)
+                {
+                    if (iS.stackCount < 1)
+                    {
+                        List<itemStack> listOfIS = inventory.ToList();
+                        listOfIS.RemoveAt(Array.IndexOf(inventory, iS));
+                        listOfIS.Add(new itemStack() { item = null, stackCount = 0});
+                        inventory = listOfIS.ToArray();
+                    }
+                }
+            }
             return inventory;
         }
         public void PlaceStructure(Placible structureToPlace)

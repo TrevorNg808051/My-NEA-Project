@@ -30,7 +30,7 @@ namespace My_NEA_Project
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.searchBar = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -39,14 +39,14 @@ namespace My_NEA_Project
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 14);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(219, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-            this.textBox1.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
+            this.searchBar.Location = new System.Drawing.Point(12, 14);
+            this.searchBar.Name = "textBox1";
+            this.searchBar.ReadOnly = true;
+            this.searchBar.Size = new System.Drawing.Size(219, 20);
+            this.searchBar.TabIndex = 0;
+            this.searchBar.Click += new System.EventHandler(this.SearchBarClick);
+            this.searchBar.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.searchBar.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
             // 
             // tableLayoutPanel1
             // 
@@ -97,7 +97,7 @@ namespace My_NEA_Project
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.vScrollBar1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.searchBar);
             this.Name = "Inventory";
             this.Size = new System.Drawing.Size(387, 409);
             this.panel1.ResumeLayout(false);
@@ -108,7 +108,7 @@ namespace My_NEA_Project
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox searchBar;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Panel panel1;

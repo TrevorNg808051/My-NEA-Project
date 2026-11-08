@@ -84,7 +84,7 @@ namespace My_NEA_Project
             
             loadSaveBtn = new Button();
             loadSaveBtn.Text = "Load Save";
-            loadSaveBtn.Click += new EventHandler(LoadSave);
+            loadSaveBtn.Click += new EventHandler(ChooseSave);
             loadSaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 
             newWorldBtn = new Button();
@@ -162,14 +162,28 @@ namespace My_NEA_Project
         private void MakeWorld()
         {
             this.Hide();
-            using (GamePlay gamePlay = new GamePlay(difficultyChosen))
+            bool thereAreStillFiles = true;
+            int fileNum = 1;
+
+            while (thereAreStillFiles)
+            {
+                if (File.Exists("SaveFile_" + fileNum + ".txt"))
+                {
+                    fileNum++;
+                }
+                else
+                {
+                    thereAreStillFiles = false;
+                }
+            }
+            using (GamePlay gamePlay = new GamePlay(difficultyChosen, fileNum))
             {
                 gamePlay.ShowDialog();
             }
             this.Close();
         }
 
-        private void LoadSave (object sender, EventArgs e)
+        private void ChooseSave (object sender, EventArgs e)
         {
             lastScreen = "worldBuildingScreen";
             this.Controls.Clear();
@@ -187,6 +201,7 @@ namespace My_NEA_Project
                     fileSaveBtn.Location = new Point((this.Width / 2) - (fileSaveBtn.Width / 2), 250 + yCoord);
                     fileSaveBtn.TextAlign = ContentAlignment.MiddleCenter;
                     fileSaveBtn.BackColor = Color.Gray;
+                    fileSaveBtn.Click += new EventHandler(LoadSave);
                     this.Controls.Add(fileSaveBtn);
                     yCoord += 200;
 
@@ -203,6 +218,17 @@ namespace My_NEA_Project
                 LastScreen(null, new EventArgs());
             }
 
+        }
+
+        private void LoadSave(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            this.Hide();
+            using (GamePlay gamePlay = new GamePlay(b.Text + ".txt"))
+            {
+                gamePlay.ShowDialog();
+            }
+            this.Close();
         }
         public void LastScreen(object sender, EventArgs e)
         {

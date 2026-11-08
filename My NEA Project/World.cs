@@ -32,6 +32,15 @@ namespace My_NEA_Project
             Random ran = new Random();
             this.seed = ran.Next(1000,9999);
         }
+        public World(Camara playerPov, GamePlay theFormThisWorldExistsIn, int seed)
+        {
+            listOfLoadedEntities = new List<Entity>();
+            cam = playerPov;
+
+            this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
+           
+            this.seed = seed;
+        }
         public Material SquareFinder(int x, int y)
         {
             Material air = new Material()
@@ -603,18 +612,20 @@ namespace My_NEA_Project
             //Returns the contents that needs to be saved in a standarised string format.
             // Im only going to enter the number so I will write the order of the numbers here in comments
             // 1. Difficulty
-            // 2. PlayerY
-            // 3. PlayerX
+            // 2. PlayerX
+            // 3. PlayerY
             // 4. Seed
-            // 5. Every structure's coords
-            // 6. Inventory content
+            // 5. FileNum
+            // 6. Every structure's coords
+            // 7. Inventory content
             string dataToStore = "";
             itemStack[] inventory = null;
             dataToStore += $"{ReturnDifficulty()}\n";
             dataToStore += $"{playerX}\n";
             dataToStore += $"{playerY}\n";
             dataToStore += $"{seed}\n";
-            foreach(Entity e in listOfLoadedEntities)
+            dataToStore += theFormThisWorldExistsIn.ReturnFileNum() + "\n";
+            foreach (Entity e in listOfLoadedEntities)
             {
                 if(e is Structure)
                 {
@@ -634,10 +645,10 @@ namespace My_NEA_Project
             foreach(itemStack iS in inventory)
             {
                 if(iS.item != null)
-                dataToStore += iS.item.ReturnName() + "," + iS.stackCount + "\n";
+                dataToStore += iS.item.ReturnName() + "\n" + iS.stackCount + "\n";
             }
-
-             return dataToStore;
+            
+            return dataToStore;
         }
 
     }

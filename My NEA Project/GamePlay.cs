@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -29,8 +30,11 @@ namespace My_NEA_Project
         string saveFile = "";
 
         int difficulty = 0;
-        public GamePlay(string difficulty)
+
+        int fileNum = 0;
+        public GamePlay(string difficulty,int fileNum)
         {
+            this.fileNum = fileNum;
             InitializeComponent();
             KeyPreview = true;
 
@@ -63,39 +67,88 @@ namespace My_NEA_Project
             FrameIntervalTracker.Start();
             AutoSaveTimer.Start();
         }
-        public GamePlay(string filePath, string difficulty)
+        public GamePlay(string filePath)
         {
-            saveFile = filePath;
-
-            InitializeComponent();
-            KeyPreview = true;
-
-            switch (difficulty)
-            {
-                case "Easy":
-                    this.difficulty = 1;
-                    break;
-                case "Normal":
-                    this.difficulty = 2;
-                    break;
-                case "Hard":
-                    this.difficulty = 3;
-                    break;
-            }
-
             thePlayerPov = new Camara(theWorldMap);
 
 
-            theWorld = new World(thePlayerPov, this);
-            thePlayer = new Player(0, -10, 1, 2, 10, theWorld, thePlayerPov);
+
+            int playerX = 0;
+            int playerY = 0;
+            int worldSeed = 0;
+            List<Structure> listOfStructure = new List<Structure>();
+            List<itemStack> listOfStackItems = new List<itemStack>();
+            saveFile = filePath;
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                // 1. Difficulty
+                // 2. PlayerX
+                // 3. PlayerY
+                // 4. Seed
+                // 5. FileNum
+                // 6. Every structure's coords
+                // 7. Inventory content
+
+
+                this.difficulty = int.Parse(reader.ReadLine());
+                playerX = int.Parse(reader.ReadLine());
+                playerY = int.Parse(reader.ReadLine());
+                worldSeed = int.Parse(reader.ReadLine());
+                fileNum = int.Parse(reader.ReadLine());
+                while (!reader.EndOfStream)
+                {
+                    itemStack iS;
+                    switch (reader.ReadLine())
+                    {
+                        case "UpgradeStationBuilding":
+                            listOfStructure.Add(new UpgradeStationBuilding(int.Parse(reader.ReadLine()),int.Parse(reader.ReadLine()), new PictureBox(), thePlayerPov, theWorld));
+                            break;
+                        case "Stone":
+                            iS = new itemStack() { item = new Stone(), stackCount = int.Parse(reader.ReadLine()) };
+
+                            listOfStackItems.Add(iS);
+                            break;
+                        case "Wood":
+                            iS = new itemStack() { item = new Wood(), stackCount = int.Parse(reader.ReadLine()) };
+
+                            listOfStackItems.Add(iS);
+                            break;
+                        case "UpgradeStation":
+                            iS = new itemStack() { item = new UpgradeStation(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
+
+                            listOfStackItems.Add(iS);
+                            break;
+
+                    }
+                    
+                }
+
+            }
+
+            theWorld = new World(thePlayerPov, this,worldSeed);
+            thePlayer = new Player(playerX, playerY, 1, 2, 10, theWorld, thePlayerPov);
             theWorldMap = new Map(theWorld, chunkSize);
             theWorld.GetWorldMap(theWorldMap);
 
             theWorld.AddEntity(thePlayer);
+            foreach(Structure s in listOfStructure)
+            {
+                theWorld.AddEntity(s);
+            }
+            foreach(itemStack iS in listOfStackItems)
+            {
+                thePlayer.ReciveItem(iS.item,iS.stackCount);
+            }
+            InitializeComponent();
+            KeyPreview = true;
+           
 
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             uiManager = new UIManager(this, thePlayer);
+            
+
+           
             FrameIntervalTracker.Start();
             AutoSaveTimer.Start();
         }
@@ -223,18 +276,18 @@ namespace My_NEA_Project
 
         private void AutoSaveTimer_Tick(object sender, EventArgs e)
         {
-            SaveGame();
+            SaveGame(fileNum);
         }
 
-        private void SaveGame(string fileName = "SaveFile_1.txt")
+        private void SaveGame(int fileNum)
         {
-            int fileNum = 1;
+            
             string filePath = "SaveFile_" + fileNum + ".txt";
             bool gameSaved = false;
 
             while (!gameSaved)
             {
-                if (File.Exists(filePath) && filePath == fileName)
+                if (File.Exists(filePath))
                 {
                     gameSaved = true;
                     string gameData = theWorld.ReturnGameData();
@@ -244,7 +297,7 @@ namespace My_NEA_Project
 
                     }
                 }
-                else if(File.Exists(filePath) && filePath != fileName)
+                else if(File.Exists(filePath))
                 {
                     fileNum++;
                     filePath = "SaveFile_" + fileNum + ".txt";
@@ -274,6 +327,10 @@ namespace My_NEA_Project
         public int ReturnDifficulty()
         {
             return difficulty;
+        }
+        public int ReturnFileNum()
+        {
+            return fileNum;
         }
     }
 }

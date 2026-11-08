@@ -9,7 +9,7 @@ namespace My_NEA_Project
 {
     public class UpgradeStationBuilding : Structure
     {
-        public UpgradeStationBuilding(int xCoord, int yCoord, int width, int height, PictureBox structureSprite, Camara pov,World theworldStructureIsIn) : base(xCoord, yCoord, width, height, structureSprite, pov,theworldStructureIsIn)
+        public UpgradeStationBuilding(int xCoord, int yCoord, PictureBox structureSprite, Camara pov,World theworldStructureIsIn, int width = 3, int height = 1) : base(xCoord, yCoord, width, height, structureSprite, pov,theworldStructureIsIn)
         {
             
         }
