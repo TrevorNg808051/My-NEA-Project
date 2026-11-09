@@ -104,12 +104,12 @@ namespace My_NEA_Project
                             listOfStructure.Add(new UpgradeStationBuilding(int.Parse(reader.ReadLine()),int.Parse(reader.ReadLine()), new PictureBox(), thePlayerPov, theWorld));
                             break;
                         case "Stone":
-                            iS = new itemStack() { item = new Stone(), stackCount = int.Parse(reader.ReadLine()) };
+                            iS = new itemStack() { item = new Stone(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
 
                             listOfStackItems.Add(iS);
                             break;
                         case "Wood":
-                            iS = new itemStack() { item = new Wood(), stackCount = int.Parse(reader.ReadLine()) };
+                            iS = new itemStack() { item = new Wood(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
 
                             listOfStackItems.Add(iS);
                             break;

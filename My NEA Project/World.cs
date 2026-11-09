@@ -31,6 +31,8 @@ namespace My_NEA_Project
             this.theFormThisWorldExistsIn = theFormThisWorldExistsIn;
             Random ran = new Random();
             this.seed = ran.Next(1000,9999);
+
+            
         }
         public World(Camara playerPov, GamePlay theFormThisWorldExistsIn, int seed)
         {
@@ -554,14 +556,14 @@ namespace My_NEA_Project
                 switch (ran.Next(1, 3))
                 {
                     case 1:
-                        resource = new Rock(spawnXCoord, -15, 3, 3, cam, this);
+                        resource = new Rock(spawnXCoord, -15,  cam, this);
                         break;
 
                     case 2:
-                        resource = new Tree(spawnXCoord, -15, 2, 4, cam, this);
+                        resource = new Tree(spawnXCoord, -15,  cam, this);
                         break;
                     default:
-                        resource = new Tree(spawnXCoord, -15, 2, 4, cam, this);
+                        resource = new Tree(spawnXCoord, -15,  cam, this);
                         break;
                 }
                 

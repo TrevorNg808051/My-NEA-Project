@@ -9,7 +9,7 @@ namespace My_NEA_Project.Entities
 {
     internal class Tree : ResourceVeins
     {
-        public Tree(int xCoord, int yCoord, int width, int height, Camara pov, World theWorldRockIsIn) : base(xCoord, yCoord, width, height, pov, theWorldRockIsIn)
+        public Tree(int xCoord, int yCoord, Camara pov, World theWorldRockIsIn, int width = 2, int height = 4) : base(xCoord, yCoord, width, height, pov, theWorldRockIsIn)
         {
             SetListOfDrops();
         }

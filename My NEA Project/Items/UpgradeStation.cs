@@ -30,10 +30,11 @@ namespace My_NEA_Project
             return new UpgradeStationBuilding(x,y,sprite,pov,this.ownerOfItem.ReturnWorldPlayerIsIn());
         }
 
-        public override bool Use()
+        public override bool Use(Player playerUsingItem)
         {
-            base.Use();
-            ownerOfItem.PlaceStructure(this);
+            base.Use(playerUsingItem);
+            SetOwner(playerUsingItem);
+            playerUsingItem.PlaceStructure(this);
             return true;
         }
     }

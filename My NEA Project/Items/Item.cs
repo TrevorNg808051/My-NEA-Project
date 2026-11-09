@@ -25,7 +25,7 @@ namespace My_NEA_Project
         {
             return nameOfItem;
         }
-        public virtual bool Use()
+        public virtual bool Use(Player playerUsingItem)
         {
             if (!usable)
             {
@@ -37,6 +37,9 @@ namespace My_NEA_Project
         {
             return ownerOfItem;
         }
-
+        public void SetOwner(Player owner)
+        {
+            this.ownerOfItem = owner;
+        }
     }
 }

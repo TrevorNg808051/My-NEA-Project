@@ -49,6 +49,13 @@ namespace My_NEA_Project
 
                 }
                 InventoryButton currentButton = allButtonsInInventory[numIndex];
+                if(currentButton != null && currentButton.ReturnItemName() != stack.item.ReturnName())
+                {
+                    currentButton.Dispose();
+                    allButtonsInInventory[numIndex] = null;
+                    currentButton = null;
+                    
+                }
                 if (currentButton == null)
                 {
                     InventoryButton buttonRepresentingItem = new InventoryButton(stack.item.ReturnName(), numIndex, stack.item);
@@ -64,7 +71,7 @@ namespace My_NEA_Project
                        
 
                 }
-                else if (currentButton.ReturnName() == stack.item.ReturnName())
+                else if (currentButton.ReturnItemName() == stack.item.ReturnName())
                 {
                     currentButton.Text = $"{stack.item.ReturnName()} x {stack.stackCount}";
                     tableLayoutPanel1.Controls.Add(currentButton);
@@ -100,9 +107,9 @@ namespace My_NEA_Project
                     case "Use":
                         if(itemBeingUsed is Placible)
                         {
-                            this.Hide();
+                            options.Hide();
                         }
-                        if (itemBeingUsed.Use())
+                        if (itemBeingUsed.Use(playerUsingInventory))
                         {
                             itemBeingUsed.ReturnOwner().ReciveItem(itemBeingUsed, -1);
                         }

@@ -22,7 +22,7 @@ namespace My_NEA_Project
         {
             return indexNum;
         }
-        public string ReturnName()
+        public string ReturnItemName()
         {
             return itemName;
         }
