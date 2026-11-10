@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace My_NEA_Project
 {
@@ -19,7 +20,7 @@ namespace My_NEA_Project
         ListBox options;
         Form formThisWillBeIn;
         Player playerUsingInventory;
-        public Inventory(Form formThisWillBeIn,Player playerWithTheInventory)
+        public Inventory(Form formThisWillBeIn, Player playerWithTheInventory)
         {
             this.formThisWillBeIn = formThisWillBeIn;
             InitializeComponent();
@@ -49,12 +50,12 @@ namespace My_NEA_Project
 
                 }
                 InventoryButton currentButton = allButtonsInInventory[numIndex];
-                if(currentButton != null && currentButton.ReturnItemName() != stack.item.ReturnName())
+                if (currentButton != null && currentButton.ReturnItemName() != stack.item.ReturnName())
                 {
                     currentButton.Dispose();
                     allButtonsInInventory[numIndex] = null;
                     currentButton = null;
-                    
+
                 }
                 if (currentButton == null)
                 {
@@ -68,7 +69,7 @@ namespace My_NEA_Project
                     int column = numIndex % 5;
                     int row = (int)Math.Floor((float)(numIndex / 5));
                     tableLayoutPanel1.Controls.Add(buttonRepresentingItem, column, row);
-                       
+
 
                 }
                 else if (currentButton.ReturnItemName() == stack.item.ReturnName())
@@ -76,11 +77,13 @@ namespace My_NEA_Project
                     currentButton.Text = $"{stack.item.ReturnName()} x {stack.stackCount}";
                     tableLayoutPanel1.Controls.Add(currentButton);
                 }
-
+                
 
                 numIndex++;
 
             }
+            this.Hide();
+            this.Show();
         }
         private void SearchBarClick(object sender, EventArgs e)
         {
@@ -105,15 +108,14 @@ namespace My_NEA_Project
                 switch (option)
                 {
                     case "Use":
-                        if(itemBeingUsed is Placible)
-                        {
-                            options.Hide();
-                        }
+
+                        this.RefreshInventory(playerUsingInventory.ReturnInventory());
+
                         if (itemBeingUsed.Use(playerUsingInventory))
                         {
                             itemBeingUsed.ReturnOwner().ReciveItem(itemBeingUsed, -1);
                         }
-                        
+
                         break;
                     case "Drop":
                         throw new NotImplementedException();

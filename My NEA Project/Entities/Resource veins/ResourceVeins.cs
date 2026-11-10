@@ -23,7 +23,7 @@ namespace My_NEA_Project
         protected void DropItem()
         {
             Random ran = new Random();
-            int itemToBeDropped = ran.Next(0,listOfDrops.Count - 1);
+            int itemToBeDropped = ran.Next(0,listOfDrops.Count);
             this.theWorldEntityExistIn.AddEntity(new DroppedItems(this.xCoord, this.yCoord, 1, 1, this.cam, listOfDrops[itemToBeDropped],this.theWorldEntityExistIn));
         }
         public override void GetHit()

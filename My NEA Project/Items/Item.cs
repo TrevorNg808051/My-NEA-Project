@@ -41,5 +41,9 @@ namespace My_NEA_Project
         {
             this.ownerOfItem = owner;
         }
+        public bool Usable()
+        {
+            return usable;
+        }
     }
 }

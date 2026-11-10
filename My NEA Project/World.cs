@@ -535,7 +535,7 @@ namespace My_NEA_Project
                 //spawn a creature;
             }
 
-            if(countOfResourceVeins < 10)
+            if(countOfResourceVeins < 25)
             {
                 Random ran = new Random();
                 ResourceVeins resource;
@@ -552,25 +552,45 @@ namespace My_NEA_Project
                 {
                     spawnXCoord = thePlayer.ReturnXCoord() - ran.Next(0, 1000);
                 }
+                int spawnYCoord = 0;
+                bool onSurface = false;
+                while (!onSurface)
+                {
+                    switch (SquareFinder(spawnXCoord, spawnYCoord).name)
+                    {
+                        case "Dirt":
+                        case "Grass":
+                            spawnYCoord--;
+                            break;
+                        case "Air":
+                            onSurface = true;
+                            break;
+                    }
+                   
+                }
 
-                switch (ran.Next(1, 3))
+                switch (ran.Next(1, 4))
                 {
                     case 1:
-                        resource = new Rock(spawnXCoord, -15,  cam, this);
+                        resource = new Rock(spawnXCoord, spawnYCoord,  cam, this);
                         break;
 
                     case 2:
-                        resource = new Tree(spawnXCoord, -15,  cam, this);
+                        resource = new Tree(spawnXCoord, spawnYCoord,  cam, this);
+                        break;
+                    case 3:
+                        resource = new Bush(spawnXCoord, spawnYCoord, cam, this);
                         break;
                     default:
-                        resource = new Tree(spawnXCoord, -15,  cam, this);
+                       
+                        resource = new Tree(spawnXCoord, spawnYCoord,  cam, this);
                         break;
                 }
                 
                 AddEntity(resource);
 
             }
-            else if(countOfResourceVeins >= 10)
+            else if(countOfResourceVeins >= 25)
             {
                 foreach(Entity e in listOfLoadedEntities)
                 {

@@ -20,7 +20,8 @@ namespace My_NEA_Project
         private bool jump = false;
         private int gunLv;
         private itemStack[] inventory;
-
+        private List<int> listOfStoredNumbers;
+        private List<char> listOfStoredOperators;
         private bool sprinting = false;
         private int doubleJump;
 
@@ -35,9 +36,13 @@ namespace My_NEA_Project
 
             this.gunEquipped = true;
             inventory = new itemStack[50];
+            listOfStoredNumbers = new List<int>();
+            listOfStoredOperators = new List<char>();
             doubleJump = 2;
 
             setHealth();
+
+            
         
         }
 
@@ -187,6 +192,24 @@ namespace My_NEA_Project
         public World ReturnWorldPlayerIsIn()
         {
             return theWorldPlayerIsIn;
+        }
+
+        public void ReceiveNumber(int numReceived)
+        {
+            this.listOfStoredNumbers.Add(numReceived);
+        }
+        public void ReceiveOperator(char opReceived)
+        {
+            this.listOfStoredOperators.Add(opReceived);
+        }
+
+        public List<int> ReturnLisOfNum()
+        {
+            return this.listOfStoredNumbers;
+        }
+        public List<char> ReturnListOfOp()
+        {
+            return this.listOfStoredOperators;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using My_NEA_Project.Entities;
 using My_NEA_Project.Entities.Creatures;
+using My_NEA_Project.Items;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -115,6 +116,16 @@ namespace My_NEA_Project
                             break;
                         case "UpgradeStation":
                             iS = new itemStack() { item = new UpgradeStation(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
+
+                            listOfStackItems.Add(iS);
+                            break;
+                        case "RandomOperation":
+                            iS = new itemStack() { item = new Operator(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
+
+                            listOfStackItems.Add(iS);
+                            break;
+                        case "RandomNumber":
+                            iS = new itemStack() { item = new Numbers(thePlayer), stackCount = int.Parse(reader.ReadLine()) };
 
                             listOfStackItems.Add(iS);
                             break;
