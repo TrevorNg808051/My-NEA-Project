@@ -217,7 +217,7 @@ namespace My_NEA_Project
                 MessageBox.Show("Currently there is no saves");
                 LastScreen(null, new EventArgs());
             }
-
+            this.Controls.Add(lastScreenBtn);
         }
 
         private void LoadSave(object sender, EventArgs e)

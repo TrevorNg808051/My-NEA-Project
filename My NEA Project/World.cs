@@ -524,11 +524,11 @@ namespace My_NEA_Project
                 int playerX = thePlayer.ReturnXCoord();
                 if (rightOfPlayer)
                 {
-                    newCreature = new subtractionMonster(thePlayer.ReturnXCoord() + ran.Next(500, 1000), -15, 3, 5, 10, cam, this);                   
+                    newCreature = new subtractionMonster(thePlayer.ReturnXCoord() + ran.Next(250, 500), -15, 3, 5, 10, cam, this);                   
                 }
                 else
                 {
-                    newCreature = new addtitonMonster(thePlayer.ReturnXCoord() - ran.Next(500, 1000), -15, 3, 5, 10, cam, this);
+                    newCreature = new addtitonMonster(thePlayer.ReturnXCoord() - ran.Next(250, 500), -15, 3, 5, 10, cam, this);
                 }
                 AddEntity(newCreature);
                 
@@ -569,7 +569,7 @@ namespace My_NEA_Project
                    
                 }
 
-                switch (ran.Next(1, 4))
+                switch (ran.Next(1, 10))
                 {
                     case 1:
                         resource = new Rock(spawnXCoord, spawnYCoord,  cam, this);
@@ -579,6 +579,12 @@ namespace My_NEA_Project
                         resource = new Tree(spawnXCoord, spawnYCoord,  cam, this);
                         break;
                     case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
                         resource = new Bush(spawnXCoord, spawnYCoord, cam, this);
                         break;
                     default:
@@ -609,7 +615,7 @@ namespace My_NEA_Project
             }
 
             int hostilX = hostileCreature.ReturnXCoord();
-            if(Math.Abs(playerX - hostilX) > 1500)
+            if(Math.Abs(playerX - hostilX) > 700)
             {
                 listOfLoadedEntities.Remove(hostileCreature);
                 hostileCreature.RemoveSprite();

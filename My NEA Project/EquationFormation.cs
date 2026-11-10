@@ -66,6 +66,7 @@ namespace My_NEA_Project
                 numberPiece.Text = i.ToString();
                 numberPiece.MouseDown += new MouseEventHandler(HoldButton);
                 numberPiece.MouseUp += new MouseEventHandler(LetGoButton);
+                numberPiece.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 NumberFlowLayout.Controls.Add(numberPiece);
 
             }
@@ -79,6 +80,7 @@ namespace My_NEA_Project
                 operationPiece.Text = c.ToString();
                 operationPiece.MouseDown += new MouseEventHandler(HoldButton);
                 operationPiece.MouseUp += new MouseEventHandler(LetGoButton);
+                operationPiece.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 OperationFlowLayout.Controls.Add(operationPiece);
             }
         }
@@ -89,7 +91,7 @@ namespace My_NEA_Project
             OperationFlowLayout.Controls.Clear();
         }
 
-        bool fromEquation = false;
+        bool formEquation = false;
         private void HoldButton(object sender, MouseEventArgs e)
         {
             buttonBeingDraged = (Button)sender;
@@ -97,11 +99,11 @@ namespace My_NEA_Project
             Control form = this;
             if(!(buttonBeingDraged.Parent is FlowLayoutPanel))
             {
-                fromEquation = true;
+                formEquation = true;
             }
             else
             {
-                fromEquation = false;
+                formEquation = false;
             }
             buttonBeingDraged.Parent.Controls.Remove(buttonBeingDraged);
             if (!form.Controls.Contains(buttonBeingDraged))
@@ -148,7 +150,7 @@ namespace My_NEA_Project
 
             if (buttonCantFindAPlace)
             {
-                if (fromEquation)
+                if (formEquation)
                 {
                     try
                     {

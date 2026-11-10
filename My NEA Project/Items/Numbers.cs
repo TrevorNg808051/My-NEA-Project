@@ -24,6 +24,7 @@ namespace My_NEA_Project.Items
             Random ran = new Random();
             int numberItWillGive = ran.Next(1, 13);
             SetOwner(playerUsingItem);
+            playerUsingItem.ReceiveNumber(numberItWillGive);
             return base.Use(playerUsingItem);
         }
     }

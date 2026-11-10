@@ -40,6 +40,7 @@ namespace My_NEA_Project
         public void RefreshInventory(itemStack[] allItemsInInventory)
         {
             tableLayoutPanel1.Controls.Clear();
+            options.Hide();
             allItemsInCurrentInventory = allItemsInInventory;
             int numIndex = 0;
             foreach (itemStack stack in allItemsInInventory)
@@ -82,8 +83,8 @@ namespace My_NEA_Project
                 numIndex++;
 
             }
-            this.Hide();
-            this.Show();
+            
+
         }
         private void SearchBarClick(object sender, EventArgs e)
         {
@@ -94,6 +95,7 @@ namespace My_NEA_Project
         private void InventoryButtonPressed(object sender, EventArgs e)
         {
             InventoryButton theButtonClicked = (InventoryButton)sender;
+            options.SelectedItem = null;
             options.Location = MousePosition;
             options.Show();
             options.BringToFront();
@@ -108,13 +110,14 @@ namespace My_NEA_Project
                 switch (option)
                 {
                     case "Use":
-
-                        this.RefreshInventory(playerUsingInventory.ReturnInventory());
-
+                        options.Hide();
+                       
                         if (itemBeingUsed.Use(playerUsingInventory))
                         {
                             itemBeingUsed.ReturnOwner().ReciveItem(itemBeingUsed, -1);
                         }
+                        this.RefreshInventory(playerUsingInventory.ReturnInventory());
+
 
                         break;
                     case "Drop":

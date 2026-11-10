@@ -173,6 +173,17 @@ namespace My_NEA_Project
             else if (equaitonForm)
             {
                 equation = equationFormation.ReturnEquation();
+                foreach(string s in equation)
+                {
+                    try
+                    {
+                        thePlayer.ReturnLisOfNum().Remove(int.Parse(s));
+                    }
+                    catch (FormatException)
+                    {
+                        thePlayer.ReturnListOfOp().Remove(char.Parse(s));
+                    }
+                }
                 equationFormation.ClearEquationFormation();
                 equationFormation.Enabled = false;
                 equationFormation.Hide();
