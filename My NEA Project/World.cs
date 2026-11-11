@@ -646,6 +646,7 @@ namespace My_NEA_Project
             // 5. FileNum
             // 6. Every structure's coords
             // 7. Inventory content
+            
             string dataToStore = "";
             itemStack[] inventory = null;
             dataToStore += $"{ReturnDifficulty()}\n";

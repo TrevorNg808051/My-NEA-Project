@@ -20,7 +20,7 @@ namespace My_NEA_Project
 
         }
 
-        protected void DropItem()
+        protected virtual void DropItem()
         {
             Random ran = new Random();
             int itemToBeDropped = ran.Next(0,listOfDrops.Count);
